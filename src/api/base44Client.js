@@ -1,8 +1,14 @@
-import { createClient } from '@base44/sdk';
-// import { getAccessToken } from '@base44/sdk/utils/auth-utils';
+// API client configuration
+// This file can be used for future API integrations
 
-// Create a client with authentication required
-export const base44 = createClient({
-  appId: "68b682448d969436874f48fc", 
-  requiresAuth: true // Ensure authentication is required for all operations
-});
+export const apiConfig = {
+  baseUrl: process.env.VITE_API_URL || 'https://api.donepudi.me',
+  timeout: 30000,
+};
+
+export const createApiClient = (config = {}) => {
+  return {
+    ...apiConfig,
+    ...config,
+  };
+};

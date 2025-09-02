@@ -4,18 +4,17 @@ import { TrendingUp, DollarSign, Users, Zap, Clock, Award } from 'lucide-react';
 
 const metrics = [
   {
-    label: 'Saved Through Automation',
-    value: 1000000,
-    prefix: '$',
-    suffix: 'M+',
+    label: 'Hours Saved',
+    value: 100,
+    suffix: 's',
     color: 'from-green-400 to-emerald-500',
     icon: DollarSign,
-    description: 'Cost savings from JIRA migration & CI/CD optimization'
+    description: 'Through JIRA migration automation & CI/CD optimization'
   },
   {
     label: 'Salary Growth',
-    value: 350,
-    suffix: '%',
+    value: 7,
+    suffix: 'x',
     color: 'from-blue-400 to-cyan-500',
     icon: TrendingUp,
     description: 'From $45K to $350K in 4 years'
@@ -30,28 +29,28 @@ const metrics = [
   },
   {
     label: 'Crypto Transactions',
-    value: 100,
-    prefix: '$',
-    suffix: 'M+',
+    value: 1000000,
+    prefix: '',
+    suffix: 's',
     color: 'from-orange-400 to-red-500',
     icon: Zap,
-    description: 'Processed through Leftbin-built exchanges'
+    description: 'Millions in crypto transactions securely handled'
   },
   {
     label: 'Microservices Deployed',
-    value: 100,
+    value: 1000,
     suffix: '+',
     color: 'from-yellow-400 to-orange-500',
     icon: Award,
-    description: 'Production services maintaining 99.99% uptime'
+    description: '1000+ microservices deployed in production'
   },
   {
     label: 'System Uptime',
-    value: 99.99,
+    value: 99,
     suffix: '%',
     color: 'from-cyan-400 to-blue-500',
     icon: Clock,
-    description: '24/7 systems with enterprise-grade reliability'
+    description: '24/7 systems with 99.99% uptime'
   }
 ];
 

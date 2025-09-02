@@ -65,7 +65,7 @@ const consulting = {
   name: 'Leftbin Consulting',
   description: 'Where startups come when they need to scale yesterday. 20+ engineers, multiple continents, zero compromises.',
   achievements: [
-    'Built crypto exchanges processing millions in transactions',
+    'Built a robust crypto exchange platform, operating at scale in a competitive global environment',
     'Scaled teams across 3 continents seamlessly',
     'Delivered enterprise-grade solutions in startup timelines',
     'Maintained 99.99% uptime for financial applications'

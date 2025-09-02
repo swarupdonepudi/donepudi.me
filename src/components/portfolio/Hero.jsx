@@ -100,7 +100,7 @@ export default function Hero() {
               transition={{ delay: 0.2 }}
               className="text-cyan-400 text-lg font-semibold tracking-wider uppercase"
             >
-              Engineer • Founder • Visionary
+              Engineer • Founder
             </motion.div>
             
             <motion.h1
@@ -123,9 +123,9 @@ export default function Hero() {
               transition={{ delay: 0.4 }}
               className="text-xl md:text-2xl text-gray-300 leading-relaxed"
             >
-              From zero to <span className="text-green-400 font-semibold">$350K in Silicon Valley</span>.
+              From zero to <span className="text-green-400 font-semibold">six-figure engineer in Silicon Valley</span>.
               <br />
-              From microservices to <span className="text-cyan-400 font-semibold">millions in transactions</span>.
+              From microservices to <span className="text-cyan-400 font-semibold">millions of real-world transactions</span>.
               <br />
               Now building the future of cloud deployment at{' '}
               <span className="text-purple-400 font-semibold">Planton.ai</span>
@@ -142,7 +142,7 @@ export default function Hero() {
               size="lg"
               className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-8 py-4 text-lg font-semibold group"
             >
-              See My $100M+ Impact
+              See My Impact
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             

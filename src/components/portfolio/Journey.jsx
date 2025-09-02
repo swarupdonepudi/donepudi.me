@@ -23,11 +23,11 @@ const milestones = [
   },
   {
     year: '2015',
-    title: 'Silicon Valley Bound',
+    title: 'US Bound',
     company: 'Student + RTB Platforms',
-    description: 'Landed in the US, built RTB platforms while still studying',
+    description: 'Moved to Chicago, built RTB platforms while still a student',
     salary: '$45K',
-    location: 'San Francisco',
+    location: 'Chicago',
     color: 'from-yellow-500 to-green-500'
   },
   {
@@ -42,8 +42,8 @@ const milestones = [
   {
     year: '2019',
     title: 'The Jump',
-    company: 'Senior Architect',
-    description: 'Jumped from $98K to $350K - because I bet on myself',
+    company: 'Senior Cloud Engineer',
+    description: 'Moved to San Francisco, bet on myself and leveled up',
     salary: '$350K',
     location: 'Silicon Valley',
     color: 'from-blue-500 to-purple-500'
@@ -158,7 +158,7 @@ export default function Journey() {
           <div className="text-gray-300">From Code to Cloud</div>
         </div>
         <div className="bg-gradient-to-br from-gray-900/80 to-black/60 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-8">
-          <div className="text-4xl font-bold text-green-400 mb-2">350%</div>
+          <div className="text-4xl font-bold text-green-400 mb-2">7x</div>
           <div className="text-gray-300">Salary Growth</div>
         </div>
         <div className="bg-gradient-to-br from-gray-900/80 to-black/60 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-8">

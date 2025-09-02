@@ -35,9 +35,14 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-xl font-bold text-cyan-400"
+            className="flex items-center gap-3"
           >
-            swarup.donepudi.me
+            <img 
+              src="/swarup-donepudi.png" 
+              alt="Swarup Donepudi" 
+              className="w-12 h-12 rounded-full border-2 border-cyan-400/30 object-cover"
+            />
+            <span className="text-xl font-bold text-cyan-400">Swarup Donepudi</span>
           </motion.div>
           
           <motion.div 
@@ -133,7 +138,7 @@ export default function Home() {
             </div>
           </motion.div>
           <div className="text-gray-500">
-            © 2024 Swarup Donepudi. Built with React & deployed on the future of cloud.
+            © 2025 Swarup Donepudi. Built with React & deployed on the future of cloud.
           </div>
         </div>
       </footer>
