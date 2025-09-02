@@ -14,8 +14,8 @@ const projects = [
     color: 'from-purple-500 to-pink-500',
     icon: Rocket,
     links: {
-      demo: 'https://planton.ai',
-      docs: 'https://docs.planton.ai'
+      demo: 'https://planton.ai/demo',
+      docs: 'https://planton.ai/docs'
     }
   },
   {
@@ -28,8 +28,8 @@ const projects = [
     color: 'from-green-500 to-emerald-500',
     icon: Code,
     links: {
-      github: 'https://github.com/project-planton/gitr',
-      website: 'https://gitr.dev'
+      github: 'https://github.com/plantoncloud/gitr',
+      website: 'https://gitr.dev/'
     }
   },
   {
@@ -42,8 +42,8 @@ const projects = [
     color: 'from-blue-500 to-cyan-500',
     icon: Zap,
     links: {
-      github: 'https://github.com/project-planton/karayaml',
-      website: 'https://karayaml.dev'
+      github: 'https://github.com/swarupdonepudi/karayaml',
+      website: 'https://karayaml.dev/'
     }
   },
   {
@@ -56,7 +56,7 @@ const projects = [
     color: 'from-orange-500 to-red-500',
     icon: Globe,
     links: {
-      github: 'https://github.com/swarupdonepudi/mactl'
+      github: 'https://github.com/plantoncloud/mactl'
     }
   }
 ];
@@ -139,12 +139,19 @@ export default function Empire() {
             </div>
 
             <div className="flex gap-4">
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400">
+              <Button 
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400"
+                onClick={() => window.open('https://planton.ai/demo', '_blank')}
+              >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Live Demo
               </Button>
-              <Button variant="outline" className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black">
-                <Github className="w-4 h-4 mr-2" />
+              <Button 
+                variant="outline" 
+                className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black"
+                onClick={() => window.open('https://planton.ai/docs', '_blank')}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
                 Documentation
               </Button>
             </div>
@@ -201,12 +208,22 @@ export default function Empire() {
                     </div>
                     <div className="flex gap-2">
                       {project.links.github && (
-                        <Button variant="ghost" size="icon" className="w-8 h-8">
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="w-8 h-8"
+                          onClick={() => window.open(project.links.github, '_blank')}
+                        >
                           <Github className="w-4 h-4" />
                         </Button>
                       )}
                       {project.links.website && (
-                        <Button variant="ghost" size="icon" className="w-8 h-8">
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="w-8 h-8"
+                          onClick={() => window.open(project.links.website, '_blank')}
+                        >
                           <ExternalLink className="w-4 h-4" />
                         </Button>
                       )}
