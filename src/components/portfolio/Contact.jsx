@@ -32,7 +32,7 @@ const contactOptions = [
     icon: Calendar,
     label: 'Schedule',
     value: 'Book a 30-min call',
-    href: '#',
+    href: 'https://cal.com/swarup',
     color: 'from-green-500 to-green-600',
     description: 'Strategy session'
   }
@@ -120,25 +120,37 @@ export default function Contact() {
           <h3 className="text-3xl font-bold text-center text-purple-400 mb-8">Choose Your Adventure</h3>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 p-6 h-auto flex-col group">
+            <Button 
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 p-6 h-auto flex-col group"
+              onClick={() => window.open('https://planton.ai', '_blank')}
+            >
               <Globe className="w-8 h-8 mb-3 group-hover:rotate-12 transition-transform" />
               <div className="text-lg font-semibold mb-1">Try planton.ai</div>
               <div className="text-sm opacity-80">Deploy in 60 seconds</div>
             </Button>
             
-            <Button className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 p-6 h-auto flex-col group">
+            <Button 
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 p-6 h-auto flex-col group"
+              onClick={() => window.open('https://cal.com/swarup', '_blank')}
+            >
               <MessageSquare className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
               <div className="text-lg font-semibold mb-1">Hire Leftbin</div>
               <div className="text-sm opacity-80">Scale your team</div>
             </Button>
             
-            <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 p-6 h-auto flex-col group">
+            <Button 
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 p-6 h-auto flex-col group"
+              onClick={() => window.open('https://cal.com/swarup', '_blank')}
+            >
               <Calendar className="w-8 h-8 mb-3 group-hover:bounce transition-transform" />
               <div className="text-lg font-semibold mb-1">Collaborate</div>
               <div className="text-sm opacity-80">Build together</div>
             </Button>
             
-            <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 p-6 h-auto flex-col group">
+            <Button 
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 p-6 h-auto flex-col group"
+              onClick={() => window.open('https://cal.com/swarup', '_blank')}
+            >
               <motion.div
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}

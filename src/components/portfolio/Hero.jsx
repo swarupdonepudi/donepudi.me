@@ -136,23 +136,14 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4"
           >
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-8 py-4 text-lg font-semibold group"
-            >
-              See My Impact
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 text-lg font-semibold group"
+              className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-400 hover:to-cyan-400 text-white px-10 py-5 text-xl font-semibold group"
+              onClick={() => window.open('https://cal.com/swarup', '_blank')}
             >
               Build With Me
-              <Zap className="ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+              <Zap className="ml-2 w-6 h-6 group-hover:rotate-12 transition-transform" />
             </Button>
           </motion.div>
 

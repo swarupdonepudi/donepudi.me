@@ -125,7 +125,16 @@ export default function Vision() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Button className={`bg-gradient-to-r ${opp.color} hover:opacity-90 flex-1`}>
+                      <Button 
+                        className={`bg-gradient-to-r ${opp.color} hover:opacity-90 flex-1`}
+                        onClick={() => {
+                          if (opp.action === 'Try planton.ai') {
+                            window.open('https://planton.ai', '_blank');
+                          } else {
+                            window.open('https://cal.com/swarup', '_blank');
+                          }
+                        }}
+                      >
                         {opp.action}
                       </Button>
                       <div className="text-sm text-gray-400 flex items-center justify-center">
@@ -166,6 +175,7 @@ export default function Vision() {
               <Button 
                 size="lg"
                 className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-8 py-4 text-lg font-semibold"
+                onClick={() => window.open('https://cal.com/swarup', '_blank')}
               >
                 <Globe className="mr-2 w-5 h-5" />
                 Let's Connect
@@ -174,6 +184,7 @@ export default function Vision() {
                 variant="outline"
                 size="lg"
                 className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 text-lg font-semibold"
+                onClick={() => window.open('https://cal.com/swarup', '_blank')}
               >
                 <Rocket className="mr-2 w-5 h-5" />
                 Book Strategy Call
