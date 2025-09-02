@@ -133,7 +133,7 @@ export default function Home() {
             <div className="flex justify-center space-x-8 text-gray-400">
               <a href="#" className="hover:text-cyan-400 transition-colors">Blog</a>
               <a href="#" className="hover:text-cyan-400 transition-colors">Open Source</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Planton.ai Docs</a>
+              <a href="#" className="hover:text-cyan-400 transition-colors">planton.ai Docs</a>
               <a href="#" className="hover:text-cyan-400 transition-colors">Speaking</a>
             </div>
           </motion.div>

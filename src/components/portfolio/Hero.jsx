@@ -11,7 +11,7 @@ const codeLines = [
   "$ terraform plan -target=silicon_valley",
   "Plan: 350k in salary increases, 0 to destroy",
   "$ docker run --rm swarup/ambition:latest",
-  "Building Planton.ai...",
+  "Building planton.ai...",
   "Revolutionizing cloud deployment...",
   "$ git push origin main",
   "Enumerating objects: 100M+, done.",
@@ -123,12 +123,12 @@ export default function Hero() {
               transition={{ delay: 0.4 }}
               className="text-xl md:text-2xl text-gray-300 leading-relaxed"
             >
-              From zero to <span className="text-green-400 font-semibold">six-figure engineer in Silicon Valley</span>.
+              From zero to <span className="text-green-400 font-semibold">$350K in Silicon Valley</span>.
               <br />
-              From microservices to <span className="text-cyan-400 font-semibold">millions of real-world transactions</span>.
+              From microservices to <span className="text-cyan-400 font-semibold">millions in transactions</span>.
               <br />
               Now building the future of cloud deployment at{' '}
-              <span className="text-purple-400 font-semibold">Planton.ai</span>
+              <span className="text-purple-400 font-semibold">planton.ai</span>
             </motion.p>
           </div>
 

@@ -6,9 +6,9 @@ import { Rocket, Users, TrendingUp, Zap, Target, Globe } from 'lucide-react';
 const opportunities = [
   {
     title: 'Early Adopters',
-    description: 'Shape the future of Planton.ai and get first-mover advantage',
+    description: 'Shape the future of planton.ai and get first-mover advantage',
     icon: Rocket,
-    action: 'Try Planton.ai',
+    action: 'Try planton.ai',
     color: 'from-purple-500 to-pink-500',
     cta: 'Deploy your first app in 60 seconds'
   },
@@ -78,7 +78,7 @@ export default function Vision() {
             
             <h3 className="text-3xl font-bold text-cyan-400 mb-4">Current Mission</h3>
             <p className="text-xl text-gray-200 leading-relaxed mb-6 max-w-4xl mx-auto">
-              "Making Planton.ai the default choice for every developer who's tired of cloud complexity. 
+              "Making planton.ai the default choice for every developer who's tired of cloud complexity. 
               If you're still writing Terraform, you're living in the past."
             </p>
             

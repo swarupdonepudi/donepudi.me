@@ -60,8 +60,8 @@ const milestones = [
   {
     year: '2024',
     title: 'The Culmination',
-    company: 'Planton.ai',
-    description: 'Launched Planton.ai - the culmination of everything I\'ve learned',
+    company: 'planton.ai',
+    description: 'Launched planton.ai - the culmination of everything I\'ve learned',
     salary: 'Disruption',
     location: 'Everywhere',
     color: 'from-pink-500 to-cyan-500'

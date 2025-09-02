@@ -122,7 +122,7 @@ export default function Contact() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 p-6 h-auto flex-col group">
               <Globe className="w-8 h-8 mb-3 group-hover:rotate-12 transition-transform" />
-              <div className="text-lg font-semibold mb-1">Try Planton.ai</div>
+              <div className="text-lg font-semibold mb-1">Try planton.ai</div>
               <div className="text-sm opacity-80">Deploy in 60 seconds</div>
             </Button>
             

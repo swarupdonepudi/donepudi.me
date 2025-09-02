@@ -5,7 +5,7 @@ import { ExternalLink, Github, Star, Users, Zap, Code, Globe, Rocket } from 'luc
 
 const projects = [
   {
-    name: 'Planton.ai',
+    name: 'planton.ai',
     type: 'Flagship Product',
     description: 'The AWS/Heroku killer I\'m building. One YAML file to rule all clouds. Making deployment so simple, it\'s almost criminal.',
     tech: ['Go', 'Kubernetes', 'gRPC', 'React', 'TypeScript'],
@@ -112,7 +112,7 @@ export default function Empire() {
                   <Rocket className="w-8 h-8 text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white mb-1">Planton.ai</h3>
+                  <h3 className="text-3xl font-bold text-white mb-1">planton.ai</h3>
                   <p className="text-purple-400 font-semibold">The Future of Cloud Deployment</p>
                 </div>
               </div>

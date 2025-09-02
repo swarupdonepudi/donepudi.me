@@ -10,7 +10,7 @@ Personal portfolio website showcasing my journey from a third-tier college to Si
 
 ## Features
 - Interactive timeline of my career journey
-- Projects showcase including Planton.ai
+- Projects showcase including planton.ai
 - Technology skills visualization
 - Contact information
 
