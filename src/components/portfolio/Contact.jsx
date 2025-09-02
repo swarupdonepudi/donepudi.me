@@ -23,8 +23,8 @@ const contactOptions = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'swarup@donepudi.me',
-    href: 'mailto:swarup@donepudi.me',
+    value: 'swarup@hey.com',
+    href: 'mailto:swarup@hey.com',
     color: 'from-red-500 to-red-600',
     description: 'Direct communication'
   },
