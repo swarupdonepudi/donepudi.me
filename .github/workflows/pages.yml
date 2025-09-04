@@ -25,10 +25,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
+          # Avoid calling global Yarn v1 before Corepack is enabled
 
-      - name: Enable Corepack (Yarn)
-        run: corepack enable
+      - name: Setup Yarn via Corepack (v3.6.4)
+        run: |
+          corepack enable
+          corepack prepare yarn@3.6.4 --activate
+          yarn -v
 
       - name: Install dependencies
         run: yarn install --immutable
