@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
+import Image from 'next/image';
 import { 
   Github, 
   Linkedin, 
@@ -18,13 +17,13 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-import Hero from '../components/portfolio/Hero';
-import Journey from '../components/portfolio/Journey';
-import Arsenal from '../components/portfolio/Arsenal';
-import Empire from '../components/portfolio/Empire';
-import Impact from '../components/portfolio/Impact';
-import Vision from '../components/portfolio/Vision';
-import Contact from '../components/portfolio/Contact';
+import Hero from '@/components/portfolio/Hero';
+import Journey from '@/components/portfolio/Journey';
+import Arsenal from '@/components/portfolio/Arsenal';
+import Empire from '@/components/portfolio/Empire';
+import Impact from '@/components/portfolio/Impact';
+import Vision from '@/components/portfolio/Vision';
+import Contact from '@/components/portfolio/Contact';
 
 export default function Home() {
   return (
@@ -37,10 +36,13 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3"
           >
-            <img 
+            <Image 
               src="/swarup-donepudi.png" 
               alt="Swarup Donepudi" 
+              width={48}
+              height={48}
               className="w-12 h-12 rounded-full border-2 border-cyan-400/30 object-cover"
+              priority
             />
             <span className="text-xl font-bold text-cyan-400">Swarup Donepudi</span>
           </motion.div>
@@ -71,7 +73,7 @@ export default function Home() {
               variant="ghost" 
               size="icon"
               className="text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/10"
-              onClick={() => window.open('https://github.com/swarupdonepudi', '_blank')}
+              onClick={() => typeof window !== 'undefined' && window.open('https://github.com/swarupdonepudi', '_blank')}
             >
               <Github className="w-5 h-5" />
             </Button>
@@ -79,7 +81,7 @@ export default function Home() {
               variant="ghost"
               size="icon" 
               className="text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/10"
-              onClick={() => window.open('https://linkedin.com/in/swarupdonepudi', '_blank')}
+              onClick={() => typeof window !== 'undefined' && window.open('https://linkedin.com/in/swarupdonepudi', '_blank')}
             >
               <Linkedin className="w-5 h-5" />
             </Button>
@@ -145,3 +147,5 @@ export default function Home() {
     </div>
   );
 }
+
+

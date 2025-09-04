@@ -3,28 +3,26 @@ name=lawpilotfoundation
 
 .PHONY: deps
 deps:
-	npm install --no-audit --no-fund
+	yarn install
 
 .PHONY: develop
 develop: deps
-	npm run dev
+	yarn dev
 
 .PHONY: preview
-preview: deps
-	npm run build && npm run preview
+preview: deps build
+	yarn preview
 
 .PHONY: build
 build: deps
-	npm run build
+	yarn build
 
 .PHONY: clean
 clean:
-	rm -rf node_modules dist
+	rm -rf node_modules dist out
 
 # Back-compat similar to Caramil naming
 .PHONY: develop-site preview-site build-site
 develop-site: develop
 preview-site: preview
 build-site: build
-
-

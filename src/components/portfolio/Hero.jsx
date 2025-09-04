@@ -62,7 +62,7 @@ export default function Hero() {
         />
         
         {/* Floating Particles */}
-        {Array.from({ length: 20 }).map((_, i) => (
+        {typeof window !== 'undefined' && Array.from({ length: 20 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-cyan-400 rounded-full"

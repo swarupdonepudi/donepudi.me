@@ -141,7 +141,7 @@ export default function Empire() {
             <div className="flex gap-4">
               <Button 
                 className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400"
-                onClick={() => window.open('https://planton.ai/demo', '_blank')}
+                onClick={() => typeof window !== 'undefined' && window.open('https://planton.ai/demo', '_blank')}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Live Demo
@@ -149,7 +149,7 @@ export default function Empire() {
               <Button 
                 variant="outline" 
                 className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black"
-                onClick={() => window.open('https://planton.ai/docs', '_blank')}
+                onClick={() => typeof window !== 'undefined' && window.open('https://planton.ai/docs', '_blank')}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Documentation
@@ -212,7 +212,7 @@ export default function Empire() {
                           variant="ghost" 
                           size="icon" 
                           className="w-8 h-8"
-                          onClick={() => window.open(project.links.github, '_blank')}
+                          onClick={() => typeof window !== 'undefined' && window.open(project.links.github, '_blank')}
                         >
                           <Github className="w-4 h-4" />
                         </Button>
@@ -222,7 +222,7 @@ export default function Empire() {
                           variant="ghost" 
                           size="icon" 
                           className="w-8 h-8"
-                          onClick={() => window.open(project.links.website, '_blank')}
+                          onClick={() => typeof window !== 'undefined' && window.open(project.links.website, '_blank')}
                         >
                           <ExternalLink className="w-4 h-4" />
                         </Button>
