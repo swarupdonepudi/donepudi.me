@@ -1,19 +1,17 @@
-name: Deploy GitHub Pages
+name: Deploy to GitHub Pages (Next.js Export)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   workflow_dispatch:
 
-# Required permissions for actions/deploy-pages
-# Ref: https://github.com/actions/deploy-pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -23,39 +21,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'yarn'
 
-      # Enables Pages and provides metadata; safe to run in all builds
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - name: Enable Corepack (Yarn)
+        run: corepack enable
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
+        run: yarn install --immutable
 
-      - name: Build site
+      - name: Build and Export
         env:
-          # Root-based app: serve from root
-          BASE_PATH: /
-        run: |
-          npm run build
-          # SPA deep links: serve index.html for unknown routes
-          if [ -f dist/index.html ]; then
-            cp dist/index.html dist/404.html
-          fi
+          GITHUB_ACTIONS: 'true'
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: yarn build
 
-      # Upload the built static site for Pages to deploy
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: out
 
   deploy:
     needs: build
@@ -67,5 +54,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-

@@ -122,7 +122,7 @@ export default function Contact() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Button 
               className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 p-6 h-auto flex-col group"
-              onClick={() => window.open('https://planton.ai', '_blank')}
+              onClick={() => typeof window !== 'undefined' && window.open('https://planton.ai', '_blank')}
             >
               <Globe className="w-8 h-8 mb-3 group-hover:rotate-12 transition-transform" />
               <div className="text-lg font-semibold mb-1">Try planton.ai</div>
@@ -131,7 +131,7 @@ export default function Contact() {
             
             <Button 
               className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 p-6 h-auto flex-col group"
-              onClick={() => window.open('https://cal.com/swarup', '_blank')}
+              onClick={() => typeof window !== 'undefined' && window.open('https://cal.com/swarup', '_blank')}
             >
               <MessageSquare className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
               <div className="text-lg font-semibold mb-1">Hire Leftbin</div>
@@ -140,7 +140,7 @@ export default function Contact() {
             
             <Button 
               className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 p-6 h-auto flex-col group"
-              onClick={() => window.open('https://cal.com/swarup', '_blank')}
+              onClick={() => typeof window !== 'undefined' && window.open('https://cal.com/swarup', '_blank')}
             >
               <Calendar className="w-8 h-8 mb-3 group-hover:bounce transition-transform" />
               <div className="text-lg font-semibold mb-1">Collaborate</div>
@@ -149,7 +149,7 @@ export default function Contact() {
             
             <Button 
               className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 p-6 h-auto flex-col group"
-              onClick={() => window.open('https://cal.com/swarup', '_blank')}
+              onClick={() => typeof window !== 'undefined' && window.open('https://cal.com/swarup', '_blank')}
             >
               <motion.div
                 animate={{ rotate: [0, 360] }}
