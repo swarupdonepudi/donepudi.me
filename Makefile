@@ -10,7 +10,7 @@ develop: deps
 	yarn dev
 
 .PHONY: preview
-preview: deps
+preview: deps build
 	yarn preview
 
 .PHONY: build
