@@ -5,7 +5,7 @@ export const portfolioData = {
   title: 'Cloud Architect',
   company: 'planton.ai',
   location: 'Silicon Valley',
-  email: 'swarup@hey.com',
+  email: 'swarup@donepudi.me',
   github: 'https://github.com/swarupdonepudi',
   linkedin: 'https://linkedin.com/in/swarupdonepudi',
 };
