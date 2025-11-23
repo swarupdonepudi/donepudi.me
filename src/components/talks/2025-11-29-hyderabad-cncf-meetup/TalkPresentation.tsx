@@ -756,7 +756,7 @@ function Slide21KeyTakeaways() {
             2️⃣ <strong className="text-green-400">Validation First</strong> - Catch errors before expensive cloud API calls
           </p>
           <p>
-            3️⃣ <strong className="text-purple-400">Simple > Sophisticated</strong> - CLI + IaC simpler than K8s operators
+            3️⃣ <strong className="text-purple-400">Simple {'>'} Sophisticated</strong> - CLI + IaC simpler than K8s operators
           </p>
           <p>
             4️⃣ <strong className="text-yellow-400">80/20 Principle</strong> - Focus on the 20% that 80% of teams need
