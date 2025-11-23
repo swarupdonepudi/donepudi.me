@@ -65,11 +65,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Featured Image */}
       {post.frontmatter.featured_image && (
-        <div className="w-full h-64 md:h-96 overflow-hidden bg-gray-900">
+        <div className="w-full max-h-[500px] overflow-hidden bg-gray-900 flex items-center justify-center">
           <img
             src={post.frontmatter.featured_image}
             alt={post.frontmatter.title}
-            className="w-full h-full object-cover"
+            className="w-full h-auto max-h-[500px] object-contain"
           />
         </div>
       )}
