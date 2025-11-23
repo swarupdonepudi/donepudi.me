@@ -1,0 +1,358 @@
+---
+description: Action rule to create a well-structured changelog document capturing meaningful work on donepudi.me website, sized proportionally to the feature's impact and complexity.
+globs: []
+alwaysApply: false
+---
+
+# Rule: Create donepudi.me Changelog (action)
+
+Purpose: When invoked, create a comprehensive changelog document in the `_changelog/` directory that captures the essence, context, and impact of recent work on the donepudi.me portfolio website. The changelog should be meaningful, well-structured, and appropriately sized based on the scope and impact of the change.
+
+Usage: Invoke explicitly as `@create-donepudi-me-changelog` after completing meaningful work in a conversation.
+
+References: `@understand-cursor-rules`, existing changelogs in `_changelog/`
+
+## ⚠️ CRITICAL: Explicit Invocation Only
+
+**DO NOT** create a changelog automatically or proactively. Changelogs must ONLY be created when the user explicitly invokes this rule with `@create-donepudi-me-changelog`.
+
+Never:
+- ❌ Suggest creating a changelog without being asked
+- ❌ Create a changelog at the end of a conversation automatically
+- ❌ Assume the user wants a changelog created
+- ❌ Create a changelog "to be helpful" without explicit request
+
+Always:
+- ✅ Wait for explicit `@create-donepudi-me-changelog` invocation
+- ✅ Confirm the request before creating the file
+- ✅ Let the user decide when/if a changelog is needed
+
+**This is a user-controlled action, not an automatic process.**
+
+## When to Create a Changelog
+
+Create a changelog when:
+- ✅ You've added new content (blog posts, talks, portfolio sections)
+- ✅ You've implemented new features or UI components
+- ✅ You've made significant design or UX improvements
+- ✅ You've refactored code with architectural changes
+- ✅ You've integrated new APIs or third-party services
+- ✅ The work involved multiple files or areas of the site
+- ✅ You want to document the thinking behind design decisions
+- ✅ Performance optimizations or SEO improvements
+- ✅ New talk presentations or blog content systems
+
+**Skip changelogs for**:
+- ✋ Minor typo fixes
+- ✋ Small CSS tweaks
+- ✋ Dependency updates without functional changes
+- ✋ Work-in-progress or incomplete features
+- ✋ Changes already well-documented elsewhere
+
+## Sizing Guidance: Use Your Judgment
+
+**Critical principle**: The changelog length should be **proportional to the feature's complexity and impact**, not artificially constrained or inflated.
+
+### Small Changes (150-300 lines)
+- New blog post or talk content
+- UI component styling updates
+- Minor feature additions
+- Bug fixes with context
+- Content restructuring
+
+**Example**: Add new blog post about cloud-native patterns - straightforward content addition
+
+### Medium Changes (300-600 lines)
+- New sections in portfolio
+- Blog system enhancements
+- UI component library additions
+- Multiple content updates
+- Talk presentation system features
+- API integrations
+
+**Example**: Build talk presentation system with slides, navigation, and progress bar
+
+### Large Changes (600-1000+ lines)
+- Major site redesign
+- Complete section overhauls
+- New interactive features
+- Architecture migrations
+- Multi-page feature implementations
+
+**Example**: Redesign portfolio with new sections, animations, and responsive layouts
+
+**Golden rule**: If you're unsure, start shorter and add detail only where it adds real value. Quality over quantity.
+
+## Changelog Structure
+
+### File Naming
+```
+YYYY-MM-DD-HHMMSS-brief-descriptive-slug.md
+```
+
+Examples:
+- `2025-11-23-085950-add-hyderabad-cncf-meetup-talk-presentation.md`
+- `2025-11-20-143022-redesign-portfolio-hero-section.md`
+- `2025-11-18-091200-integrate-base44-api-client.md`
+
+**IMPORTANT**: Get the actual current timestamp by running the command `date +"%Y-%m-%d-%H%M%S"` and use that exact output as the prefix for the filename. Do NOT make up or guess the timestamp.
+
+### Required Metadata
+
+Every changelog should start with metadata in this format:
+
+```markdown
+# [Clear, Descriptive Title]
+
+**Date**: [Month Day, Year]
+**Type**: [Enhancement | Bug Fix | Feature | Content | Design | Refactoring]
+**Areas**: [Area1, Area2, Area3]
+
+## Summary
+
+[2-4 sentence overview of what was accomplished and why it matters]
+```
+
+**Common Areas**:
+- Blog
+- Talks
+- Portfolio
+- UI Components
+- Navigation/Layout
+- API Integration
+- Performance
+- SEO
+- Accessibility
+- Design System
+- Build/Deploy
+- Content Management
+
+### Required Sections
+
+Every changelog should include:
+
+```markdown
+# [Clear, Descriptive Title]
+
+**Date**: [Month Day, Year]
+**Type**: [Type]
+**Areas**: [Areas]
+
+## Summary
+
+[2-4 sentence overview of what was accomplished and why it matters]
+
+## Motivation / Background
+
+[Describe why this work was needed - what prompted it?]
+
+### Goals
+- [Goal 1]
+- [Goal 2]
+- [Goal 3]
+
+## What Changed
+
+[High-level description of the changes made]
+
+### Key Features/Components
+
+[List or describe the main additions/changes]
+
+## Implementation Details
+
+[Technical specifics - code structure, key decisions, patterns used]
+
+## Visual/UX Impact
+
+[How does this affect the user experience? Screenshots or descriptions]
+
+## Benefits
+
+[Concrete improvements - performance, UX, developer experience, content]
+
+## Impact
+
+[Who/what is affected and how]
+
+## Related Work
+
+[Connect to other changelogs, features, or content]
+
+---
+
+**Status**: ✅ [Live | In Progress | Experimental]
+```
+
+### Optional Sections (Include When Valuable)
+
+Add these sections only when they provide meaningful value:
+
+- **Before/After**: Visual or functional comparisons
+- **Performance Metrics**: Load times, bundle sizes, etc.
+- **Browser Compatibility**: When relevant
+- **Accessibility**: A11y improvements
+- **SEO Impact**: Search optimization changes
+- **Mobile Experience**: Responsive design notes
+- **Design Decisions**: Why this approach vs alternatives
+- **Content Strategy**: For content-focused changes
+- **Technical Debt**: What was cleaned up
+- **Known Issues**: Current limitations
+- **Future Enhancements**: Planned follow-up work
+- **Usage Examples**: How to use new features
+
+## Writing Guidelines
+
+### Do:
+- ✅ **Start with context**: Why did this work happen?
+- ✅ **Focus on value**: What does this improve for visitors/readers?
+- ✅ **Use concrete examples**: Show actual content, components, or features
+- ✅ **Include visuals**: Screenshots or descriptions of UI changes
+- ✅ **Explain decisions**: Why this design/approach vs alternatives?
+- ✅ **Write for future you**: Capture the thinking, not just the what
+- ✅ **Link to related work**: Connect the dots with other changes
+- ✅ **Use formatting**: Code blocks, lists, headers for readability
+- ✅ **Show impact**: Metrics, user feedback, or observed improvements
+
+### Don't:
+- ❌ **Over-explain the obvious**: Assume the reader is technical
+- ❌ **Include every detail**: Focus on what matters
+- ❌ **Write generic summaries**: Be specific to this portfolio site
+- ❌ **Skip the "why"**: Context is critical for future understanding
+- ❌ **Ignore trade-offs**: Document decisions and their rationale
+- ❌ **Use jargon without context**: Define terms that may be unclear
+
+## Tone and Style
+
+- **Personal but professional**: This is your portfolio, let personality show
+- **Technical but accessible**: Balance depth with clarity
+- **Honest about challenges**: "This was tricky because..." is fine
+- **Present tense for descriptions**: "The site now includes..."
+- **Past tense for actions**: "I redesigned the hero section"
+
+## Quality Checklist
+
+Before finalizing a changelog:
+
+- [ ] Title clearly describes the change
+- [ ] Metadata includes Date, Type, and Areas
+- [ ] Summary captures essence in 2-4 sentences
+- [ ] Motivation explains why work was needed
+- [ ] What Changed describes the additions/modifications
+- [ ] Implementation details are technical but focused
+- [ ] Benefits are concrete and measurable
+- [ ] Visual/UX impact is described (with screenshots if helpful)
+- [ ] Code examples (if any) are actual code, not pseudocode
+- [ ] Related work connects this to other changes
+- [ ] Length is proportional to scope and impact
+- [ ] No sensitive information (API keys, private data, etc.)
+
+## Proportionality Examples
+
+### ✅ Good: Appropriately Sized
+
+**Small change** (200 lines):
+- Motivation: 1 paragraph
+- What Changed: 1-2 paragraphs + key components
+- Benefits: 3-5 bullets
+- Impact: 1 paragraph
+
+**Medium change** (500 lines):
+- Motivation: 2-3 paragraphs with goals
+- What Changed: Component descriptions with examples
+- Implementation: 3-4 key changes with code snippets
+- Benefits: Categorized list with specifics
+- Visual/UX Impact: Screenshots or detailed descriptions
+
+**Large change** (900 lines):
+- Motivation: Comprehensive context with background
+- What Changed: Full feature breakdown with examples
+- Implementation: Detailed technical sections per area
+- Benefits: Quantitative and qualitative analysis
+- Before/After: Visual comparisons
+- Impact: Multi-dimensional (visitors, SEO, performance)
+
+### ❌ Anti-patterns
+
+- **Over-detailed small change**: 800-line changelog for a blog post
+- **Under-documented major change**: 150-line changelog for major redesign
+- **Too abstract**: Generic descriptions without specifics
+- **Missing visuals**: UI changes without screenshots or descriptions
+
+## donepudi.me Specific Guidelines
+
+### File Path Examples
+
+When referencing code, use actual paths:
+
+```markdown
+**File**: `src/app/blog/page.tsx`
+**File**: `src/components/portfolio/Hero.jsx`
+**File**: `src/app/talks/[slug]/page.tsx`
+**File**: `src/components/ui/button.jsx`
+**File**: `public/blog/welcome.md`
+```
+
+### Content Examples
+
+Reference actual content:
+
+```markdown
+**Blog Post**: `/blog/welcome`
+**Talk**: `/talks/2025-11-29-hyderabad-cncf-meetup`
+**Portfolio Section**: Arsenal, Journey, Impact, Vision
+```
+
+### Area Categories
+
+Use these area categories consistently:
+
+**Content**:
+- Blog, Talks, Portfolio Content
+
+**UI/Design**:
+- UI Components, Design System, Layout, Navigation, Styling
+
+**Technical**:
+- API Integration, Performance, Build System, SEO
+
+**Infrastructure**:
+- Deployment, Configuration, Dependencies
+
+## Automation Notes
+
+When creating the changelog:
+1. **Get current timestamp**: Run `date +"%Y-%m-%d-%H%M%S"` to get the actual current date and time for the filename
+2. **Analyze the conversation**: Extract key decisions, changes, outcomes
+3. **Assess scope**: Count files, areas affected
+4. **Determine areas**: Map changes to area categories
+5. **Choose type**: Enhancement, Feature, Content, Design, Bug Fix, Refactoring
+6. **Size appropriately**: Match detail level to impact
+7. **Write the file**: Create in `_changelog/` with proper naming using the timestamp from step 1
+8. **Confirm creation**: Provide file path and next steps
+
+## Example Invocations
+
+```
+"I've finished adding the CNCF talk presentation. @create-donepudi-me-changelog"
+
+"The portfolio redesign is complete. @create-donepudi-me-changelog - this was a major visual overhaul"
+
+"New blog system is working. @create-donepudi-me-changelog - include the markdown rendering improvements"
+```
+
+## Remember
+
+**Changelogs are living documentation** that helps future you understand:
+- What changed on the website
+- Why it changed
+- How it was implemented
+- What the impact was on visitors/readers
+
+Write for the person who will come back to this site in six months. Give them the context they need - no more, no less.
+
+**When in doubt**: Start with the required sections, keep it focused, and add detail only where it truly helps understanding. A clear, concise 300-line changelog is better than a rambling 1000-line document.
+
+---
+
+*"Documentation is a love letter to your future self."* - Damian Conway

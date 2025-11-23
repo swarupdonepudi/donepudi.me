@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -52,13 +54,19 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             className="hidden md:flex space-x-8"
           >
-            {['Journey', 'Arsenal', 'Projects', 'Impact', 'Vision'].map((item) => (
+            {[
+              { label: 'Journey', href: '#journey' },
+              { label: 'Arsenal', href: '#arsenal' },
+              { label: 'Projects', href: '#projects' },
+              { label: 'Blog', href: '/blog' },
+              { label: 'Talks', href: '/talks' },
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 relative group"
               >
-                {item}
+                {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
@@ -133,10 +141,10 @@ export default function Home() {
               Engineering the Future, One System at a Time
             </h3>
             <div className="flex justify-center space-x-8 text-gray-400">
-              <a href="#" className="hover:text-cyan-400 transition-colors">Blog</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Open Source</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">planton.ai Docs</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Speaking</a>
+              <a href="/blog" className="hover:text-cyan-400 transition-colors">Blog</a>
+              <a href="/talks" className="hover:text-cyan-400 transition-colors">Talks</a>
+              <a href="https://github.com/project-planton" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Open Source</a>
+              <a href="https://planton.cloud" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Planton Cloud</a>
             </div>
           </motion.div>
           <div className="text-gray-500">
