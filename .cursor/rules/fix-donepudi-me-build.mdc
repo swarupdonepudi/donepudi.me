@@ -1,0 +1,55 @@
+---
+description: After making code changes, always run make build and iterate until it succeeds
+alwaysApply: false
+---
+
+# Rule: Iterate Until Build Succeeds
+
+## When This Applies
+
+After making ANY code changes (edits, new files, deletions), you MUST:
+
+1. Run `make build` (or equivalent build command)
+2. If build fails, read the error
+3. Fix the error
+4. Run `make build` again
+5. Repeat steps 2-4 until build succeeds
+
+## Critical Points
+
+- **DO NOT** stop after making changes without verifying the build
+- **DO NOT** ask the user if you should fix build errors - just fix them
+- **DO NOT** assume the build works - always verify
+- If build cache issues occur, run `rm -rf .next out && make build`
+- Keep iterating until you see `✓ Compiled successfully` and `✓ Generating static pages`
+
+## Expected Behavior
+
+```bash
+# After any code change:
+make build
+
+# If errors appear, fix them and run again:
+make build
+
+# Repeat until you see:
+✓ Compiled successfully
+✓ Generating static pages (10/10)
+```
+
+Only after seeing successful build output should you commit or report completion.
+
+## Do NOT
+
+- ❌ Stop after editing files without building
+- ❌ Ask "should I run the build?" - YES, always
+- ❌ Report "changes made" without verifying build succeeds
+- ❌ Assume changes work without testing
+
+## DO
+
+- ✅ Run `make build` after every change
+- ✅ Fix errors immediately when they appear
+- ✅ Clean cache if needed (`rm -rf .next out`)
+- ✅ Iterate until success
+- ✅ Only then commit or report completion
