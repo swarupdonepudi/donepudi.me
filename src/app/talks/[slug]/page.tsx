@@ -186,9 +186,18 @@ export default async function TalkPage({ params }: TalkPageProps) {
 
               {/* Talk Info */}
               <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg p-6">
-                <h3 className="font-semibold text-lg mb-4 text-white">
-                  Talk Information
-                </h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-lg text-white">
+                    Talk Information
+                  </h3>
+                  <Link
+                    href={`/talks/${params.slug}/organizer`}
+                    className="text-gray-500 hover:text-cyan-400 transition-colors"
+                    title="Organizer Notes"
+                  >
+                    <FileText className="w-4 h-4" />
+                  </Link>
+                </div>
                 <dl className="space-y-3 text-sm">
                   <div>
                     <dt className="text-gray-500 mb-1">Event</dt>
