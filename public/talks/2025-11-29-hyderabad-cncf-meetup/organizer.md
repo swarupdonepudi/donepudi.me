@@ -21,7 +21,7 @@ With over 10 years of experience in DevOps and platform engineering, Swarup has 
 Project Planton features 100+ deployment components with dual Pulumi/Terraform support, enabling teams to deploy production-ready infrastructure in minutes instead of weeks. PlantonCloud currently serves paying customers in production.
 
 **GitHub:** github.com/project-planton/project-planton  
-**Website:** planton.cloud
+**Website:** project-planton.org
 
 ### Alternate Bio (More Concise)
 
@@ -181,7 +181,7 @@ The talk includes:
 
 ### Materials to Share
 - **GitHub:** github.com/project-planton/project-planton
-- **Website:** planton.cloud
+- **Website:** project-planton.org
 - **LinkedIn:** linkedin.com/in/swarupdonepudi
 
 ---
@@ -219,7 +219,7 @@ The talk includes:
 - Vegetarian
 
 ### Contact
-- **Email:** swarup@planton.cloud
+- **Email:** swarup@donepudi.me
 - **LinkedIn:** linkedin.com/in/swarupdonepudi
 - **Response time:** Usually within 24 hours
 

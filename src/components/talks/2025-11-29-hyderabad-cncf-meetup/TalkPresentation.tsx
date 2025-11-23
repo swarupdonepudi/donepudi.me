@@ -169,9 +169,9 @@ function Slide05ProjectPlanton() {
             ✅ <strong className="text-white">Simple CLI</strong> - No K8s cluster required
           </p>
         </div>
-        <p className="text-xl text-gray-400 pt-6">
-          🌐 github.com/project-planton/project-planton
-        </p>
+          <p className="text-xl text-gray-400 pt-6">
+          🌐 project-planton.org • github.com/project-planton/project-planton
+          </p>
       </motion.div>
     </div>
   );
@@ -821,13 +821,13 @@ function Slide23ThankYou() {
           <div className="grid md:grid-cols-2 gap-6 text-gray-300 text-lg">
             <div className="bg-white/5 rounded-lg p-6">
               <p className="text-white font-semibold mb-2">Project Planton (OSS)</p>
+              <p>project-planton.org</p>
               <p>github.com/project-planton/project-planton</p>
-              <p>planton.cloud</p>
             </div>
             <div className="bg-white/5 rounded-lg p-6">
               <p className="text-white font-semibold mb-2">Connect</p>
               <p>linkedin.com/in/swarupdonepudi</p>
-              <p>swarup@planton.cloud</p>
+              <p>swarup@donepudi.me</p>
             </div>
           </div>
           <p className="text-2xl text-cyan-400 pt-8">

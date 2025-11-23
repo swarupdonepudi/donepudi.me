@@ -85,7 +85,7 @@ You can have unified experience without hiding provider differences. The manifes
 ## Links
 
 - **GitHub:** [github.com/project-planton/project-planton](https://github.com/project-planton/project-planton)
-- **Website:** [planton.cloud](https://planton.cloud)
+- **Website:** [project-planton.org](https://project-planton.org)
 
 ## About the Speaker
 
@@ -95,7 +95,7 @@ With 10+ years architecting DevOps infrastructure at scale, he believes in "cons
 
 **Connect:**
 - **GitHub:** [github.com/project-planton/project-planton](https://github.com/project-planton/project-planton)
-- **Website:** [planton.cloud](https://planton.cloud)
+- **Website:** [project-planton.org](https://project-planton.org)
 - **LinkedIn:** [linkedin.com/in/swarupdonepudi](https://linkedin.com/in/swarupdonepudi)
 
 ---
