@@ -5,6 +5,7 @@ import { getAllTalks, getTalkOrganizerNotes } from '@/lib/talks';
 import MarkdownRenderer from '@/components/blog/MarkdownRenderer';
 import { ArrowLeft, Lock } from 'lucide-react';
 import Header from '@/components/Header';
+import CopyMarkdownButton from './CopyMarkdownButton';
 
 interface OrganizerPageProps {
   params: {
@@ -66,10 +67,13 @@ export default async function OrganizerPage({ params }: OrganizerPageProps) {
 
         {/* Notes Content */}
         <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg shadow-sm p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-white mb-8 flex items-center gap-3">
-            <Lock className="w-8 h-8 text-cyan-400" />
-            Organizer Notes
-          </h1>
+          <div className="flex items-start justify-between mb-8">
+            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
+              <Lock className="w-8 h-8 text-cyan-400" />
+              Organizer Notes
+            </h1>
+            <CopyMarkdownButton content={notes.content} />
+          </div>
           
           <MarkdownRenderer content={notes.content} />
         </div>

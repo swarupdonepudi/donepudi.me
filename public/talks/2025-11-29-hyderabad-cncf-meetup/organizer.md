@@ -2,8 +2,6 @@
 title: "Organizer Notes - Hyderabad CNCF Meetup"
 ---
 
-# Organizer Notes for Rohit
-
 **Talk:** Consistency Without Abstraction: Building a Multi-Cloud Infrastructure Framework with Project Planton  
 **Date:** November 29, 2025  
 **Speaker:** Swarup Donepudi

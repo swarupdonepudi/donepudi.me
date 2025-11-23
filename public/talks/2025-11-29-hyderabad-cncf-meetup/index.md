@@ -3,7 +3,7 @@ title: "Consistency Without Abstraction: Building a Multi-Cloud Infrastructure F
 event: "Hyderabad CNCF Meetup"
 date: "2025-11-29"
 location: "Hyderabad, India"
-audience_size: "50-100"
+audience_size: "10-30"
 excerpt: "What if deploying a PostgreSQL database to AWS RDS, GCP Cloud SQL, or a Kubernetes cluster felt the same—without hiding cloud-specific power?"
 has_presentation: true
 status: "upcoming"
