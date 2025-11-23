@@ -23,17 +23,17 @@ export default function CopyMarkdownButton({ content }: CopyMarkdownButtonProps)
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-2 md:px-4 text-sm font-medium rounded-md border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-400/20 hover:border-cyan-400/50 transition-colors"
+      className="inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-md border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-400/20 hover:border-cyan-400/50 transition-colors"
       title={copied ? "Copied!" : "Copy Markdown"}
     >
       {copied ? (
         <>
-          <Check className="w-4 h-4" />
+          <Check className="w-3 h-3" />
           <span className="hidden sm:inline">Copied!</span>
         </>
       ) : (
         <>
-          <Copy className="w-4 h-4" />
+          <Copy className="w-3 h-3" />
           <span className="hidden sm:inline">Copy Markdown</span>
         </>
       )}

@@ -32,7 +32,7 @@ export default function TalkLayout({
   const isLastSlide = currentSlide === totalSlides - 1;
 
   return (
-    <div className="min-h-screen bg-[#110D1F] flex flex-col">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#110D1F] flex flex-col">
       {/* Home button */}
       <div className="absolute top-4 right-4 z-50">
         <button
@@ -44,7 +44,7 @@ export default function TalkLayout({
       </div>
 
       {/* Main content - slide */}
-      <div className="flex-1 flex items-center justify-center overflow-hidden">
+      <div className="flex-1 w-full flex items-center justify-center overflow-hidden px-4">
         {children}
       </div>
 
