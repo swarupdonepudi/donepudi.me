@@ -21,7 +21,7 @@ When this rule is triggered, the user will provide:
 1. **Title**: Either directly stated or visible in a screenshot
 2. **Date**: Either directly stated or visible in a screenshot (format: "March 18, 2025" or "April 1, 2025")
 3. **Content**: In a placeholder markdown file like `donepudi.me/public/blog/a.md` or `donepudi.me/public/blog/b.md`
-4. **Cover Image**: In `donepudi.me/public/images/` with a random name like `image.png`, `realization.png`, etc.
+4. **Cover Image**: In `donepudi.me/public/blog/images/` with a random name like `image.png`, `realization.png`, etc.
 5. **Optional**: Screenshot showing title and date from the published Hey World post
 6. **Optional**: Links or references to embed in the content
 
@@ -53,7 +53,7 @@ Add complete YAML frontmatter:
 title: "Exact Title From User"
 date: "YYYY-MM-DD"  # Convert "March 18, 2025" to "2025-03-18"
 excerpt: "First 1-2 sentences from content, or generate compelling summary"
-featured_image: "/images/{slug}.cover.png"
+featured_image: "/blog/images/{slug}.cover.png"
 author: "Swarup Donepudi"
 tags: ["tag1", "tag2", "tag3"]  # Generate 3-5 relevant tags
 ---
@@ -96,8 +96,8 @@ tags: ["tag1", "tag2", "tag3"]  # Generate 3-5 relevant tags
 
 **Rename cover image**:
 ```bash
-# From: donepudi.me/public/images/image.png
-# To:   donepudi.me/public/images/{slug}.cover.png
+# From: donepudi.me/public/blog/images/image.png
+# To:   donepudi.me/public/blog/images/{slug}.cover.png
 ```
 
 Use the same slug for both files.
@@ -114,7 +114,7 @@ Delete the placeholder markdown file after creating the final version.
 - Title: "A Practical Way to Spark Your Next Product Idea: Start with Consulting"
 - Date: March 19, 2025
 - Content: `donepudi.me/public/blog/a.md`
-- Cover: `donepudi.me/public/images/image.png`
+- Cover: `donepudi.me/public/blog/images/image.png`
 
 **You do**:
 1. Generate slug: `consulting-to-product-ideas`
@@ -167,7 +167,7 @@ Before completing, verify:
 ## Notes
 
 - **Blog system location**: `donepudi.me/public/blog/`
-- **Images location**: `donepudi.me/public/images/`
+- **Images location**: `donepudi.me/public/blog/images/`
 - **Source**: Content comes from Hey World posts at `world.hey.com/swarup`
 - **Build system**: Next.js static site generator
 - **Deployment**: GitHub Pages via GitHub Actions

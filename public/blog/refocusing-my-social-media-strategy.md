@@ -2,7 +2,7 @@
 title: "Refocusing My Social Media Strategy"
 date: "2025-04-08"
 excerpt: "I woke up at 3 AM today, ready to ramp up my online presence. My plan was simple: jump onto Twitter, post a quick update, and start connecting. But almost before I knew it, 30 minutes vanished while I scrolled through other tweets and followed random threads."
-featured_image: "/images/refocusing-my-social-media-strategy.cover.png"
+featured_image: "/blog/images//refocusing-my-social-media-strategy.cover.png"
 author: "Swarup Donepudi"
 tags: ["personal", "productivity", "reflection", "social-media", "buildinpublic"]
 ---
@@ -19,5 +19,5 @@ That's when I stumbled on a Twitter community called [BuildInPublic](https://twi
 
 I'm hoping this more intentional approach helps me stay consistent—and actually reach my goal of growing a meaningful online presence.
 
-![My social media strategy visualization](/images/refocusing-my-social-media-strategy.png)
+![My social media strategy visualization](/blog/images//refocusing-my-social-media-strategy.png)
 

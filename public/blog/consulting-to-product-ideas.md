@@ -2,7 +2,7 @@
 title: "A Practical Way to Spark Your Next Product Idea: Start with Consulting"
 date: "2025-03-19"
 excerpt: "If you're someone who really wants to build your own company but can't pin down that breakthrough product idea just yet, starting as a consulting business could be the perfect first step."
-featured_image: "/images/consulting-to-product-ideas.cover.png"
+featured_image: "/blog/images//consulting-to-product-ideas.cover.png"
 author: "Swarup Donepudi"
 tags: ["consulting", "product", "startup", "entrepreneurship", "planton-cloud"]
 ---

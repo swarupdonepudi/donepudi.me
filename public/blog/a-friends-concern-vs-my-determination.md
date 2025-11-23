@@ -2,7 +2,7 @@
 title: "A Friend's Concern vs. My Determination"
 date: "2025-04-11"
 excerpt: "I met with a close friend last night, and he was worried about how intensely I've been working on my startup. We'd just finished an evening workout, and afterward, he asked me if I was depressed or in denial."
-featured_image: "/images/a-friends-concern-vs-my-determination.cover.png"
+featured_image: "/blog/images//a-friends-concern-vs-my-determination.cover.png"
 author: "Swarup Donepudi"
 tags: ["personal", "reflection", "startup", "planton-cloud", "determination"]
 ---
