@@ -53,18 +53,6 @@ export default async function OrganizerPage({ params }: OrganizerPageProps) {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        {/* Privacy Alert */}
-        <div className="mb-8 p-4 border border-amber-500/30 bg-amber-500/10 backdrop-blur-lg rounded-lg flex gap-3">
-          <Lock className="h-5 w-5 text-amber-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <h3 className="font-semibold text-amber-400 mb-1">Organizer Notes</h3>
-            <p className="text-sm text-amber-300/80">
-              This page contains internal notes for event organizers. It is not linked publicly
-              and should be accessed only via direct URL.
-            </p>
-          </div>
-        </div>
-
         {/* Notes Content */}
         <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg shadow-sm p-8 md:p-12">
           <div className="flex items-start justify-between mb-8">
