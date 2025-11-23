@@ -1,0 +1,237 @@
+---
+description: Action rule to commit donepudi.me changes with appropriate conventional commit messages
+globs: []
+alwaysApply: false
+---
+
+# Rule: Commit donepudi.me Changes
+
+## Purpose
+
+When triggered, create a Git commit with an appropriate commit message following Conventional Commits format, based on the current conversation context and file changes.
+
+## Usage
+
+Invoke explicitly as `@commit-donepudi-me-changes` when ready to commit changes.
+
+## Behavior
+
+1. **Analyze Changes**: Review the git diff and conversation context to understand what changed
+2. **Determine Type**: Select appropriate conventional commit prefix
+3. **Infer Scope**: Determine scope based on files changed
+4. **Craft Message**: Write clear, imperative commit message
+5. **Stage & Commit**: Execute `git add .` and `git commit -m "message"`
+
+## Conventional Commit Format
+
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Types
+
+- `feat`: New feature (blog post, portfolio section, talk, etc.)
+- `fix`: Bug fix
+- `refactor`: Code refactoring without changing functionality
+- `style`: UI/UX styling changes (CSS, design updates)
+- `docs`: Documentation changes (README, content updates)
+- `perf`: Performance improvements
+- `chore`: Routine tasks (dependencies, config)
+- `ci`: CI/CD changes
+- `build`: Build system changes
+
+### Scopes (donepudi.me-specific)
+
+Determine scope based on changed files:
+
+**Content Areas**:
+- `blog`: Blog posts and related components (`src/app/blog/`, `public/blog/`)
+- `talks`: Talk presentations and content (`src/app/talks/`, `public/talks/`, `src/components/talks/`)
+- `portfolio`: Portfolio sections (`src/components/portfolio/`)
+- `content`: General content updates
+
+**Technical Areas**:
+- `ui`: UI components (`src/components/ui/`)
+- `layout`: Layout and navigation (`src/app/layout.tsx`, `src/components/Layout.jsx`)
+- `api`: API integrations (`src/api/`)
+- `lib`: Utility libraries (`src/lib/`)
+- `hooks`: React hooks (`src/hooks/`)
+- `styles`: Global styles and theming (`src/app/globals.css`, `tailwind.config.js`)
+
+**Infrastructure**:
+- `deps`: Dependency updates
+- `config`: Configuration files (`next.config.mjs`, `tsconfig.json`, etc.)
+- `build`: Build and deployment
+- `repo`: Repository-level changes
+
+### Scope Selection Heuristics
+
+- Single area changes: Use specific scope (e.g., `blog`, `talks`, `portfolio`)
+- Multiple related areas: Use parent scope (e.g., `content` for blog + talks)
+- UI component changes: Use `ui`
+- Cross-cutting changes: Use `repo`
+
+### Subject Guidelines
+
+- **Imperative mood**: "add", "fix", "update" (not "added", "fixes", "updating")
+- **Lowercase**: Start with lowercase letter
+- **No period**: Don't end with a period
+- **Concise**: 50 characters or less
+- **Descriptive**: Clearly state what changed
+
+### Body Guidelines (Optional)
+
+Add body when:
+- Change needs context or explanation
+- Multiple related changes need grouping
+- Breaking changes need migration notes
+
+**Format**:
+- Blank line after subject
+- Wrap at 72 characters
+- Focus on "what" and "why", not "how"
+
+### Examples
+
+**Content changes**:
+```
+feat(blog): add post about kubernetes platform engineering
+```
+
+```
+feat(talks): add hyderabad cncf meetup presentation slides
+```
+
+```
+docs(portfolio): update arsenal section with new technologies
+```
+
+**UI changes**:
+```
+style(portfolio): improve hero section mobile responsiveness
+```
+
+```
+feat(ui): add dark mode support to blog posts
+```
+
+```
+refactor(layout): modernize navigation component structure
+```
+
+**Technical changes**:
+```
+fix(blog): correct markdown rendering for code blocks
+```
+
+```
+perf(talks): optimize slide transitions and animations
+```
+
+```
+feat(api): integrate base44 client for dynamic content
+```
+
+**Infrastructure**:
+```
+chore(deps): upgrade next.js to 14.2.15
+```
+
+```
+build(config): update next.config for static export
+```
+
+## Execution Flow
+
+When invoked:
+
+1. **Review changes**: Read git status and diff
+   ```bash
+   git status
+   git diff
+   ```
+
+2. **Analyze context**: Review conversation to understand the "why"
+
+3. **Determine commit details**:
+   - Type: What kind of change?
+   - Scope: Which area is affected?
+   - Subject: What's the one-line summary?
+   - Body: Does this need explanation?
+
+4. **Stage changes**:
+   ```bash
+   git add .
+   ```
+
+5. **Create commit**:
+   ```bash
+   git commit -m "<type>(<scope>): <subject>"
+   ```
+   
+   Or with body:
+   ```bash
+   git commit -m "<type>(<scope>): <subject>" -m "<body>"
+   ```
+
+6. **Confirm**: Show the commit message and SHA
+
+## Special Cases
+
+### Multiple Unrelated Changes
+
+If git status shows unrelated changes:
+- Ask user which changes to commit
+- Stage selectively with `git add <files>`
+- Create separate commits if appropriate
+
+### No Changes
+
+If `git status` shows no changes:
+- Inform the user
+- Don't attempt to commit
+
+### Uncommitted Prior Work
+
+If there are unstaged changes from previous work:
+- Ask user if they want to include them
+- Proceed based on user response
+
+## Quality Checklist
+
+Before committing:
+- [ ] Type is appropriate for the change
+- [ ] Scope accurately reflects affected area
+- [ ] Subject is imperative, lowercase, concise
+- [ ] Message clearly describes the change
+- [ ] No sensitive information in commit message
+- [ ] Changes are related and cohesive
+
+## Integration with Other Rules
+
+**Works with**:
+- `@create-donepudi-me-changelog`: Create changelog before committing
+- `@generate-donepudi-me-pr-info`: Generate PR info after committing
+
+**Typical workflow**:
+1. Make changes to website
+2. `@create-donepudi-me-changelog` (for significant changes)
+3. `@commit-donepudi-me-changes`
+4. Push branch
+5. `@generate-donepudi-me-pr-info` (to prepare PR)
+
+## Notes
+
+- This rule uses standard git commands
+- No git hooks are bypassed
+- Commits are local until pushed
+- User can amend or revert if needed
+- Follow repository's existing commit style
+
+---
+
+**Remember**: Good commit messages help future you understand what changed and why. Write for clarity and context.

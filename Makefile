@@ -5,6 +5,10 @@ name=lawpilotfoundation
 deps:
 	yarn install
 
+.PHONY: run
+run:
+	yarn dev
+
 .PHONY: develop
 develop: deps
 	yarn dev
