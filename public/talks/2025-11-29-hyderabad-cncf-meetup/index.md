@@ -9,8 +9,6 @@ has_presentation: true
 status: "upcoming"
 ---
 
-# Consistency Without Abstraction: Building a Multi-Cloud Infrastructure Framework with Project Planton
-
 ## Overview
 
 What if deploying a PostgreSQL database to AWS RDS, GCP Cloud SQL, or a Kubernetes cluster felt the same—same YAML structure, same CLI command, same validation workflow—without hiding cloud-specific power?

@@ -6,6 +6,7 @@ import { formatDate } from '@/lib/content';
 import MarkdownRenderer from '@/components/blog/MarkdownRenderer';
 import { ArrowLeft, Play, Calendar, MapPin, Users, Video, FileText, ExternalLink } from 'lucide-react';
 import Header from '@/components/Header';
+import CopyMarkdownButton from './CopyMarkdownButton';
 
 interface TalkPageProps {
   params: {
@@ -49,6 +50,20 @@ export default async function TalkPage({ params }: TalkPageProps) {
 
   const hasPresentation = talk.frontmatter.has_presentation && hasPresentationComponent(params.slug);
   const isUpcoming = new Date(talk.frontmatter.date) > new Date();
+  
+  // Generate markdown content with frontmatter
+  const markdownContent = `---
+title: "${talk.frontmatter.title}"
+event: "${talk.frontmatter.event}"
+date: "${talk.frontmatter.date}"
+location: "${talk.frontmatter.location || ''}"
+audience_size: "${talk.frontmatter.audience_size || ''}"
+excerpt: "${talk.frontmatter.excerpt || ''}"
+has_presentation: ${talk.frontmatter.has_presentation || false}
+status: "${talk.frontmatter.status || ''}"${talk.frontmatter.video_url ? `\nvideo_url: "${talk.frontmatter.video_url}"` : ''}${talk.frontmatter.slides_url ? `\nslides_url: "${talk.frontmatter.slides_url}"` : ''}
+---
+
+${talk.content}`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
@@ -66,70 +81,122 @@ export default async function TalkPage({ params }: TalkPageProps) {
 
       {/* Content */}
       <article className="container mx-auto px-4 py-12 max-w-5xl">
+        {/* Header - always at top */}
+        <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg shadow-sm p-8 md:p-12 mb-8 relative">
+          {/* Copy Markdown Button - Top Right */}
+          <div className="absolute top-4 right-4 md:top-6 md:right-6">
+            <CopyMarkdownButton content={markdownContent} />
+          </div>
+
+          <header className="mb-0">
+            <div className="flex items-center gap-2 mb-4">
+              {isUpcoming ? (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-500/20 text-green-400 border border-green-500/30">
+                  Upcoming
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-500/20 text-gray-400 border border-gray-500/30">
+                  Completed
+                </span>
+              )}
+              {hasPresentation && (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border border-cyan-500/30 text-cyan-400">
+                  <Play className="w-3 h-3 mr-1" />
+                  Presentation Available
+                </span>
+              )}
+            </div>
+
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              {talk.frontmatter.title}
+            </h1>
+            
+            <p className="text-xl text-gray-300 font-medium mb-4">
+              {talk.frontmatter.event}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 text-gray-400">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-cyan-400" />
+                <time dateTime={talk.frontmatter.date}>
+                  {formatDate(talk.frontmatter.date)}
+                </time>
+              </div>
+              
+              {talk.frontmatter.location && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-cyan-400" />
+                  <span>{talk.frontmatter.location}</span>
+                </div>
+              )}
+              
+              {talk.frontmatter.audience_size && (
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-cyan-400" />
+                  <span>{talk.frontmatter.audience_size} attendees</span>
+                </div>
+              )}
+            </div>
+          </header>
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main content */}
-          <div className="lg:col-span-2">
+          {/* Main content - body only */}
+          <div className="lg:col-span-2 order-2 lg:order-1">
             <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg shadow-sm p-8 md:p-12">
-              {/* Title and metadata */}
-              <header className="mb-8 pb-8 border-b border-cyan-500/20">
-                <div className="flex items-center gap-2 mb-4">
-                  {isUpcoming ? (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-500/20 text-green-400 border border-green-500/30">
-                      Upcoming
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-500/20 text-gray-400 border border-gray-500/30">
-                      Completed
-                    </span>
-                  )}
-                  {hasPresentation && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border border-cyan-500/30 text-cyan-400">
-                      <Play className="w-3 h-3 mr-1" />
-                      Presentation Available
-                    </span>
-                  )}
-                </div>
-
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  {talk.frontmatter.title}
-                </h1>
-                
-                <p className="text-xl text-gray-300 font-medium mb-4">
-                  {talk.frontmatter.event}
-                </p>
-
-                <div className="flex flex-wrap items-center gap-4 text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-cyan-400" />
-                    <time dateTime={talk.frontmatter.date}>
-                      {formatDate(talk.frontmatter.date)}
-                    </time>
-                  </div>
-                  
-                  {talk.frontmatter.location && (
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-cyan-400" />
-                      <span>{talk.frontmatter.location}</span>
-                    </div>
-                  )}
-                  
-                  {talk.frontmatter.audience_size && (
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-cyan-400" />
-                      <span>{talk.frontmatter.audience_size} attendees</span>
-                    </div>
-                  )}
-                </div>
-              </header>
-
-              {/* Markdown content */}
               <MarkdownRenderer content={talk.content} />
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
+          {/* Sidebar - shows between header and body on mobile */}
+          <div className="lg:col-span-1 order-1 lg:order-2">
             <div className="sticky top-24 space-y-6">
+              {/* Talk Info */}
+              <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-lg text-white">
+                    Talk Information
+                  </h3>
+                  <Link
+                    href={`/talks/${params.slug}/organizer`}
+                    className="text-gray-500 hover:text-cyan-400 transition-colors"
+                    title="Organizer Notes"
+                  >
+                    <FileText className="w-4 h-4" />
+                  </Link>
+                </div>
+                <dl className="space-y-3 text-sm">
+                  <div>
+                    <dt className="text-gray-500 mb-1">Event</dt>
+                    <dd className="text-gray-300 font-medium">
+                      {talk.frontmatter.event}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-gray-500 mb-1">Date</dt>
+                    <dd className="text-gray-300">
+                      {formatDate(talk.frontmatter.date)}
+                    </dd>
+                  </div>
+                  {talk.frontmatter.location && (
+                    <div>
+                      <dt className="text-gray-500 mb-1">Location</dt>
+                      <dd className="text-gray-300">
+                        {talk.frontmatter.location}
+                      </dd>
+                    </div>
+                  )}
+                  {talk.frontmatter.audience_size && (
+                    <div>
+                      <dt className="text-gray-500 mb-1">Audience</dt>
+                      <dd className="text-gray-300">
+                        {talk.frontmatter.audience_size}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              </div>
+
               {/* Presentation Button */}
               {hasPresentation && (
                 <div className="bg-gradient-to-br from-blue-900/40 to-purple-900/40 border border-cyan-500/30 backdrop-blur-lg rounded-lg p-6">
@@ -183,52 +250,6 @@ export default async function TalkPage({ params }: TalkPageProps) {
                   </div>
                 </div>
               )}
-
-              {/* Talk Info */}
-              <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-lg text-white">
-                    Talk Information
-                  </h3>
-                  <Link
-                    href={`/talks/${params.slug}/organizer`}
-                    className="text-gray-500 hover:text-cyan-400 transition-colors"
-                    title="Organizer Notes"
-                  >
-                    <FileText className="w-4 h-4" />
-                  </Link>
-                </div>
-                <dl className="space-y-3 text-sm">
-                  <div>
-                    <dt className="text-gray-500 mb-1">Event</dt>
-                    <dd className="text-gray-300 font-medium">
-                      {talk.frontmatter.event}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-gray-500 mb-1">Date</dt>
-                    <dd className="text-gray-300">
-                      {formatDate(talk.frontmatter.date)}
-                    </dd>
-                  </div>
-                  {talk.frontmatter.location && (
-                    <div>
-                      <dt className="text-gray-500 mb-1">Location</dt>
-                      <dd className="text-gray-300">
-                        {talk.frontmatter.location}
-                      </dd>
-                    </div>
-                  )}
-                  {talk.frontmatter.audience_size && (
-                    <div>
-                      <dt className="text-gray-500 mb-1">Audience</dt>
-                      <dd className="text-gray-300">
-                        {talk.frontmatter.audience_size}
-                      </dd>
-                    </div>
-                  )}
-                </dl>
-              </div>
             </div>
           </div>
         </div>
