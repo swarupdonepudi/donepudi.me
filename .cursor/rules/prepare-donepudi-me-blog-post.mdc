@@ -1,0 +1,193 @@
+---
+description: Action rule to format and publish blog posts for donepudi.me with proper frontmatter, structure, and file naming
+globs: []
+alwaysApply: false
+---
+
+# Rule: Prepare donepudi.me Blog Post
+
+**Purpose**: Format raw blog content into properly structured markdown with frontmatter, rename files to match conventions, and prepare for publication.
+
+**Type**: Action rule
+
+**When to use**: User will provide raw blog content and say something like "new blog post" or mention this rule. They will provide inputs as described below.
+
+---
+
+## Inputs User Will Provide
+
+When this rule is triggered, the user will provide:
+
+1. **Title**: Either directly stated or visible in a screenshot
+2. **Date**: Either directly stated or visible in a screenshot (format: "March 18, 2025" or "April 1, 2025")
+3. **Content**: In a placeholder markdown file like `donepudi.me/public/blog/a.md` or `donepudi.me/public/blog/b.md`
+4. **Cover Image**: In `donepudi.me/public/images/` with a random name like `image.png`, `realization.png`, etc.
+5. **Optional**: Screenshot showing title and date from the published Hey World post
+6. **Optional**: Links or references to embed in the content
+
+---
+
+## What You Must Do
+
+### 1. Extract Information
+
+- Read the title (from user message or screenshot)
+- Extract the date (from user message or screenshot)
+- Read the content from the placeholder markdown file
+- Note the cover image filename
+
+### 2. Generate Slug
+
+Create a URL-friendly slug from the title:
+- Convert to lowercase
+- Replace spaces with hyphens
+- Remove special characters except hyphens
+- Example: "Time to Shift Your Mindset" → `ai-efficiency-mindset`
+
+### 3. Create Frontmatter
+
+Add complete YAML frontmatter:
+
+```yaml
+---
+title: "Exact Title From User"
+date: "YYYY-MM-DD"  # Convert "March 18, 2025" to "2025-03-18"
+excerpt: "First 1-2 sentences from content, or generate compelling summary"
+featured_image: "/images/{slug}.cover.png"
+author: "Swarup Donepudi"
+tags: ["tag1", "tag2", "tag3"]  # Generate 3-5 relevant tags
+---
+```
+
+**Tag Guidelines**:
+- Use lowercase
+- Common tags: `cloud`, `datacenter`, `infrastructure`, `ai`, `productivity`, `startup`, `consulting`, `planton-cloud`, `reflection`, `personal`, `development`, `efficiency`, `tools`
+- Choose tags that match the content topic
+
+### 4. Format Content
+
+**Structure with headings**:
+- Add `## H2` headings to break up sections
+- Headings should be descriptive and natural
+- Don't force headings where they don't fit
+- Typical structure: Intro paragraph(s) → Section 1 → Section 2 → Closing
+
+**Enhance readability**:
+- Convert plain URLs to markdown links with descriptive text
+- Preserve **bold** emphasis where it exists
+- Fix minor typos if obvious
+- Add line breaks between paragraphs if missing
+
+**What NOT to do**:
+- ❌ Don't rewrite the author's voice
+- ❌ Don't add marketing fluff or buzzwords
+- ❌ Don't change the tone or personality
+- ❌ Don't add content that wasn't there
+- ❌ Don't over-structure simple posts
+- ✅ Keep it natural and authentic
+
+### 5. Rename Files
+
+**Rename markdown file**:
+```bash
+# From: donepudi.me/public/blog/a.md
+# To:   donepudi.me/public/blog/{slug}.md
+```
+
+**Rename cover image**:
+```bash
+# From: donepudi.me/public/images/image.png
+# To:   donepudi.me/public/images/{slug}.cover.png
+```
+
+Use the same slug for both files.
+
+### 6. Clean Up
+
+Delete the placeholder markdown file after creating the final version.
+
+---
+
+## Example Workflow
+
+**User provides**:
+- Title: "A Practical Way to Spark Your Next Product Idea: Start with Consulting"
+- Date: March 19, 2025
+- Content: `donepudi.me/public/blog/a.md`
+- Cover: `donepudi.me/public/images/image.png`
+
+**You do**:
+1. Generate slug: `consulting-to-product-ideas`
+2. Rename image: `image.png` → `consulting-to-product-ideas.cover.png`
+3. Create `consulting-to-product-ideas.md` with:
+   - Frontmatter (title, date: "2025-03-19", excerpt, featured_image, author, tags)
+   - Formatted content with `## H2` headings
+   - Hyperlinked URLs
+4. Delete `a.md`
+
+---
+
+## Naming Convention
+
+**Markdown files**: `{slug}.md`
+- kebab-case
+- descriptive of content
+- Examples: `37-signals-in-datacenter.md`, `consulting-to-product-ideas.md`, `ai-efficiency-mindset.md`
+
+**Cover images**: `{slug}.cover.png`
+- Must match the markdown slug
+- `.cover.png` suffix indicates it's a cover/hero image
+- Examples: `37-signals-in-datacenter.cover.png`, `consulting-to-product-ideas.cover.png`
+
+**Inline images** (if any): `{slug}.png` or `{slug}-{descriptor}.png`
+- No `.cover` suffix
+- Used for images embedded in content
+
+---
+
+## Quality Checklist
+
+Before completing, verify:
+
+- [ ] Frontmatter is complete and valid YAML
+- [ ] Date is in YYYY-MM-DD format
+- [ ] Excerpt is compelling and under 200 characters
+- [ ] Featured image path matches renamed file
+- [ ] Tags are relevant (3-5 tags)
+- [ ] Content has appropriate `## H2` headings
+- [ ] URLs are converted to markdown links
+- [ ] Original voice and tone preserved
+- [ ] Markdown file renamed to `{slug}.md`
+- [ ] Cover image renamed to `{slug}.cover.png`
+- [ ] Placeholder file deleted
+- [ ] No spelling errors or obvious typos
+
+---
+
+## Notes
+
+- **Blog system location**: `donepudi.me/public/blog/`
+- **Images location**: `donepudi.me/public/images/`
+- **Source**: Content comes from Hey World posts at `world.hey.com/swarup`
+- **Build system**: Next.js static site generator
+- **Deployment**: GitHub Pages via GitHub Actions
+
+**Philosophy**: These posts reflect personal insights and experiences. Keep them authentic, relatable, and developer-friendly. The goal is to maintain the natural voice while adding just enough structure and polish for a professional blog.
+
+---
+
+## Example Tag Mappings
+
+| Topic | Suggested Tags |
+|-------|---------------|
+| Cloud migrations | `cloud`, `datacenter`, `infrastructure`, `37signals`, `kamal` |
+| Product building | `startup`, `product`, `consulting`, `entrepreneurship`, `planton-cloud` |
+| AI productivity | `ai`, `productivity`, `efficiency`, `chatgpt`, `tools` |
+| Personal updates | `reflection`, `personal`, `productivity`, `discipline`, `development` |
+| Technical work | `development`, `infrastructure`, `deployment`, `devops`, `platform` |
+
+---
+
+**Status**: Ready to use
+
+**Usage**: User mentions this rule or provides blog post inputs, and you follow this workflow automatically.

@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { 
   Github, 
@@ -15,7 +15,9 @@ import {
   Cloud,
   Rocket,
   Star,
-  Globe
+  Globe,
+  Menu,
+  X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -27,7 +29,17 @@ import Impact from '@/components/portfolio/Impact';
 import Vision from '@/components/portfolio/Vision';
 import Contact from '@/components/portfolio/Contact';
 
+const navItems = [
+  { label: 'Journey', href: '#journey' },
+  { label: 'Arsenal', href: '#arsenal' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Talks', href: '/talks' },
+];
+
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white overflow-x-hidden">
       {/* Navigation */}
@@ -49,18 +61,13 @@ export default function Home() {
             <span className="text-xl font-bold text-cyan-400">Swarup Donepudi</span>
           </motion.div>
           
+          {/* Desktop Navigation */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className="hidden md:flex space-x-8"
           >
-            {[
-              { label: 'Journey', href: '#journey' },
-              { label: 'Arsenal', href: '#arsenal' },
-              { label: 'Projects', href: '#projects' },
-              { label: 'Blog', href: '/blog' },
-              { label: 'Talks', href: '/talks' },
-            ].map((item) => (
+            {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
@@ -72,10 +79,11 @@ export default function Home() {
             ))}
           </motion.div>
           
+          {/* Desktop Social Links */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex space-x-3"
+            className="hidden md:flex space-x-3"
           >
             <Button
               variant="ghost" 
@@ -94,7 +102,80 @@ export default function Home() {
               <Linkedin className="w-5 h-5" />
             </Button>
           </motion.div>
+
+          {/* Mobile Hamburger Button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="md:hidden"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/10"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </Button>
+          </motion.div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-black/95 backdrop-blur-lg border-b border-cyan-500/20 overflow-hidden"
+            >
+              <div className="px-6 py-4 space-y-4">
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="block text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2 border-b border-cyan-500/10"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </motion.a>
+                ))}
+                
+                {/* Mobile Social Links */}
+                <div className="flex space-x-3 pt-4">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/10"
+                    onClick={() => {
+                      if (typeof window !== 'undefined') {
+                        window.open('https://github.com/swarupdonepudi', '_blank');
+                      }
+                    }}
+                  >
+                    <Github className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/10"
+                    onClick={() => {
+                      if (typeof window !== 'undefined') {
+                        window.open('https://linkedin.com/in/swarupdonepudi', '_blank');
+                      }
+                    }}
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
