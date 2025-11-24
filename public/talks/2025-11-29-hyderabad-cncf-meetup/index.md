@@ -33,6 +33,10 @@ This talk introduces **Project Planton**, an open-source multi-cloud infrastruct
 - Why simple CLI + Pulumi/Terraform over Kubernetes operators
 - Why dual Pulumi/Terraform support (choice > dogma)
 - The "deployment component" concept (API + IaC + docs + examples)
+- InfraCharts: Orchestrating complex environments (Helm charts for infrastructure)
+  - Deploy 20+ interconnected resources from simple templates
+  - Automatic dependency resolution via DAG
+  - Real example: AWS ECS environment with VPC, ALB, security groups, IAM in 20 minutes
 
 ### 4. Crossplane Comparison (5 minutes)
 - Crossplane: YAML-driven, requires Kubernetes cluster, reconciler loops
@@ -47,6 +51,7 @@ Attendees will leave understanding:
 - ✅ Why validation-first deployments catch 90%+ of errors before cloud APIs
 - ✅ The tradeoffs between Kubernetes-operator-based vs CLI-based infrastructure frameworks
 - ✅ How Project Planton's 100+ deployment components work
+- ✅ How InfraCharts orchestrate multi-resource deployments with automatic dependency management
 - ✅ When to use Crossplane vs Project Planton vs raw IaC
 - ✅ How to contribute to Project Planton (it's open source!)
 

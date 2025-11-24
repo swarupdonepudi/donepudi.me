@@ -678,8 +678,68 @@ function Slide19DeploymentComponent() {
   );
 }
 
-// Slide 20: Crossplane Comparison Table
-function Slide20CrossplaneTable() {
+// Slide 20: InfraCharts
+function Slide20InfraCharts() {
+  return (
+    <div className="w-full h-full flex items-center justify-center p-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-6xl"
+      >
+        <h2 className="text-4xl font-bold text-white mb-8">InfraCharts: Orchestrating Complex Environments</h2>
+        <p className="text-xl text-gray-300 mb-6">
+          <strong className="text-cyan-400">Think Helm charts, but for multi-cloud infrastructure</strong>
+        </p>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6">
+            <h3 className="text-red-400 text-2xl font-bold mb-4">The Problem</h3>
+            <div className="text-gray-300 space-y-3">
+              <p>❌ Deploying AWS ECS needs 20+ resources:</p>
+              <ul className="list-disc list-inside pl-4 space-y-1 text-sm">
+                <li>VPC, subnets, security groups</li>
+                <li>ALB, target groups, listeners</li>
+                <li>ECS cluster, task definitions</li>
+                <li>IAM roles, artifact registry</li>
+              </ul>
+              <p className="pt-2">⏰ Manual deployment: 3 × 2-hour sessions</p>
+            </div>
+          </div>
+          <div className="bg-green-900/20 border border-green-500/50 rounded-lg p-6">
+            <h3 className="text-green-400 text-2xl font-bold mb-4">The Solution: InfraCharts</h3>
+            <div className="text-gray-300 space-y-3">
+              <p>✅ Reusable templates with parameters</p>
+              <p>✅ Automatic dependency resolution (DAG)</p>
+              <p>✅ Deploy 20+ resources from single command</p>
+              <p>✅ Parallel execution where possible</p>
+              <p className="pt-2 text-green-400 font-semibold">⚡ Time: 20 minutes (automated)</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 bg-gray-900 rounded-lg border border-cyan-500/30 p-6">
+          <pre className="text-green-400 text-xs font-mono overflow-x-auto">
+{`# Chart structure
+aws-ecs-environment/
+├── Chart.yaml         # Metadata
+├── values.yaml        # Parameters (region, domain, etc)
+└── templates/         # 20+ cloud resource definitions
+    ├── vpc.yaml
+    ├── security-groups.yaml
+    ├── alb.yaml
+    ├── ecs-cluster.yaml
+    └── ...
+
+$ planton chart deploy aws-ecs-environment --values prod-values.yaml
+✅ Rendering 22 resources... ✅ Building dependency graph... ✅ Deploying in parallel...`}
+          </pre>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+// Slide 21: Crossplane Comparison Table
+function Slide21CrossplaneTable() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -736,8 +796,8 @@ function Slide20CrossplaneTable() {
   );
 }
 
-// Slide 21: Key Takeaways
-function Slide21KeyTakeaways() {
+// Slide 22: Key Takeaways
+function Slide22KeyTakeaways() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -770,8 +830,8 @@ function Slide21KeyTakeaways() {
   );
 }
 
-// Slide 22: Get Involved
-function Slide22GetInvolved() {
+// Slide 23: Get Involved
+function Slide23GetInvolved() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -806,8 +866,8 @@ function Slide22GetInvolved() {
   );
 }
 
-// Slide 23: Thank You
-function Slide23ThankYou() {
+// Slide 24: Thank You
+function Slide24ThankYou() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -864,10 +924,11 @@ export default function TalkPresentation() {
     <Slide17WhenToUse key="slide-17" />,
     <Slide18DualIaC key="slide-18" />,
     <Slide19DeploymentComponent key="slide-19" />,
-    <Slide20CrossplaneTable key="slide-20" />,
-    <Slide21KeyTakeaways key="slide-21" />,
-    <Slide22GetInvolved key="slide-22" />,
-    <Slide23ThankYou key="slide-23" />,
+    <Slide20InfraCharts key="slide-20" />,
+    <Slide21CrossplaneTable key="slide-21" />,
+    <Slide22KeyTakeaways key="slide-22" />,
+    <Slide23GetInvolved key="slide-23" />,
+    <Slide24ThankYou key="slide-24" />,
   ];
 
   const goToNext = useCallback(() => {
