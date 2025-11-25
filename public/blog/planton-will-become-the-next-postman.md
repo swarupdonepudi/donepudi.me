@@ -10,19 +10,13 @@ tags:
 
 While working out today, something clicked. Postman and Planton—both have exactly 7 characters. Both start with 'P' and end with 'N'. A pure coincidence, sure, but it felt like a sign.
 
-![Postman website homepage](/blog/images/planton-will-become-the-next-postman-postman-website.png)
-
-![Planton website homepage](/blog/images/planton-will-become-the-next-postman-planton-website.png)
+![Planton and Postman logos side by side](/blog/images/planton-will-become-the-next-postman-logos.png)
 
 ## Postman: India's First Global Developer Tool
 
 I recently dove deep into Postman's origin story. It's the only developer tool company that truly came out of India and earned global love from the tech community. Founded in 2012 in Bangalore by Abhinav Asthana as a side project at Yahoo, it started as a simple Chrome extension to make API testing less tedious.
 
-![Postman's Indian origin story and founding journey](/blog/images/planton-will-become-the-next-postman-origin.jpg)
-
 The tool caught on fast. With no marketing, it grew to 500,000 users purely by word of mouth. Today, Postman has 30 million users, serves 500,000+ organizations worldwide, and 98% of Fortune 500 companies rely on it. That's not just adoption—that's becoming essential infrastructure for how the world builds software.
-
-![Postman's global adoption and impact statistics](/blog/images/planton-will-become-the-next-postman-adoption.jpg)
 
 ## The Belief I'm Declaring Today
 
@@ -35,8 +29,6 @@ So here it is: **Planton will become the next Postman.**
 ## Why This Matters
 
 Postman proved that world-class software products can be built from India. When Abhinav Asthana started, there was skepticism—"one cannot build a global product from India," he recalls. But Postman's success destroyed that bias.
-
-![Other Indian developer tools loved globally](/blog/images/planton-will-become-the-next-postman-ecosystem.jpg)
 
 I'm building Planton with the same conviction. It's not about where you build; it's about solving real problems for developers worldwide. Postman made API development effortless. Planton will make DevOps effortless. That's the mission.
 
@@ -51,3 +43,11 @@ But that's exactly the point. If I don't believe it enough to say it publicly, h
 Postman's founders had to believe they could compete globally from Bangalore. They had to take that leap. Now it's my turn.
 
 Planton will become the next Postman. I believe it. And I'm saying it.
+
+## Research: Postman's Journey
+
+![Postman's Indian origin story and founding journey](/blog/images/planton-will-become-the-next-postman-origin.jpg)
+
+![Postman's global adoption and impact statistics](/blog/images/planton-will-become-the-next-postman-adoption.jpg)
+
+![Other Indian developer tools loved globally](/blog/images/planton-will-become-the-next-postman-ecosystem.jpg)
