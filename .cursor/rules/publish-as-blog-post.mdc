@@ -1,0 +1,353 @@
+---
+description: Action rule to transform journal entries and conversation insights into publication-ready blog posts for donepudi.me
+globs: []
+alwaysApply: false
+---
+
+# Rule: Publish as Blog Post
+
+**Purpose**: Transform raw journal entries or conversation insights into polished, publication-ready blog posts with proper structure, frontmatter, and image handling.
+
+**Type**: Action rule
+
+**When to use**: User will invoke this rule (e.g., `@publish-as-blog-post`) and provide context from journal entries or conversations they want to convert into a blog post.
+
+---
+
+## Two Usage Scenarios
+
+### Scenario 1: Journal Entry to Blog Post
+
+User provides:
+- Journal entry text (from `jad/journal/` repository)
+- What specific insight or story they want to highlight
+
+Agent extracts and transforms the relevant portion into a reader-friendly narrative.
+
+**Example**: Converting a journal reflection about Postman and Planton having the same character count into a blog post.
+
+### Scenario 2: Conversation/Technical Discovery to Blog Post
+
+User provides:
+- Conversation history or technical insight
+- Optional: specific angle or takeaway
+
+Agent distills the key insight into an accessible narrative with problem → solution → impact structure.
+
+**Example**: Converting a technical discovery from a cursor AI conversation into a blog post about the learning.
+
+---
+
+## What You Must Do
+
+### 1. Analyze Context
+
+**Read and understand** the provided content:
+- If journal entry: identify the core insight, story, or realization
+- If conversation: distill the key technical or conceptual breakthrough
+- Determine what aspect resonates as shareable knowledge
+
+**Extract the essence**:
+- What's the main point or story?
+- Why would readers care?
+- What's the hook or interesting angle?
+
+### 2. Generate Title
+
+Create a compelling, descriptive title:
+- Captures the essence of the insight
+- Hooks the reader's curiosity
+- Natural and conversational (not clickbait)
+- 5-12 words typically
+
+**Examples**:
+- "Postman and Planton: A Curious Coincidence"
+- "Why Consulting Often Leads to Product Ideas"
+- "The YouTube Knowledge Trap We Tell Ourselves"
+
+### 3. Create Slug
+
+Generate URL-friendly slug from title:
+- Convert to lowercase
+- Replace spaces with hyphens
+- Remove special characters except hyphens
+- Keep it descriptive and readable
+
+**Examples**:
+- "Postman and Planton: A Curious Coincidence" → `postman-planton-curious-coincidence`
+- "Why I Built Planton After 10 Years" → `why-i-built-planton-after-10-years`
+
+### 4. Write Blog Post Content
+
+**Transform the content** following these guidelines:
+
+#### Opening Hook (First Paragraph)
+- Start with relatable context or observation
+- Draw reader in with a story or question
+- Set up what the post is about
+- Keep it conversational and authentic
+
+#### Section Structure
+- Use `## H2` headings for major sections (typically 2-5 sections)
+- Headings should be descriptive and natural
+- Examples: `## Why This Matters`, `## The Realization`, `## Real-World Examples`, `## Looking Ahead`
+
+#### Voice and Tone
+- **Conversational**: First-person, like talking to a friend
+- **Authentic**: Keep your personality and style
+- **Clear**: Polish for readability without losing voice
+- **Relatable**: Include personal experiences, real examples
+
+#### Content Guidelines
+- **Short paragraphs**: 2-4 sentences typically
+- **Natural flow**: Logical progression of ideas
+- **Real examples**: Name products, companies, specific situations
+- **Personal touch**: Include "I" experiences and observations
+- **No fluff**: Get to the point, no marketing speak
+
+#### Closing
+- Brief reflection or forward-looking thought
+- Can be a single sentence or short paragraph
+- Leave reader with something to think about
+
+### 5. Create Frontmatter
+
+Generate complete YAML frontmatter:
+
+```yaml
+---
+title: "Exact Title You Generated"
+date: "YYYY-MM-DD"  # Use today's date unless user specifies otherwise
+excerpt: "One or two sentence summary that entices readers (under 200 characters)"
+featured_image: "/blog/images/{slug}.cover.png"
+author: "Swarup Donepudi"
+tags: ["tag1", "tag2", "tag3", "tag4", "tag5"]
+---
+```
+
+**Excerpt Guidelines**:
+- First 1-2 sentences from content, OR
+- Generate compelling summary that hooks readers
+- Under 200 characters
+- Should make readers want to click and read more
+
+**Tag Guidelines** (3-5 tags):
+- Automatically generate based on content themes
+- Use lowercase
+- Mix of technical, business, and personal as relevant
+
+**Common Tags**:
+- Technical: `cloud`, `infrastructure`, `ai`, `productivity`, `tools`, `development`, `devops`
+- Business: `consulting`, `product`, `startup`, `entrepreneurship`, `planton-cloud`, `platform`
+- Personal: `reflection`, `discipline`, `personal`, `focus`, `journey`
+- Specific: `datacenter`, `37signals`, `kamal`, `chatgpt`, `postman`, `kubernetes`
+
+### 6. Handle Images
+
+#### Placeholder Cover Image (Always)
+
+**Always copy the placeholder cover**:
+```bash
+# From: donepudi.me/public/blog/images/_blog_placeholder.cover.png
+# To:   donepudi.me/public/blog/images/{slug}.cover.png
+```
+
+This placeholder will be replaced by user with a Gemini-generated cover image.
+
+#### Additional Images (If Provided)
+
+If user provides additional images:
+1. Copy them to `donepudi.me/public/blog/images/`
+2. Rename to `{slug}-{descriptor}.png` (e.g., `postman-planton-curious-coincidence-screenshot.png`)
+3. Embed them in the markdown at appropriate locations using:
+   ```markdown
+   ![Descriptive alt text](/blog/images/{slug}-{descriptor}.png)
+   ```
+
+### 7. Create Markdown File
+
+Write the complete blog post to:
+```
+donepudi.me/public/blog/{slug}.md
+```
+
+**File structure**:
+```markdown
+---
+[frontmatter as above]
+---
+
+[Opening paragraph - the hook]
+
+## Section Heading 1
+
+[Content...]
+
+## Section Heading 2
+
+[Content...]
+
+![Image alt text](/blog/images/{slug}-image.png)
+
+## Section Heading 3
+
+[Content...]
+
+[Closing paragraph]
+```
+
+### 8. Inform User
+
+After creating the blog post, tell the user:
+
+```
+✅ Blog post created: `donepudi.me/public/blog/{slug}.md`
+✅ Placeholder cover copied: `donepudi.me/public/blog/images/{slug}.cover.png`
+
+**Next steps**:
+1. Generate cover image using Gemini Nano Banana
+   - Use the title: "{title}"
+   - Provide the content for context
+2. Replace the placeholder cover image
+3. Run `make build` to verify (optional)
+4. Commit and push to publish
+
+**Title for Gemini**: {title}
+**Post preview**: [First paragraph of the post]
+```
+
+---
+
+## Content Transformation Examples
+
+### Example 1: Journal Entry → Blog Post
+
+**Input** (from journal):
+> "While I was working out today, I realized that both Postman and Planton have same number of characters and also start and end with the same letter. That is a legit coincidence."
+
+**Output** (blog post opening):
+> I've been thinking a lot about Postman lately. It's the only developer tool company that truly came out of India and earned global love from the tech community. I'm determined to make Planton the second one.
+> 
+> ## A Curious Coincidence
+> 
+> Today during my workout, something clicked: both Postman and Planton have exactly 7 characters. They both start with 'P' and end with 'N'. Pure coincidence, but it feels like a good omen.
+
+### Example 2: Conversation → Blog Post
+
+**Input** (technical discovery):
+> "I just realized our current system doesn't support target-cluster references in kubernetes-components anymore. But there's more standardization now for kubernetes-based components."
+
+**Output** (blog post structure):
+> When you're deep in building a platform, sometimes the best insights come from recognizing what you can remove, not what you can add.
+> 
+> ## The Abstraction Trap
+> 
+> For the longest time, our system tried to abstract away Kubernetes namespaces. We thought we were helping users by handling namespace creation automatically. [...]
+> 
+> ## The Shift to Simplicity
+> 
+> Today I realized we don't need target-cluster references anymore. [...]
+
+---
+
+## Quality Checklist
+
+Before completing, verify:
+
+- [ ] Title is compelling and descriptive
+- [ ] Slug is URL-friendly (kebab-case)
+- [ ] Frontmatter is complete and valid YAML
+- [ ] Date is in YYYY-MM-DD format
+- [ ] Excerpt is under 200 characters and enticing
+- [ ] Featured image path uses correct slug
+- [ ] Tags are relevant (3-5 tags)
+- [ ] Content has appropriate `## H2` headings
+- [ ] Opening paragraph hooks the reader
+- [ ] Voice is authentic and conversational
+- [ ] Short paragraphs (2-4 sentences)
+- [ ] Includes real examples and personal touch
+- [ ] Closing provides reflection or forward-looking thought
+- [ ] Placeholder cover image copied with correct name
+- [ ] Additional images (if any) embedded properly
+- [ ] Markdown file created at correct location
+- [ ] User informed with next steps
+
+---
+
+## Important Reminders
+
+### What TO Do
+
+- ✅ Extract only the relevant insight or story from provided context
+- ✅ Polish for clarity and flow while keeping authentic voice
+- ✅ Use first-person perspective naturally
+- ✅ Include real examples, named products, specific situations
+- ✅ Keep paragraphs short and readable
+- ✅ Generate compelling title that hooks readers
+- ✅ Auto-generate relevant tags (3-5)
+- ✅ Always copy placeholder cover image
+- ✅ Provide clear next steps for user
+
+### What NOT To Do
+
+- ❌ Don't copy entire journal entry verbatim
+- ❌ Don't rewrite in formal or corporate tone
+- ❌ Don't add marketing fluff or buzzwords
+- ❌ Don't make up details not in the source
+- ❌ Don't over-structure simple observations
+- ❌ Don't lose the personal, authentic voice
+- ❌ Don't write long paragraphs (keep 2-4 sentences)
+- ❌ Don't forget to copy the placeholder cover image
+
+---
+
+## File Locations
+
+- **Blog posts**: `donepudi.me/public/blog/{slug}.md`
+- **Cover images**: `donepudi.me/public/blog/images/{slug}.cover.png`
+- **Additional images**: `donepudi.me/public/blog/images/{slug}-{descriptor}.png`
+- **Placeholder cover**: `donepudi.me/public/blog/images/_blog_placeholder.cover.png`
+
+---
+
+## Workflow Summary
+
+When user invokes `@publish-as-blog-post`:
+
+1. **Analyze** the provided context (journal or conversation)
+2. **Extract** the key insight or story to share
+3. **Generate** compelling title
+4. **Create** slug from title
+5. **Write** frontmatter with auto-generated tags
+6. **Transform** content with structure, polish, and authentic voice
+7. **Copy** placeholder cover to `{slug}.cover.png`
+8. **Embed** any additional images provided
+9. **Create** markdown file at `public/blog/{slug}.md`
+10. **Inform** user with next steps (Gemini cover generation, commit, push)
+
+---
+
+## Tag Selection Guide
+
+Choose tags based on content themes:
+
+| Content Theme | Suggested Tags |
+|--------------|----------------|
+| Cloud/Infrastructure | `cloud`, `infrastructure`, `datacenter`, `kubernetes`, `platform` |
+| DevOps/Development | `devops`, `development`, `deployment`, `tools`, `productivity` |
+| AI/Automation | `ai`, `chatgpt`, `automation`, `productivity`, `efficiency` |
+| Startup Journey | `startup`, `entrepreneurship`, `planton-cloud`, `product`, `journey` |
+| Consulting/Business | `consulting`, `product`, `business`, `strategy` |
+| Personal Growth | `reflection`, `discipline`, `personal`, `focus`, `habits` |
+| Technical Deep-Dive | `development`, `architecture`, `infrastructure`, `engineering` |
+| Product Building | `product`, `planton-cloud`, `platform`, `startup`, `development` |
+
+---
+
+**Philosophy**: Blog posts should feel like conversations with a fellow developer or founder. They share real insights, personal experiences, and practical wisdom. The goal is to be authentic and helpful, not promotional or overly polished. Write the way you'd explain something to a friend over coffee.
+
+---
+
+**Status**: Ready to use
+
+**Usage**: User invokes `@publish-as-blog-post` with journal entry or conversation context, and you follow this workflow to create a publication-ready blog post.
