@@ -154,15 +154,48 @@ tags: ["tag1", "tag2", "tag3", "tag4", "tag5"]
 
 This placeholder will be replaced by user with a Gemini-generated cover image.
 
-#### Additional Images (If Provided)
+#### Additional Images (From Workspace)
 
-If user provides additional images:
-1. Copy them to `donepudi.me/public/blog/images/`
-2. Rename to `{slug}-{descriptor}.png` (e.g., `postman-planton-curious-coincidence-screenshot.png`)
-3. Embed them in the markdown at appropriate locations using:
-   ```markdown
-   ![Descriptive alt text](/blog/images/{slug}-{descriptor}.png)
+**If images exist in workspace folder** (`donepudi.me/public/blog/images/workspace/`):
+
+1. **Check for images**:
+   - List all image files in `donepudi.me/public/blog/images/workspace/`
+   - If no images found, skip this step
+   - If images found, proceed with steps below
+
+2. **Review each image**:
+   - Examine the image content (if possible) or use filename as context
+   - Determine where in the blog post this image should be embedded
+   - Identify the most appropriate section/paragraph
+
+3. **Generate brief descriptor**:
+   - Create a short, descriptive name for the image (2-3 words max)
+   - Examples: `screenshot`, `diagram`, `example`, `comparison`, `result`, `architecture`
+   - Keep it simple and relevant to the image content
+
+4. **Copy and rename image**:
+   ```bash
+   # From: donepudi.me/public/blog/images/workspace/image1.png
+   # To:   donepudi.me/public/blog/images/{slug}-{descriptor}.png
+   # Example: postman-planton-curious-coincidence-screenshot.png
    ```
+
+5. **Embed in markdown**:
+   - Insert at the appropriate location in the blog post
+   - Use descriptive alt text
+   ```markdown
+   ![Descriptive alt text explaining what the image shows](/blog/images/{slug}-{descriptor}.png)
+   ```
+
+6. **Delete from workspace**:
+   - After successfully copying and embedding, delete the original image from workspace folder
+   - This keeps the workspace clean for the next blog post
+
+**Important Notes**:
+- Preserve file extensions (`.png`, `.jpg`, `.jpeg`, `.webp`, etc.)
+- Use the same slug as the blog post filename
+- Embed images at logical breakpoints (between paragraphs or sections)
+- Clean up workspace after processing all images
 
 ### 7. Create Markdown File
 
@@ -203,6 +236,9 @@ After creating the blog post, tell the user:
 ```
 ✅ Blog post created: `donepudi.me/public/blog/{slug}.md`
 ✅ Placeholder cover copied: `donepudi.me/public/blog/images/{slug}.cover.png`
+[If images were processed from workspace:]
+✅ {N} image(s) embedded: [{list of image filenames}]
+✅ Workspace cleaned (images removed after processing)
 
 **Next steps**:
 1. Generate cover image using Gemini Nano Banana
@@ -215,6 +251,11 @@ After creating the blog post, tell the user:
 **Title for Gemini**: {title}
 **Post preview**: [First paragraph of the post]
 ```
+
+**Note**: If images were found in workspace and processed, mention:
+- Number of images embedded
+- List of final image filenames (e.g., `{slug}-screenshot.png`, `{slug}-diagram.png`)
+- Confirmation that workspace was cleaned
 
 ---
 
@@ -268,7 +309,10 @@ Before completing, verify:
 - [ ] Includes real examples and personal touch
 - [ ] Closing provides reflection or forward-looking thought
 - [ ] Placeholder cover image copied with correct name
-- [ ] Additional images (if any) embedded properly
+- [ ] Workspace checked for additional images
+- [ ] If images in workspace: copied with `{slug}-{descriptor}.{ext}` naming
+- [ ] If images in workspace: embedded properly in markdown
+- [ ] If images in workspace: deleted from workspace after processing
 - [ ] Markdown file created at correct location
 - [ ] User informed with next steps
 
@@ -298,6 +342,8 @@ Before completing, verify:
 - ❌ Don't lose the personal, authentic voice
 - ❌ Don't write long paragraphs (keep 2-4 sentences)
 - ❌ Don't forget to copy the placeholder cover image
+- ❌ Don't forget to check workspace for additional images
+- ❌ Don't forget to delete workspace images after processing
 
 ---
 
@@ -307,6 +353,13 @@ Before completing, verify:
 - **Cover images**: `donepudi.me/public/blog/images/{slug}.cover.png`
 - **Additional images**: `donepudi.me/public/blog/images/{slug}-{descriptor}.png`
 - **Placeholder cover**: `donepudi.me/public/blog/images/_blog_placeholder.cover.png`
+- **Image workspace**: `donepudi.me/public/blog/images/workspace/` (place images here before running rule)
+
+**Workspace Workflow**:
+1. User places images in `workspace/` folder before invoking rule
+2. Rule processes images: reviews, copies with proper naming, embeds in markdown
+3. Rule deletes images from `workspace/` after processing
+4. Workspace becomes clean and ready for next blog post
 
 ---
 
@@ -321,9 +374,14 @@ When user invokes `@publish-as-blog-post`:
 5. **Write** frontmatter with auto-generated tags
 6. **Transform** content with structure, polish, and authentic voice
 7. **Copy** placeholder cover to `{slug}.cover.png`
-8. **Embed** any additional images provided
-9. **Create** markdown file at `public/blog/{slug}.md`
-10. **Inform** user with next steps (Gemini cover generation, commit, push)
+8. **Check workspace** for images (`public/blog/images/workspace/`)
+9. **If images found**:
+   - Review each image and determine placement
+   - Copy to `public/blog/images/{slug}-{descriptor}.{ext}`
+   - Embed in markdown at appropriate locations
+   - Delete from workspace after processing
+10. **Create** markdown file at `public/blog/{slug}.md`
+11. **Inform** user with next steps (Gemini cover generation, commit, push)
 
 ---
 
