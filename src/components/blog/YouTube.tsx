@@ -10,7 +10,7 @@ interface YouTubeProps {
 }
 
 /**
- * Extracts YouTube video ID from various URL formats
+ * Extracts YouTube video ID and parameters from various URL formats
  * Supports:
  * - youtube.com/watch?v=VIDEO_ID
  * - youtu.be/VIDEO_ID
@@ -34,6 +34,26 @@ function extractVideoId(url: string): string | null {
 }
 
 /**
+ * Extracts URL parameters like start time (t=86) from YouTube URLs
+ */
+function extractParams(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+    const params = new URLSearchParams(urlObj.search);
+    
+    // Extract start time if present (t parameter)
+    const startTime = params.get('t');
+    if (startTime) {
+      return `start=${startTime}`;
+    }
+    
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Performance-optimized YouTube embed using lite-youtube-embed
  * Lazy loads the full YouTube player only when user clicks
  * Saves ~224KB of resources before interaction
@@ -43,6 +63,9 @@ export default function YouTube({ videoId, url, title, className = '' }: YouTube
 
   // Determine the video ID from either prop
   const id = videoId || (url ? extractVideoId(url) : null);
+  
+  // Extract URL parameters (like start time) if URL is provided
+  const params = url ? extractParams(url) : null;
 
   useEffect(() => {
     // Dynamically import lite-youtube-embed to ensure it's only loaded on client
@@ -64,6 +87,7 @@ export default function YouTube({ videoId, url, title, className = '' }: YouTube
       <lite-youtube
         videoid={id}
         playlabel={title || 'Play video'}
+        params={params || undefined}
         style={{
           backgroundImage: `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`,
         }}
@@ -80,6 +104,7 @@ declare global {
         React.HTMLAttributes<HTMLElement> & {
           videoid: string;
           playlabel?: string;
+          params?: string;
         },
         HTMLElement
       >;
