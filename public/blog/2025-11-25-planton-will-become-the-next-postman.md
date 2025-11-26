@@ -48,6 +48,10 @@ Planton will become the next Postman. I believe it. And I'm saying it.
 
 <YouTube videoId="LGc-5rlM-WI" title="Conor McGregor on Belief" />
 
+If you have a couple more minutes and want to understand the deeper context behind Conor's statement, here's the [full interview](https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86) where he talks about belief, manifestation, and the power of declaring your vision publicly:
+
+<YouTube url="https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86" title="Conor McGregor - Full Context on Belief and Manifestation" />
+
 ## Research: Postman's Journey
 
 ![Postman's Indian origin story and founding journey](/blog/images/2025-11-25-planton-will-become-the-next-postman-origin.jpg)
@@ -55,9 +59,3 @@ Planton will become the next Postman. I believe it. And I'm saying it.
 ![Postman's global adoption and impact statistics](/blog/images/2025-11-25-planton-will-become-the-next-postman-adoption.jpg)
 
 ![Other Indian developer tools loved globally](/blog/images/2025-11-25-planton-will-become-the-next-postman-ecosystem.jpg)
-
-## Full Context: Conor's Philosophy on Belief
-
-If you have a couple more minutes and want to understand the deeper context behind Conor's statement, here's the [full interview](https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86) where he talks about belief, manifestation, and the power of declaring your vision publicly:
-
-<YouTube url="https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86" title="Conor McGregor - Full Context on Belief and Manifestation" />
