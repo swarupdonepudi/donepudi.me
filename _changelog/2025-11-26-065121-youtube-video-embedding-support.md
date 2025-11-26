@@ -6,7 +6,7 @@
 
 ## Summary
 
-Added YouTube video embedding capability to the blog platform using lite-youtube-embed for performance-optimized video playback. Blog posts can now include embedded YouTube videos via simple markdown syntax, with lazy-loading that saves ~224KB of resources until users interact with videos. The first implementation demonstrates both inline linking and embedded playback for a Conor McGregor video in the "Planton Will Become the Next Postman" blog post.
+Added YouTube video embedding capability to the blog platform using lite-youtube-embed for performance-optimized video playback. Blog posts can now include embedded YouTube videos via simple markdown syntax, with lazy-loading that saves ~224KB of resources until users interact with videos. Supports timestamp parameters to start videos at specific times (e.g., `t=86` starts at 1:26). The first implementation demonstrates both inline linking and embedded playback for Conor McGregor videos in the "Planton Will Become the Next Postman" blog post, including a longer interview video that starts at the relevant timestamp.
 
 ## Motivation / Background
 
@@ -19,9 +19,10 @@ The broader need was to enable any blog post to include video content without sa
 - ✅ Enable YouTube video embedding in blog posts via markdown
 - ✅ Maintain site performance (lazy-load videos)
 - ✅ Support multiple YouTube URL formats (regular, shorts, embed URLs)
+- ✅ Support timestamp parameters (start videos at specific times)
 - ✅ Keep authoring simple (no complex setup required)
 - ✅ Work with static export to GitHub Pages
-- ✅ Demonstrate with the Conor McGregor video in the Postman blog post
+- ✅ Demonstrate with Conor McGregor videos in the Postman blog post
 
 ## What Changed
 
@@ -45,6 +46,12 @@ Created `/src/components/blog/YouTube.tsx` - a React wrapper around the lite-you
 - `youtube.com/embed/VIDEO_ID`
 - Direct video IDs (11-character alphanumeric)
 
+**Timestamp Support**: Automatically extracts and applies start time parameters
+- Parses `t=86` from YouTube URLs
+- Converts to `start=86` for lite-youtube player
+- Videos begin at specified timestamp when played
+- Works with both `youtu.be` and full YouTube URLs
+
 **Performance Optimization**: Dynamic import of lite-youtube-embed ensures client-side only loading
 
 **Styling**: Integrates with site's cyan theme
@@ -56,9 +63,18 @@ Created `/src/components/blog/YouTube.tsx` - a React wrapper around the lite-you
 ```typescript
 interface YouTubeProps {
   videoId?: string;        // Direct video ID
-  url?: string;            // Full YouTube URL
+  url?: string;            // Full YouTube URL (with optional ?t=N timestamp)
   title?: string;          // Accessibility label
   className?: string;      // Custom styling
+}
+```
+
+**Timestamp Extraction**:
+```typescript
+function extractParams(url: string): string | null {
+  // Extracts ?t=86 or &t=86 from URLs
+  // Returns "start=86" for lite-youtube player
+  // Supports both query string formats
 }
 ```
 
@@ -88,23 +104,36 @@ youtube: ({ node, ...props }: any) => {
 
 ### Updated: Blog Post Content
 
-Modified `/public/blog/planton-will-become-the-next-postman.md` to demonstrate video embedding:
+Modified `/public/blog/2025-11-25-planton-will-become-the-next-postman.md` to demonstrate video embedding:
 
 **Inline Link** (line 25): Changed plain text to hyperlink
 ```markdown
 Conor McGregor once said in a [press conference](http://youtube.com/shorts/LGc-5rlM-WI): "If you truly believe it..."
 ```
 
-**Embedded Video** (after line 46): Added new section with video player
+**First Embedded Video** (after line 46): Short impactful statement
 ```markdown
 ## The Statement That Inspired This
 
 <YouTube videoId="LGc-5rlM-WI" title="Conor McGregor on Belief" />
 ```
 
-This provides two access points:
+**Second Embedded Video** (at end): Longer context with timestamp
+```markdown
+## Full Context: Conor's Philosophy on Belief
+
+If you have a couple more minutes and want to understand the deeper context behind Conor's statement, 
+here's the full interview where he talks about belief, manifestation, and the power of declaring your 
+vision publicly:
+
+<YouTube url="https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86" 
+         title="Conor McGregor - Full Context on Belief and Manifestation" />
+```
+
+This provides three access points:
 1. Inline link for readers who want to open YouTube directly
-2. Embedded player for readers who prefer in-page viewing
+2. Short embedded video (8 seconds) for quick impact
+3. Long embedded video (starts at 1:26) for deeper context
 
 ## Implementation Details
 
@@ -147,16 +176,46 @@ function extractVideoId(url: string): string | null {
 - Handles query parameters (stops at `&`, `?`, `#`)
 - Falls back to treating input as direct video ID if 11 characters
 
+### Timestamp Parameter Extraction
+
+```typescript
+function extractParams(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+    const params = new URLSearchParams(urlObj.search);
+    
+    // Extract start time if present (t parameter)
+    const startTime = params.get('t');
+    if (startTime) {
+      return `start=${startTime}`;
+    }
+    
+    return null;
+  } catch {
+    return null;
+  }
+}
+```
+
+**How it Works**:
+- Parses URL to extract query parameters
+- Looks for `t` parameter (YouTube's timestamp format)
+- Converts to `start` parameter (lite-youtube's format)
+- Example: `?t=86` becomes `start=86`
+- Safe handling with try-catch for invalid URLs
+
 ### Markdown Rendering Flow
 
 1. Blog post markdown parsed by `react-markdown`
 2. `rehype-raw` processes custom HTML elements
 3. `<YouTube>` tag recognized by component mapping
 4. Props extracted (videoId, url, title)
-5. YouTube component renders `lite-youtube` web component
-6. On client, lite-youtube.js dynamically imported
-7. User sees thumbnail with play button
-8. Click triggers full YouTube iframe load
+5. Component extracts video ID from URL
+6. Component extracts timestamp parameters from URL (if present)
+7. YouTube component renders `lite-youtube` web component with params
+8. On client, lite-youtube.js dynamically imported
+9. User sees thumbnail with play button
+10. Click triggers full YouTube iframe load with timestamp applied
 
 ### Static Export Compatibility
 
@@ -223,6 +282,7 @@ Blog posts now support:
 
 - ✅ **Simple syntax**: `<YouTube videoId="..." />` in markdown
 - ✅ **Flexible formats**: Accepts full URLs or video IDs
+- ✅ **Timestamp support**: Automatically handles `?t=N` parameters
 - ✅ **No configuration**: Works immediately in any blog post
 - ✅ **Accessible**: Title prop for screen readers
 
@@ -251,19 +311,20 @@ Blog posts now support:
 
 ### Immediate
 
-- **Blog capability**: Can now embed videos in any post
-- **Postman post enhanced**: Conor McGregor video adds authenticity
+- **Blog capability**: Can now embed videos in any post with timestamp support
+- **Postman post enhanced**: Two Conor McGregor videos (short + long context)
+- **Timestamp feature**: Videos start at relevant moments automatically
 - **Build verification**: Static export still works (26 routes generated)
 - **Performance maintained**: Page load times unaffected
 
 ### Future Blog Posts
 
 Enables video content for:
-- **Product demos**: Show Project Planton CLI in action
-- **Conference talks**: Embed presentation recordings
-- **Tutorial content**: Step-by-step video guides
-- **Interviews**: Share video clips with context
-- **Visual explanations**: Complement text with video
+- **Product demos**: Show Project Planton CLI in action (with timestamps to key features)
+- **Conference talks**: Embed presentation recordings (start at specific sections)
+- **Tutorial content**: Step-by-step video guides (link to relevant timestamps)
+- **Interviews**: Share video clips with context (start at exact quotes)
+- **Visual explanations**: Complement text with video (skip intros with timestamps)
 
 ### Technical Foundation
 
@@ -375,6 +436,16 @@ Builds on blog platform foundation from:
 <YouTube url="http://youtube.com/shorts/LGc-5rlM-WI" title="My Video" />
 ```
 
+### With Timestamp (Start at Specific Time)
+
+```markdown
+<!-- Starts at 1:26 (86 seconds) -->
+<YouTube url="https://youtu.be/8G1B7UzLtlk?t=86" title="Full Interview" />
+
+<!-- Also works with full URLs -->
+<YouTube url="https://youtube.com/watch?v=8G1B7UzLtlk&t=86" title="Full Interview" />
+```
+
 ### Inline with Content
 
 ```markdown
@@ -412,14 +483,16 @@ As you can see in the video...
 
 **Verified in dev server** (http://localhost:3000):
 
-1. ✅ Page loads with video thumbnail
+1. ✅ Page loads with video thumbnails
 2. ✅ Play button appears with YouTube branding
 3. ✅ Click loads full YouTube player
-4. ✅ Video plays correctly (Conor McGregor short, 0:08 duration)
-5. ✅ Inline link opens YouTube in new tab
-6. ✅ No JavaScript errors in console
-7. ✅ Responsive sizing on mobile/desktop
-8. ✅ Consistent styling with site theme
+4. ✅ First video plays correctly (Conor McGregor short, 0:08 duration)
+5. ✅ Second video plays correctly (longer interview)
+6. ✅ Timestamp works: second video starts at 1:26 automatically
+7. ✅ Inline link opens YouTube in new tab
+8. ✅ No JavaScript errors in console
+9. ✅ Responsive sizing on mobile/desktop
+10. ✅ Consistent styling with site theme
 
 ### Performance Verification
 
@@ -441,12 +514,15 @@ As you can see in the video...
 - No custom player options (uses YouTube defaults)
 - Requires internet connection (no offline support)
 - YouTube-only (no Vimeo, Twitter video, etc.)
+- Timestamp format: Only supports `t` parameter (not `start` or `time`)
 
 **Not Limitations** (Future could add):
 - Other video platforms (extend component)
 - Thumbnail customization (modify lite-youtube config)
 - Autoplay/loop options (pass to lite-youtube)
 - Custom player controls (replace lite-youtube)
+- End time support (stop video at specific timestamp)
+- Chapter markers (show multiple timestamps)
 
 ## Next Steps
 
@@ -459,8 +535,10 @@ As you can see in the video...
 - Add support for other video platforms (Vimeo, Twitter)
 - Custom thumbnail support
 - Video galleries (multiple videos in grid)
-- Timestamp deep-linking (start at specific time)
+- ✅ ~~Timestamp deep-linking (start at specific time)~~ - **DONE**
 - Playlist embeds
+- End time support (stop at specific timestamp)
+- Chapter navigation (multiple timestamps in one video)
 
 **Content Opportunities**:
 - Add demo videos to technical blog posts
