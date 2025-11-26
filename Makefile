@@ -23,7 +23,7 @@ build: deps
 
 .PHONY: clean
 clean:
-	rm -rf node_modules dist out
+	rm -rf node_modules dist out .next .yarn
 
 # Back-compat similar to Caramil naming
 .PHONY: develop-site preview-site build-site
