@@ -2,7 +2,7 @@
 title: "A Casual Take on Cloud vs. Data Centers (An Opinion Reaffirmed by DHH)"
 date: "2025-03-20"
 excerpt: "There's been a lot of buzz lately about whether the cloud is the right option or if data centers are making a comeback. My thoughts on this debate, reaffirmed by DHH's perspective."
-featured_image: "/blog/images//cloud-vs-datacenter-debate.cover.png"
+featured_image: "/blog/images/2025-03-20-cloud-vs-datacenter-debate.cover.png"
 author: "Swarup Donepudi"
 tags: ["cloud", "datacenter", "infrastructure", "dhh", "startup"]
 ---

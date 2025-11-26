@@ -2,7 +2,7 @@
 title: "July Month Reflection: Balance, Breakthroughs, Resilience"
 date: "2025-08-01"
 excerpt: "July was a fascinating ride, packed with significant strides in product development, deep reflections on work-life balance, and valuable lessons on managing productivity and emotions."
-featured_image: "/blog/images//july-month-reflection-balance-breakthroughs-resilience.cover.png"
+featured_image: "/blog/images/2025-08-01-july-month-reflection-balance-breakthroughs-resilience.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "balance", "planton-cloud", "productivity", "resilience"]
 ---

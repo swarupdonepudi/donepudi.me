@@ -2,7 +2,7 @@
 title: "Time to Shift Your Mindset: Embrace AI Tools for Maximum Efficiency"
 date: "2025-04-02"
 excerpt: "A coffee shop conversation that turned into a productivity lesson. How combining ChatGPT and voice dictation transformed a tedious spreadsheet task into a 10-second solution."
-featured_image: "/blog/images//ai-efficiency-mindset.cover.png"
+featured_image: "/blog/images/2025-04-02-ai-efficiency-mindset.cover.png"
 author: "Swarup Donepudi"
 tags: ["ai", "productivity", "efficiency", "chatgpt", "tools"]
 ---

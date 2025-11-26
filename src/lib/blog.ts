@@ -54,16 +54,40 @@ export async function getBlogPost(slugOrPath: string): Promise<BlogPost | null> 
   if (slugOrPath.includes('/')) {
     filePath = slugOrPath;
   } else {
-    // Try to find the file by slug
-    filePath = `${BLOG_DIR}/${slugOrPath}.md`;
-    
-    // Also check for directory with index.md
-    const dirPath = `${BLOG_DIR}/${slugOrPath}/index.md`;
+    // Try to find the file by slug, accounting for date prefixes (YYYY-MM-DD-)
     const fs = await import('fs');
     const path = await import('path');
+    const blogPath = path.join(process.cwd(), BLOG_DIR);
     
-    if (fs.existsSync(path.join(process.cwd(), dirPath))) {
-      filePath = dirPath;
+    // First try exact match (backward compatibility with non-dated files)
+    const exactMatch = `${BLOG_DIR}/${slugOrPath}.md`;
+    if (fs.existsSync(path.join(process.cwd(), exactMatch))) {
+      filePath = exactMatch;
+    } else {
+      // Search for files with date prefix (YYYY-MM-DD-slug.md)
+      const files = fs.readdirSync(blogPath);
+      const matchingFile = files.find(file => {
+        // Match pattern: YYYY-MM-DD-{slug}.md
+        const datePrefix = /^\d{4}-\d{2}-\d{2}-/;
+        if (datePrefix.test(file) && file.endsWith('.md')) {
+          const fileWithoutDate = file.replace(datePrefix, '');
+          return fileWithoutDate === `${slugOrPath}.md`;
+        }
+        return false;
+      });
+      
+      if (matchingFile) {
+        filePath = `${BLOG_DIR}/${matchingFile}`;
+      } else {
+        // Also check for directory with index.md
+        const dirPath = `${BLOG_DIR}/${slugOrPath}/index.md`;
+        if (fs.existsSync(path.join(process.cwd(), dirPath))) {
+          filePath = dirPath;
+        } else {
+          // File not found
+          filePath = `${BLOG_DIR}/${slugOrPath}.md`; // Will return null below
+        }
+      }
     }
   }
 

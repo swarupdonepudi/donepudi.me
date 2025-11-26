@@ -67,15 +67,17 @@ Create a compelling, descriptive title:
 
 ### 3. Create Slug
 
-Generate URL-friendly slug from title:
-- Convert to lowercase
+Generate URL-friendly slug from title and prepend with date:
+- Convert title to lowercase
 - Replace spaces with hyphens
 - Remove special characters except hyphens
 - Keep it descriptive and readable
+- Prepend with date in YYYY-MM-DD format from frontmatter
+- Format: `YYYY-MM-DD-{slug}`
 
 **Examples**:
-- "Postman and Planton: A Curious Coincidence" → `postman-planton-curious-coincidence`
-- "Why I Built Planton After 10 Years" → `why-i-built-planton-after-10-years`
+- "Postman and Planton: A Curious Coincidence" (dated 2025-11-25) → `2025-11-25-postman-planton-curious-coincidence`
+- "Why I Built Planton After 10 Years" (dated 2025-11-26) → `2025-11-26-why-i-built-planton-after-10-years`
 
 ### 4. Write Blog Post Content
 
@@ -119,7 +121,7 @@ Generate complete YAML frontmatter:
 title: "Exact Title You Generated"
 date: "YYYY-MM-DD"  # Use today's date unless user specifies otherwise
 excerpt: "One or two sentence summary that entices readers (under 200 characters)"
-featured_image: "/blog/images/{slug}.cover.png"
+featured_image: "/blog/images/{date-slug}.cover.png"
 author: "Swarup Donepudi"
 tags: ["tag1", "tag2", "tag3", "tag4", "tag5"]
 ---
@@ -149,7 +151,7 @@ tags: ["tag1", "tag2", "tag3", "tag4", "tag5"]
 **Always copy the placeholder cover**:
 ```bash
 # From: donepudi.me/public/blog/images/_blog_placeholder.cover.png
-# To:   donepudi.me/public/blog/images/{slug}.cover.png
+# To:   donepudi.me/public/blog/images/{date-slug}.cover.png
 ```
 
 This placeholder will be replaced by user with a Gemini-generated cover image.
@@ -176,15 +178,15 @@ This placeholder will be replaced by user with a Gemini-generated cover image.
 4. **Copy and rename image**:
    ```bash
    # From: donepudi.me/public/blog/images/workspace/image1.png
-   # To:   donepudi.me/public/blog/images/{slug}-{descriptor}.png
-   # Example: postman-planton-curious-coincidence-screenshot.png
+   # To:   donepudi.me/public/blog/images/{date-slug}-{descriptor}.png
+   # Example: 2025-11-25-postman-planton-curious-coincidence-screenshot.png
    ```
 
 5. **Embed in markdown**:
    - Insert at the appropriate location in the blog post
    - Use descriptive alt text
    ```markdown
-   ![Descriptive alt text explaining what the image shows](/blog/images/{slug}-{descriptor}.png)
+   ![Descriptive alt text explaining what the image shows](/blog/images/{date-slug}-{descriptor}.png)
    ```
 
 6. **Delete from workspace**:
@@ -201,7 +203,7 @@ This placeholder will be replaced by user with a Gemini-generated cover image.
 
 Write the complete blog post to:
 ```
-donepudi.me/public/blog/{slug}.md
+donepudi.me/public/blog/{date-slug}.md
 ```
 
 **File structure**:
@@ -220,7 +222,7 @@ donepudi.me/public/blog/{slug}.md
 
 [Content...]
 
-![Image alt text](/blog/images/{slug}-image.png)
+![Image alt text](/blog/images/{date-slug}-image.png)
 
 ## Section Heading 3
 
@@ -234,8 +236,8 @@ donepudi.me/public/blog/{slug}.md
 After creating the blog post, tell the user:
 
 ```
-✅ Blog post created: `donepudi.me/public/blog/{slug}.md`
-✅ Placeholder cover copied: `donepudi.me/public/blog/images/{slug}.cover.png`
+✅ Blog post created: `donepudi.me/public/blog/{date-slug}.md`
+✅ Placeholder cover copied: `donepudi.me/public/blog/images/{date-slug}.cover.png`
 [If images were processed from workspace:]
 ✅ {N} image(s) embedded: [{list of image filenames}]
 ✅ Workspace cleaned (images removed after processing)
@@ -254,7 +256,7 @@ After creating the blog post, tell the user:
 
 **Note**: If images were found in workspace and processed, mention:
 - Number of images embedded
-- List of final image filenames (e.g., `{slug}-screenshot.png`, `{slug}-diagram.png`)
+- List of final image filenames (e.g., `{date-slug}-screenshot.png`, `{date-slug}-diagram.png`)
 - Confirmation that workspace was cleaned
 
 ---
@@ -296,11 +298,11 @@ After creating the blog post, tell the user:
 Before completing, verify:
 
 - [ ] Title is compelling and descriptive
-- [ ] Slug is URL-friendly (kebab-case)
+- [ ] Slug is URL-friendly (kebab-case with YYYY-MM-DD prefix)
 - [ ] Frontmatter is complete and valid YAML
 - [ ] Date is in YYYY-MM-DD format
 - [ ] Excerpt is under 200 characters and enticing
-- [ ] Featured image path uses correct slug
+- [ ] Featured image path uses correct date-slug format
 - [ ] Tags are relevant (3-5 tags)
 - [ ] Content has appropriate `## H2` headings
 - [ ] Opening paragraph hooks the reader
@@ -308,12 +310,12 @@ Before completing, verify:
 - [ ] Short paragraphs (2-4 sentences)
 - [ ] Includes real examples and personal touch
 - [ ] Closing provides reflection or forward-looking thought
-- [ ] Placeholder cover image copied with correct name
+- [ ] Placeholder cover image copied with correct date-slug name
 - [ ] Workspace checked for additional images
-- [ ] If images in workspace: copied with `{slug}-{descriptor}.{ext}` naming
+- [ ] If images in workspace: copied with `{date-slug}-{descriptor}.{ext}` naming
 - [ ] If images in workspace: embedded properly in markdown
 - [ ] If images in workspace: deleted from workspace after processing
-- [ ] Markdown file created at correct location
+- [ ] Markdown file created at correct location with date prefix
 - [ ] User informed with next steps
 
 ---
@@ -349,9 +351,9 @@ Before completing, verify:
 
 ## File Locations
 
-- **Blog posts**: `donepudi.me/public/blog/{slug}.md`
-- **Cover images**: `donepudi.me/public/blog/images/{slug}.cover.png`
-- **Additional images**: `donepudi.me/public/blog/images/{slug}-{descriptor}.png`
+- **Blog posts**: `donepudi.me/public/blog/{date-slug}.md`
+- **Cover images**: `donepudi.me/public/blog/images/{date-slug}.cover.png`
+- **Additional images**: `donepudi.me/public/blog/images/{date-slug}-{descriptor}.png`
 - **Placeholder cover**: `donepudi.me/public/blog/images/_blog_placeholder.cover.png`
 - **Image workspace**: `donepudi.me/public/blog/images/workspace/` (place images here before running rule)
 
@@ -370,17 +372,17 @@ When user invokes `@publish-as-blog-post`:
 1. **Analyze** the provided context (journal or conversation)
 2. **Extract** the key insight or story to share
 3. **Generate** compelling title
-4. **Create** slug from title
+4. **Create** slug from title with date prefix (YYYY-MM-DD-slug)
 5. **Write** frontmatter with auto-generated tags
 6. **Transform** content with structure, polish, and authentic voice
-7. **Copy** placeholder cover to `{slug}.cover.png`
+7. **Copy** placeholder cover to `{date-slug}.cover.png`
 8. **Check workspace** for images (`public/blog/images/workspace/`)
 9. **If images found**:
    - Review each image and determine placement
-   - Copy to `public/blog/images/{slug}-{descriptor}.{ext}`
+   - Copy to `public/blog/images/{date-slug}-{descriptor}.{ext}`
    - Embed in markdown at appropriate locations
    - Delete from workspace after processing
-10. **Create** markdown file at `public/blog/{slug}.md`
+10. **Create** markdown file at `public/blog/{date-slug}.md`
 11. **Inform** user with next steps (Gemini cover generation, commit, push)
 
 ---

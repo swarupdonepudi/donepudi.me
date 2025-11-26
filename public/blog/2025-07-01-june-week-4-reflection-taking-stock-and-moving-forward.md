@@ -2,7 +2,7 @@
 title: "June Week #4 Reflection: Taking Stock and Moving Forward"
 date: "2025-07-01"
 excerpt: "This past week was full of lessons about productivity, self-awareness, and the power of simplifying. After addressing the nagging distraction of YouTube by deleting the app, my mind felt clearer, and my productivity skyrocketed."
-featured_image: "/blog/images//june-week-4-reflection-taking-stock-and-moving-forward.cover.png"
+featured_image: "/blog/images/2025-07-01-june-week-4-reflection-taking-stock-and-moving-forward.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "productivity", "planton-cloud", "personal", "development"]
 ---

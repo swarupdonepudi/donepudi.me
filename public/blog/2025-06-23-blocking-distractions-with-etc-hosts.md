@@ -2,7 +2,7 @@
 title: "Get rid of distractions w/ /etc/hosts and uninstalling apps on mobile"
 date: "2025-06-23"
 excerpt: "It has been a while since I published my last blog post. I have recently succumbed to the temptation of watching YouTube videos both on my phone and on the laptop. Here's how I reclaimed my focus using /etc/hosts and mobile app management."
-featured_image: "/blog/images//blocking-distractions-with-etc-hosts.cover.png"
+featured_image: "/blog/images/2025-06-23-blocking-distractions-with-etc-hosts.cover.png"
 author: "Swarup Donepudi"
 tags: ["productivity", "personal", "focus", "discipline", "reflection"]
 ---
@@ -31,11 +31,11 @@ I wanted to apply the same technique, but one difference is that YouTube is also
 
 Here's what my `/etc/hosts` file looks like now:
 
-![/etc/hosts file blocking distracting websites](/blog/images//blocking-distractions-with-etc-hosts-1.png)
+![/etc/hosts file blocking distracting websites](/blog/images/2025-06-23-blocking-distractions-with-etc-hosts-1.png)
 
 And when I try to visit YouTube in my browser, this is what I see:
 
-![YouTube blocked in browser](/blog/images//blocking-distractions-with-etc-hosts-2.png)
+![YouTube blocked in browser](/blog/images/2025-06-23-blocking-distractions-with-etc-hosts-2.png)
 
 ## The Results After 48 Hours
 
@@ -43,7 +43,7 @@ It's been close to 48 hours since I did that, and I don't have any cravings. I n
 
 I have even resumed my book reading before going to bed last night, and I did that the choice was pretty effortless because I don't really have a second one. I resumed reading the "Sapiens" book and I actually started enjoying reading it. So I'm going to continue reading that book during the breaks that I take during the day time. I want to finish that book since I have been wanting to do so for a very very long time.
 
-![Sapiens book - my current reading](/blog/images//blocking-distractions-with-etc-hosts-3.png)
+![Sapiens book - my current reading](/blog/images/2025-06-23-blocking-distractions-with-etc-hosts-3.png)
 
 ## A Testament to Removing Distractions
 

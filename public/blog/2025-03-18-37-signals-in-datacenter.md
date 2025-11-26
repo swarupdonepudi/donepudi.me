@@ -2,14 +2,14 @@
 title: "37Signals in Datacenter"
 date: "2025-03-18"
 excerpt: "37signals moved their apps out of the cloud and back to datacenters in 2023. Their journey and the open-source tool Kamal offer interesting insights for platform builders."
-featured_image: "/blog/images//37-signals-de-cloud.cover.png"
+featured_image: "/blog/images/2025-03-18-37-signals-de-cloud.cover.png"
 author: "Swarup Donepudi"
 tags: ["cloud", "datacenter", "infrastructure", "37signals", "kamal"]
 ---
 
 I knew this. Considering the emphasis Jason put on being cost-effective, it is imperative for them to operate in a datacenter. I was right. Their ops team published [37signals Dev — De-cloud and de-k8s — bringing our apps back home](https://dev.37signals.com/bringing-our-apps-back-home/), explaining their journey to move out of cloud in 2023.
 
-![37signals de-cloud journey](/blog/images//37-signals-de-cloud.png)
+![37signals de-cloud journey](/blog/images/2025-03-18-37-signals-de-cloud.png)
 
 While reading up that blog post, I came across a potential open source version of PlantonCloud that they have built internally to orchestrate their deployments to the VMs in the datacenter the old school way. It's called [github.com/basecamp/kamal](https://github.com/basecamp/kamal). Gaining traction for any initiative started by the creator of Rails would obviously be far easier as he already has a ton of audience.
 

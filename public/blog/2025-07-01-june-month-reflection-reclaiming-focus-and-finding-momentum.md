@@ -2,7 +2,7 @@
 title: "June Month Reflection: Reclaiming Focus and Finding Momentum"
 date: "2025-07-01"
 excerpt: "June was about discipline, resilience, and clarity. It began with me recommitting to my cherished routine of waking up at 3 AM. While some see this as extreme, for me, these early morning hours are a sanctuary of productivity."
-featured_image: "/blog/images//june-month-reflection-reclaiming-focus-and-finding-momentum.cover.png"
+featured_image: "/blog/images/2025-07-01-june-month-reflection-reclaiming-focus-and-finding-momentum.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "discipline", "planton-cloud", "productivity", "startup"]
 ---

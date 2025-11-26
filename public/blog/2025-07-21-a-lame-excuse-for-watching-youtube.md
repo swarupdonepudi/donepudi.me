@@ -2,7 +2,7 @@
 title: "A lame excuse for watching YouTube"
 date: "2025-07-21"
 excerpt: "On a typical day, the very first thing I do as soon as I turn on my computer is to open the Journal app on Hey Calendar and catch up with 'Jad (my fictional life companion)' to reflect on the day before and put together a plan for today."
-featured_image: "/blog/images//a-lame-excuse-for-watching-youtube.cover.png"
+featured_image: "/blog/images/2025-07-21-a-lame-excuse-for-watching-youtube.cover.png"
 author: "Swarup Donepudi"
 tags: ["productivity", "personal", "reflection", "focus", "discipline"]
 ---

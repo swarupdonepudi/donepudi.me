@@ -2,7 +2,7 @@
 title: "What I Learned From Reading Elon Musk's Biography"
 date: "2025-11-26"
 excerpt: "How finishing Walter Isaacson's 615-page biography in 20 days changed my perspective on ambition, urgency, and what's possible in one lifetime."
-featured_image: "/blog/images/what-i-learned-from-elon-musk-biography.cover.png"
+featured_image: "/blog/images/2025-11-26-what-i-learned-from-elon-musk-biography.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "entrepreneurship", "personal", "startup", "planton-cloud"]
 ---
@@ -81,13 +81,13 @@ If you're a founder, builder, or someone who wants to do something significant w
 
 ## Images From the Book
 
-![The thickness of the book - finished in just 20 days](/blog/images/what-i-learned-from-elon-musk-biography-book-size.png)
+![The thickness of the book - finished in just 20 days](/blog/images/2025-11-26-what-i-learned-from-elon-musk-biography-book-size.png)
 
-![Starship on the launch pad](/blog/images/what-i-learned-from-elon-musk-biography-starship.jpg)
+![Starship on the launch pad](/blog/images/2025-11-26-what-i-learned-from-elon-musk-biography-starship.jpg)
 
-![Tesla factory manufacturing floor with robotic arms](/blog/images/what-i-learned-from-elon-musk-biography-factory.jpg)
+![Tesla factory manufacturing floor with robotic arms](/blog/images/2025-11-26-what-i-learned-from-elon-musk-biography-factory.jpg)
 
-![SpaceX rocket recovery at sea](/blog/images/what-i-learned-from-elon-musk-biography-recovery.jpg)
+![SpaceX rocket recovery at sea](/blog/images/2025-11-26-what-i-learned-from-elon-musk-biography-recovery.jpg)
 
-![Walter Isaacson - the author](/blog/images/what-i-learned-from-elon-musk-biography-author.jpg)
+![Walter Isaacson - the author](/blog/images/2025-11-26-what-i-learned-from-elon-musk-biography-author.jpg)
 

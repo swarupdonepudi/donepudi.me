@@ -2,7 +2,7 @@
 title: "May Month Reflection: A month of reality checks"
 date: "2025-06-01"
 excerpt: "This month reminded me vividly of the entrepreneurial truth: building something meaningful is never just about technology. It's about navigating uncertainty, managing stress, and facing down fear, often all at once."
-featured_image: "/blog/images//may-month-reflection-a-month-of-reality-checks.cover.png"
+featured_image: "/blog/images/2025-06-01-may-month-reflection-a-month-of-reality-checks.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "startup", "planton-cloud", "personal", "resilience"]
 ---

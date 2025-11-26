@@ -2,7 +2,7 @@
 title: "Reflections on March"
 date: "2025-04-01"
 excerpt: "This past month was all about discipline, momentum, and a dash of creative problem-solving. Sticking to a 3:00 AM routine gave me the space to focus deeply on what really matters."
-featured_image: "/blog/images//reflections-on-march.cover.png"
+featured_image: "/blog/images/2025-04-01-reflections-on-march.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "productivity", "discipline", "development", "personal"]
 ---

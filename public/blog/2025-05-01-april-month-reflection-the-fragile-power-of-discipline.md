@@ -2,7 +2,7 @@
 title: "April Month Reflection: The Fragile Power of Discipline"
 date: "2025-05-01"
 excerpt: "April was a month defined by contrasts—intense productivity mingled with emotional turbulence, clarity battling chaos. Each morning began in the predawn silence, waking at 3 AM, embracing solitude, meditation, and deep focus."
-featured_image: "/blog/images//april-month-reflection-the-fragile-power-of-discipline.cover.png"
+featured_image: "/blog/images/2025-05-01-april-month-reflection-the-fragile-power-of-discipline.cover.png"
 author: "Swarup Donepudi"
 tags: ["reflection", "discipline", "startup", "planton-cloud", "personal"]
 ---

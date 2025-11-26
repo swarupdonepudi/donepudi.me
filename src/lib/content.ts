@@ -56,10 +56,21 @@ export function generateSlugFromPath(filePath: string): string {
   if (basename === 'index' || basename === 'README') {
     const parentDir = path.dirname(filePath);
     const dirName = path.basename(parentDir);
-    return sanitizeSlug(dirName);
+    return sanitizeSlug(stripDatePrefix(dirName));
   }
   
-  return sanitizeSlug(basename);
+  // Strip date prefix from filename (YYYY-MM-DD- pattern)
+  const withoutDatePrefix = stripDatePrefix(basename);
+  
+  return sanitizeSlug(withoutDatePrefix);
+}
+
+/**
+ * Strip date prefix (YYYY-MM-DD-) from filename
+ */
+function stripDatePrefix(str: string): string {
+  // Match and remove YYYY-MM-DD- pattern at the start
+  return str.replace(/^\d{4}-\d{2}-\d{2}-/, '');
 }
 
 /**
