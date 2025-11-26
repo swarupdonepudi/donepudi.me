@@ -5417,6 +5417,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lite-youtube-embed@npm:^0.3.4":
+  version: 0.3.4
+  resolution: "lite-youtube-embed@npm:0.3.4"
+  checksum: e5fabbeee3a58ec210f6834a3737505fb5a185f95ab6425741af7db5af971402ba83fe71fb8930fbd4c34bdc93e04193bab815e94b00ce6ede40b7544f9400ce
+  languageName: node
+  linkType: hard
+
 "locate-path@npm:^6.0.0":
   version: 6.0.0
   resolution: "locate-path@npm:6.0.0"
@@ -8036,6 +8043,7 @@ __metadata:
     globals: ^15.14.0
     gray-matter: ^4.0.3
     input-otp: ^1.4.2
+    lite-youtube-embed: ^0.3.4
     lucide-react: ^0.475.0
     next: ^14.2.15
     next-themes: ^0.4.4

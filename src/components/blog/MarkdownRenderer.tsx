@@ -6,6 +6,8 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+import YouTube from './YouTube';
 
 interface MarkdownRendererProps {
   content: string;
@@ -152,7 +154,14 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               {children}
             </td>
           ),
-        }}
+          // Custom YouTube component via rehype-raw
+          youtube: ({ node, ...props }: any) => {
+            const videoId = props.videoid || props.videId;
+            const url = props.url;
+            const title = props.title;
+            return <YouTube videoId={videoId} url={url} title={title} />;
+          },
+        } as any}
       >
         {content}
       </ReactMarkdown>

@@ -22,7 +22,7 @@ The tool caught on fast. With no marketing, it grew to 500,000 users purely by w
 
 I believe—deeply, unshakably—that Planton will become India's second globally loved developer tool.
 
-Conor McGregor once said in a press conference: "If you truly believe it and if you have the courage to say it, it will happen." I don't know if that's an original quote, and honestly, I don't care. I heard it from Conor, and it resonates with me.
+Conor McGregor once said in a [press conference](http://youtube.com/shorts/LGc-5rlM-WI): "If you truly believe it and if you have the courage to say it, it will happen." I don't know if that's an original quote, and honestly, I don't care. I heard it from Conor, and it resonates with me.
 
 So here it is: **Planton will become the next Postman.**
 
@@ -43,6 +43,10 @@ But that's exactly the point. If I don't believe it enough to say it publicly, h
 Postman's founders had to believe they could compete globally from Bangalore. They had to take that leap. Now it's my turn.
 
 Planton will become the next Postman. I believe it. And I'm saying it.
+
+## The Statement That Inspired This
+
+<YouTube videoId="LGc-5rlM-WI" title="Conor McGregor on Belief" />
 
 ## Research: Postman's Journey
 
