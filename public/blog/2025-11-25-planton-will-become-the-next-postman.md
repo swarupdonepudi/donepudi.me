@@ -46,11 +46,11 @@ Planton will become the next Postman. I believe it. And I'm saying it.
 
 ## The Statement That Inspired This
 
-<YouTube videoId="LGc-5rlM-WI" title="Conor McGregor on Belief" />
+<youtube videoid="LGc-5rlM-WI" title="Conor McGregor on Belief"></youtube>
 
 If you have a couple more minutes and want to understand the deeper context behind Conor's statement, here's the [full interview](https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86) where he talks about belief, manifestation, and the power of declaring your vision publicly:
 
-<YouTube url="https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86" title="Conor McGregor - Full Context on Belief and Manifestation" />
+<youtube url="https://youtu.be/8G1B7UzLtlk?si=KKK-fEMOAd0FyV1E&t=86" title="Conor McGregor - Full Context on Belief and Manifestation"></youtube>
 
 ## Research: Postman's Journey
 

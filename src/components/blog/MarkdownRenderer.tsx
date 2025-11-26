@@ -154,9 +154,9 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               {children}
             </td>
           ),
-          // Custom YouTube component via rehype-raw
+          // Custom YouTube component via rehype-raw (lowercase because rehype-raw converts to lowercase)
           youtube: ({ node, ...props }: any) => {
-            const videoId = props.videoid || props.videId;
+            const videoId = props.videoid || props.videoid || props.videoId;
             const url = props.url;
             const title = props.title;
             return <YouTube videoId={videoId} url={url} title={title} />;
