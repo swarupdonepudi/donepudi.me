@@ -30,7 +30,29 @@ function Slide01Title() {
   );
 }
 
-// Slide 2: The Problem
+// Slide 2: The Deployment Scenario
+function Slide02Hook() {
+  return (
+    <div className="w-full h-full flex items-center justify-center p-12">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="w-full max-w-6xl text-center"
+      >
+        <h2 className="text-5xl font-bold text-white mb-12">
+          A Common Scenario
+        </h2>
+        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg p-16">
+          <p className="text-4xl text-gray-200 leading-relaxed">
+            Deploying the same thing — like a Postgres DB — to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or <strong className="text-cyan-400">Kubernetes</strong>
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+// Slide 3: The Challenge
 function Slide03Problem() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
@@ -39,71 +61,57 @@ function Slide03Problem() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-6xl"
       >
-        <h2 className="text-5xl font-bold text-white mb-12">The Multi-Cloud Challenge</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6">
-            <h3 className="text-red-400 text-2xl font-bold mb-4">Abstract Too Much</h3>
-            <div className="text-gray-300 space-y-3">
+        <h2 className="text-5xl font-bold text-white mb-10">The Challenge</h2>
+        
+        <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-8 mb-8">
+          <p className="text-2xl text-gray-300 mb-4">
+            Today, each destination requires:
+          </p>
+          <div className="space-y-3 text-xl text-gray-200">
+            <p>❌ Different YAML structures</p>
+            <p>❌ Different tools and CLIs</p>
+            <p>❌ Different validation approaches</p>
+          </div>
+        </div>
+
+        <p className="text-2xl text-gray-300 mb-6 text-center">
+          Existing multi-cloud solutions fall short:
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-5">
+            <h3 className="text-red-400 text-xl font-bold mb-3">Abstract Too Much</h3>
+            <div className="text-gray-300 space-y-2 text-sm">
               <p>❌ Lowest common denominator</p>
               <p>❌ Lose cloud-specific power</p>
-              <p>❌ Limited functionality</p>
             </div>
           </div>
-          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6">
-            <h3 className="text-red-400 text-2xl font-bold mb-4">Abstract Too Little</h3>
-            <div className="text-gray-300 space-y-3">
+          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-5">
+            <h3 className="text-red-400 text-xl font-bold mb-3">Abstract Too Little</h3>
+            <div className="text-gray-300 space-y-2 text-sm">
               <p>❌ No consistency</p>
-              <p>❌ Different tools per cloud</p>
               <p>❌ Constant context switching</p>
             </div>
           </div>
-          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6">
-            <h3 className="text-red-400 text-2xl font-bold mb-4">Complex Setup</h3>
-            <div className="text-gray-300 space-y-3">
+          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-5">
+            <h3 className="text-red-400 text-xl font-bold mb-3">Complex Setup</h3>
+            <div className="text-gray-300 space-y-2 text-sm">
               <p>❌ Requires K8s clusters</p>
-              <p>❌ Operators, CRDs, reconcilers</p>
               <p>❌ High barrier to entry</p>
             </div>
           </div>
         </div>
+
         <p className="text-center text-2xl text-gray-300 mt-8">
-          💭 How do we provide consistency <strong className="text-cyan-400">without</strong> losing power?
+          💭 How do we get consistency <strong className="text-cyan-400">without</strong> losing power?
         </p>
       </motion.div>
     </div>
   );
 }
 
-// Slide 4: Opening Hook
-function Slide04Hook() {
-  return (
-    <div className="w-full h-full flex items-center justify-center p-12">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-6xl text-center"
-      >
-        <h2 className="text-6xl font-bold text-white mb-12">
-          What if...
-        </h2>
-        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg p-12">
-          <p className="text-3xl text-gray-200 leading-relaxed mb-6">
-            Deploying a PostgreSQL database to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or <strong className="text-cyan-400">Kubernetes</strong> felt the same?
-          </p>
-          <p className="text-2xl text-cyan-400 font-semibold">
-            Same YAML structure • Same CLI command • Same validation workflow
-          </p>
-          <p className="text-xl text-gray-400 mt-6">
-            Without hiding cloud-specific power?
-          </p>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-// Slide 5: Project Planton Introduction
-function Slide05ProjectPlanton() {
+// Slide 4: Project Planton - The Solution
+function Slide04ProjectPlanton() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -111,7 +119,7 @@ function Slide05ProjectPlanton() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-5xl"
       >
-        <h2 className="text-5xl font-bold text-white mb-8">Project Planton</h2>
+        <h2 className="text-5xl font-bold text-white mb-8">Meet Project Planton</h2>
         <p className="text-2xl text-cyan-400 mb-8">
           Open-Source Multi-Cloud Infrastructure Framework
         </p>
@@ -140,8 +148,8 @@ function Slide05ProjectPlanton() {
   );
 }
 
-// Slide 6: Example Walkthrough
-function Slide06DemoPreview() {
+// Slide 5: Example Walkthrough
+function Slide05DemoPreview() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -177,22 +185,23 @@ function Slide06DemoPreview() {
   );
 }
 
-// Slide 7: Example 1 - Postgres on Kubernetes
-function Slide07DemoK8s() {
+// Slide 6: Example 1 - Postgres on Kubernetes
+function Slide06DemoK8s() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-6xl"
+        className="w-full max-w-7xl"
       >
-        <h2 className="text-4xl font-bold text-white mb-6">Example 1: PostgreSQL on Kubernetes</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Example 1: PostgreSQL on Kubernetes</h2>
         
-        {/* Manifest Section */}
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-2">Manifest</h3>
-          <div className="bg-gray-900 rounded-lg border border-gray-700 p-4">
-            <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
+        <div className="grid grid-cols-2 gap-4">
+          {/* Manifest Section */}
+          <div>
+            <h3 className="text-base font-semibold text-cyan-400 mb-2">Manifest</h3>
+            <div className="bg-gray-900 rounded-lg border border-gray-700 p-3">
+              <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
 {`apiVersion: kubernetes.project-planton.org/v1
 kind: KubernetesPostgres
 metadata:
@@ -214,31 +223,32 @@ spec:
     diskSize: 1Gi
   ingress:
     enabled: false`}
-            </pre>
+              </pre>
+            </div>
           </div>
-        </div>
 
-        {/* Terminal Section */}
-        <div>
-          <h3 className="text-lg font-semibold text-cyan-400 mb-2">Terminal</h3>
-          <div className="bg-gray-950 rounded-lg border border-gray-700 p-4">
-            <pre className="text-sm font-mono overflow-x-auto leading-relaxed">
-              <span className="text-cyan-400">$</span> <span className="text-white">project-planton apply -f --manifest kubernetes-postgres.yaml</span>
-              {'\n\n'}
-              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
-              {'\n'}
-              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
-              {'\n'}
-              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Creating PostgreSQL cluster...</span>
-              {'\n'}
-              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
-              {'\n\n'}
-              <span className="text-yellow-400">Outputs:</span>
-              {'\n'}
-              <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://user:pass@postgres.example.com:5432/db</span>
-              {'\n'}
-              <span className="text-gray-500">  pod_count: </span><span className="text-white">1</span>
-            </pre>
+          {/* Terminal Section */}
+          <div>
+            <h3 className="text-base font-semibold text-cyan-400 mb-2">Terminal</h3>
+            <div className="bg-gray-950 rounded-lg border border-gray-700 p-3">
+              <pre className="text-xs font-mono overflow-x-auto leading-relaxed">
+                <span className="text-cyan-400">$</span> <span className="text-white">project-planton apply -f --manifest kubernetes-postgres.yaml</span>
+                {'\n\n'}
+                <span className="text-cyan-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
+                {'\n'}
+                <span className="text-cyan-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
+                {'\n'}
+                <span className="text-cyan-400">✓</span> <span className="text-gray-300">Creating PostgreSQL cluster...</span>
+                {'\n'}
+                <span className="text-cyan-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
+                {'\n\n'}
+                <span className="text-yellow-400">Outputs:</span>
+                {'\n'}
+                <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://user:pass@postgres.example.com:5432/db</span>
+                {'\n'}
+                <span className="text-gray-500">  pod_count: </span><span className="text-white">1</span>
+              </pre>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -246,22 +256,23 @@ spec:
   );
 }
 
-// Slide 8: Example 2 - Postgres on AWS
-function Slide08DemoAWS() {
+// Slide 7: Example 2 - Postgres on AWS
+function Slide07DemoAWS() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-6xl"
+        className="w-full max-w-7xl"
       >
-        <h2 className="text-4xl font-bold text-white mb-6">Example 2: PostgreSQL on AWS RDS</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Example 2: PostgreSQL on AWS RDS</h2>
         
-        {/* Manifest Section */}
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold text-orange-400 mb-2">Manifest</h3>
-          <div className="bg-gray-900 rounded-lg border border-gray-700 p-4">
-            <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
+        <div className="grid grid-cols-2 gap-4">
+          {/* Manifest Section */}
+          <div>
+            <h3 className="text-base font-semibold text-orange-400 mb-2">Manifest</h3>
+            <div className="bg-gray-900 rounded-lg border border-gray-700 p-3">
+              <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
 {`apiVersion: aws.project-planton.org/v1
 kind: AwsRdsInstance
 metadata:
@@ -284,31 +295,32 @@ spec:
   port: 5432
   publiclyAccessible: false
   multiAz: false`}
-            </pre>
+              </pre>
+            </div>
           </div>
-        </div>
 
-        {/* Terminal Section */}
-        <div>
-          <h3 className="text-lg font-semibold text-orange-400 mb-2">Terminal</h3>
-          <div className="bg-gray-950 rounded-lg border border-gray-700 p-4">
-            <pre className="text-sm font-mono overflow-x-auto leading-relaxed">
-              <span className="text-orange-400">$</span> <span className="text-white">project-planton apply -f --manifest aws-postgres.yaml</span>
-              {'\n\n'}
-              <span className="text-orange-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
-              {'\n'}
-              <span className="text-orange-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
-              {'\n'}
-              <span className="text-orange-400">✓</span> <span className="text-gray-300">Creating RDS instance...</span>
-              {'\n'}
-              <span className="text-orange-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
-              {'\n\n'}
-              <span className="text-yellow-400">Outputs:</span>
-              {'\n'}
-              <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://admin:pass@mydb.abc.us-east-1.rds.amazonaws.com:5432/db</span>
-              {'\n'}
-              <span className="text-gray-500">  instance_id: </span><span className="text-white">mydb-20251129</span>
-            </pre>
+          {/* Terminal Section */}
+          <div>
+            <h3 className="text-base font-semibold text-orange-400 mb-2">Terminal</h3>
+            <div className="bg-gray-950 rounded-lg border border-gray-700 p-3">
+              <pre className="text-xs font-mono overflow-x-auto leading-relaxed">
+                <span className="text-orange-400">$</span> <span className="text-white">project-planton apply -f --manifest aws-postgres.yaml</span>
+                {'\n\n'}
+                <span className="text-orange-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
+                {'\n'}
+                <span className="text-orange-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
+                {'\n'}
+                <span className="text-orange-400">✓</span> <span className="text-gray-300">Creating RDS instance...</span>
+                {'\n'}
+                <span className="text-orange-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
+                {'\n\n'}
+                <span className="text-yellow-400">Outputs:</span>
+                {'\n'}
+                <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://admin:pass@mydb.abc.us-east-1.rds.amazonaws.com:5432/db</span>
+                {'\n'}
+                <span className="text-gray-500">  instance_id: </span><span className="text-white">mydb-20251129</span>
+              </pre>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -316,22 +328,23 @@ spec:
   );
 }
 
-// Slide 9: Example 3 - Postgres on GCP
-function Slide09DemoGCP() {
+// Slide 8: Example 3 - Postgres on GCP
+function Slide08DemoGCP() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-6xl"
+        className="w-full max-w-7xl"
       >
-        <h2 className="text-4xl font-bold text-white mb-6">Example 3: PostgreSQL on GCP Cloud SQL</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Example 3: PostgreSQL on GCP Cloud SQL</h2>
         
-        {/* Manifest Section */}
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold text-blue-400 mb-2">Manifest</h3>
-          <div className="bg-gray-900 rounded-lg border border-gray-700 p-4">
-            <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
+        <div className="grid grid-cols-2 gap-4">
+          {/* Manifest Section */}
+          <div>
+            <h3 className="text-base font-semibold text-blue-400 mb-2">Manifest</h3>
+            <div className="bg-gray-900 rounded-lg border border-gray-700 p-3">
+              <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
 {`apiVersion: gcp.project-planton.org/v1
 kind: GcpCloudSql
 metadata:
@@ -349,31 +362,32 @@ spec:
   rootPassword: my-secure-password
   storageGb: 10
   tier: db-f1-micro`}
-            </pre>
+              </pre>
+            </div>
           </div>
-        </div>
 
-        {/* Terminal Section */}
-        <div>
-          <h3 className="text-lg font-semibold text-blue-400 mb-2">Terminal</h3>
-          <div className="bg-gray-950 rounded-lg border border-gray-700 p-4">
-            <pre className="text-sm font-mono overflow-x-auto leading-relaxed">
-              <span className="text-blue-400">$</span> <span className="text-white">project-planton apply -f --manifest gcp-postgres.yaml</span>
-              {'\n\n'}
-              <span className="text-blue-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
-              {'\n'}
-              <span className="text-blue-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
-              {'\n'}
-              <span className="text-blue-400">✓</span> <span className="text-gray-300">Creating Cloud SQL instance...</span>
-              {'\n'}
-              <span className="text-blue-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
-              {'\n\n'}
-              <span className="text-yellow-400">Outputs:</span>
-              {'\n'}
-              <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://user:pass@10.1.2.3:5432/db</span>
-              {'\n'}
-              <span className="text-gray-500">  instance_name: </span><span className="text-white">my-postgres-gcp-abc123</span>
-            </pre>
+          {/* Terminal Section */}
+          <div>
+            <h3 className="text-base font-semibold text-blue-400 mb-2">Terminal</h3>
+            <div className="bg-gray-950 rounded-lg border border-gray-700 p-3">
+              <pre className="text-xs font-mono overflow-x-auto leading-relaxed">
+                <span className="text-blue-400">$</span> <span className="text-white">project-planton apply -f --manifest gcp-postgres.yaml</span>
+                {'\n\n'}
+                <span className="text-blue-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
+                {'\n'}
+                <span className="text-blue-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
+                {'\n'}
+                <span className="text-blue-400">✓</span> <span className="text-gray-300">Creating Cloud SQL instance...</span>
+                {'\n'}
+                <span className="text-blue-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
+                {'\n\n'}
+                <span className="text-yellow-400">Outputs:</span>
+                {'\n'}
+                <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://user:pass@10.1.2.3:5432/db</span>
+                {'\n'}
+                <span className="text-gray-500">  instance_name: </span><span className="text-white">my-postgres-gcp-abc123</span>
+              </pre>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -381,8 +395,8 @@ spec:
   );
 }
 
-// Slide 10: Key Point
-function Slide10KeyPoint() {
+// Slide 9: Key Point
+function Slide09KeyPoint() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -403,8 +417,8 @@ function Slide10KeyPoint() {
   );
 }
 
-// Slide 11: The Backstory
-function Slide11Backstory() {
+// Slide 10: The Backstory
+function Slide10Backstory() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -435,8 +449,8 @@ function Slide11Backstory() {
   );
 }
 
-// Slide 12: The Turning Point
-function Slide12TurningPoint() {
+// Slide 11: The Turning Point
+function Slide11TurningPoint() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -465,8 +479,8 @@ function Slide12TurningPoint() {
   );
 }
 
-// Slide 13: Architecture - Protocol Buffers
-function Slide13ProtoBufs() {
+// Slide 12: Architecture - Protocol Buffers
+function Slide12ProtoBufs() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -500,8 +514,8 @@ function Slide13ProtoBufs() {
   );
 }
 
-// Slide 14: Proto Example
-function Slide14ProtoExample() {
+// Slide 13: Proto Example
+function Slide13ProtoExample() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -541,8 +555,8 @@ $ project-planton validate --manifest postgres.yaml
   );
 }
 
-// Slide 15: SDK Generation
-function Slide15SDKs() {
+// Slide 14: SDK Generation
+function Slide14SDKs() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -577,8 +591,8 @@ function Slide15SDKs() {
   );
 }
 
-// Slide 16: CLI vs Operators
-function Slide16CLIvsOperators() {
+// Slide 15: CLI vs Operators
+function Slide15CLIvsOperators() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -612,8 +626,8 @@ function Slide16CLIvsOperators() {
   );
 }
 
-// Slide 17: When to Use Each
-function Slide17WhenToUse() {
+// Slide 16: When to Use Each
+function Slide16WhenToUse() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -648,8 +662,8 @@ function Slide17WhenToUse() {
   );
 }
 
-// Slide 18: Dual IaC Support
-function Slide18DualIaC() {
+// Slide 17: Dual IaC Support
+function Slide17DualIaC() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -687,8 +701,8 @@ function Slide18DualIaC() {
   );
 }
 
-// Slide 19: Deployment Component Concept
-function Slide19DeploymentComponent() {
+// Slide 18: Deployment Component Concept
+function Slide18DeploymentComponent() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -720,8 +734,8 @@ function Slide19DeploymentComponent() {
   );
 }
 
-// Slide 20: Crossplane Comparison Table
-function Slide20CrossplaneTable() {
+// Slide 19: Crossplane Comparison Table
+function Slide19CrossplaneTable() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -778,8 +792,8 @@ function Slide20CrossplaneTable() {
   );
 }
 
-// Slide 21: Key Takeaways
-function Slide21KeyTakeaways() {
+// Slide 20: Key Takeaways
+function Slide20KeyTakeaways() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -812,8 +826,8 @@ function Slide21KeyTakeaways() {
   );
 }
 
-// Slide 22: Get Involved
-function Slide22GetInvolved() {
+// Slide 21: Get Involved
+function Slide21GetInvolved() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -848,8 +862,8 @@ function Slide22GetInvolved() {
   );
 }
 
-// Slide 23: Roadmap
-function Slide23Roadmap() {
+// Slide 22: Roadmap
+function Slide22Roadmap() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -897,8 +911,8 @@ function Slide23Roadmap() {
   );
 }
 
-// Slide 24: Thank You
-function Slide24ThankYou() {
+// Slide 23: Thank You
+function Slide23ThankYou() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -937,28 +951,28 @@ export default function TalkPresentation() {
 
   const slides = [
     <Slide01Title key="slide-1" />,
-    <Slide03Problem key="slide-2" />,
-    <Slide04Hook key="slide-3" />,
-    <Slide05ProjectPlanton key="slide-4" />,
-    <Slide06DemoPreview key="slide-5" />,
-    <Slide07DemoK8s key="slide-6" />,
-    <Slide08DemoAWS key="slide-7" />,
-    <Slide09DemoGCP key="slide-8" />,
-    <Slide10KeyPoint key="slide-9" />,
-    <Slide11Backstory key="slide-10" />,
-    <Slide12TurningPoint key="slide-11" />,
-    <Slide13ProtoBufs key="slide-12" />,
-    <Slide14ProtoExample key="slide-13" />,
-    <Slide15SDKs key="slide-14" />,
-    <Slide16CLIvsOperators key="slide-15" />,
-    <Slide17WhenToUse key="slide-16" />,
-    <Slide18DualIaC key="slide-17" />,
-    <Slide19DeploymentComponent key="slide-18" />,
-    <Slide20CrossplaneTable key="slide-19" />,
-    <Slide21KeyTakeaways key="slide-20" />,
-    <Slide22GetInvolved key="slide-21" />,
-    <Slide23Roadmap key="slide-22" />,
-    <Slide24ThankYou key="slide-23" />,
+    <Slide02Hook key="slide-2" />,
+    <Slide03Problem key="slide-3" />,
+    <Slide04ProjectPlanton key="slide-4" />,
+    <Slide05DemoPreview key="slide-5" />,
+    <Slide06DemoK8s key="slide-6" />,
+    <Slide07DemoAWS key="slide-7" />,
+    <Slide08DemoGCP key="slide-8" />,
+    <Slide09KeyPoint key="slide-9" />,
+    <Slide10Backstory key="slide-10" />,
+    <Slide11TurningPoint key="slide-11" />,
+    <Slide12ProtoBufs key="slide-12" />,
+    <Slide13ProtoExample key="slide-13" />,
+    <Slide14SDKs key="slide-14" />,
+    <Slide15CLIvsOperators key="slide-15" />,
+    <Slide16WhenToUse key="slide-16" />,
+    <Slide17DualIaC key="slide-17" />,
+    <Slide18DeploymentComponent key="slide-18" />,
+    <Slide19CrossplaneTable key="slide-19" />,
+    <Slide20KeyTakeaways key="slide-20" />,
+    <Slide21GetInvolved key="slide-21" />,
+    <Slide22Roadmap key="slide-22" />,
+    <Slide23ThankYou key="slide-23" />,
   ];
 
   const goToNext = useCallback(() => {
