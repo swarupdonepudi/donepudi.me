@@ -52,15 +52,18 @@ export function generateSlugFromPath(filePath: string): string {
   // Extract filename without extension
   const basename = path.basename(filePath, path.extname(filePath));
   
+  // Only strip date prefix for blog content, keep it for talks
+  const shouldStripDate = filePath.includes('/blog/');
+  
   // If it's index.md, use the parent directory name
   if (basename === 'index' || basename === 'README') {
     const parentDir = path.dirname(filePath);
     const dirName = path.basename(parentDir);
-    return sanitizeSlug(stripDatePrefix(dirName));
+    return sanitizeSlug(shouldStripDate ? stripDatePrefix(dirName) : dirName);
   }
   
-  // Strip date prefix from filename (YYYY-MM-DD- pattern)
-  const withoutDatePrefix = stripDatePrefix(basename);
+  // Strip date prefix from filename only for blog content
+  const withoutDatePrefix = shouldStripDate ? stripDatePrefix(basename) : basename;
   
   return sanitizeSlug(withoutDatePrefix);
 }
