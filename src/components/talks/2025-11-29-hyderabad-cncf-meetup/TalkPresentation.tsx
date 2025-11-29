@@ -30,44 +30,7 @@ function Slide01Title() {
   );
 }
 
-// Slide 2: About Me
-function Slide02AboutMe() {
-  return (
-    <div className="w-full h-full flex items-center justify-center p-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-5xl"
-      >
-        <h2 className="text-5xl font-bold text-white mb-8">About Me</h2>
-        <div className="space-y-6 text-gray-200 text-xl">
-          <p className="text-2xl text-cyan-400">
-            Platform Engineering Entrepreneur
-          </p>
-          <div className="space-y-4">
-            <p>
-              🏢 <strong className="text-white">Founder:</strong> PlantonCloud - "DevOps-in-a-Box" Internal Developer Platform
-            </p>
-            <p>
-              🔧 <strong className="text-white">Creator:</strong> Project Planton - Open-source multi-cloud framework
-            </p>
-            <p>
-              📈 <strong className="text-white">Experience:</strong> 10+ years in DevOps (1-person startups → 500-dev enterprises)
-            </p>
-            <p>
-              🎯 <strong className="text-white">Mission:</strong> Making enterprise-grade platform engineering accessible
-            </p>
-          </div>
-          <p className="text-lg text-gray-400 pt-4">
-            🌐 github.com/project-planton/project-planton
-          </p>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-// Slide 3: The Problem
+// Slide 2: The Problem
 function Slide03Problem() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
@@ -974,29 +937,28 @@ export default function TalkPresentation() {
 
   const slides = [
     <Slide01Title key="slide-1" />,
-    <Slide02AboutMe key="slide-2" />,
-    <Slide03Problem key="slide-3" />,
-    <Slide04Hook key="slide-4" />,
-    <Slide05ProjectPlanton key="slide-5" />,
-    <Slide06DemoPreview key="slide-6" />,
-    <Slide07DemoK8s key="slide-7" />,
-    <Slide08DemoAWS key="slide-8" />,
-    <Slide09DemoGCP key="slide-9" />,
-    <Slide10KeyPoint key="slide-10" />,
-    <Slide11Backstory key="slide-11" />,
-    <Slide12TurningPoint key="slide-12" />,
-    <Slide13ProtoBufs key="slide-13" />,
-    <Slide14ProtoExample key="slide-14" />,
-    <Slide15SDKs key="slide-15" />,
-    <Slide16CLIvsOperators key="slide-16" />,
-    <Slide17WhenToUse key="slide-17" />,
-    <Slide18DualIaC key="slide-18" />,
-    <Slide19DeploymentComponent key="slide-19" />,
-    <Slide20CrossplaneTable key="slide-20" />,
-    <Slide21KeyTakeaways key="slide-21" />,
-    <Slide22GetInvolved key="slide-22" />,
-    <Slide23Roadmap key="slide-23" />,
-    <Slide24ThankYou key="slide-24" />,
+    <Slide03Problem key="slide-2" />,
+    <Slide04Hook key="slide-3" />,
+    <Slide05ProjectPlanton key="slide-4" />,
+    <Slide06DemoPreview key="slide-5" />,
+    <Slide07DemoK8s key="slide-6" />,
+    <Slide08DemoAWS key="slide-7" />,
+    <Slide09DemoGCP key="slide-8" />,
+    <Slide10KeyPoint key="slide-9" />,
+    <Slide11Backstory key="slide-10" />,
+    <Slide12TurningPoint key="slide-11" />,
+    <Slide13ProtoBufs key="slide-12" />,
+    <Slide14ProtoExample key="slide-13" />,
+    <Slide15SDKs key="slide-14" />,
+    <Slide16CLIvsOperators key="slide-15" />,
+    <Slide17WhenToUse key="slide-16" />,
+    <Slide18DualIaC key="slide-17" />,
+    <Slide19DeploymentComponent key="slide-18" />,
+    <Slide20CrossplaneTable key="slide-19" />,
+    <Slide21KeyTakeaways key="slide-20" />,
+    <Slide22GetInvolved key="slide-21" />,
+    <Slide23Roadmap key="slide-22" />,
+    <Slide24ThankYou key="slide-23" />,
   ];
 
   const goToNext = useCallback(() => {
