@@ -30,7 +30,7 @@ function Slide01Title() {
   );
 }
 
-// Slide 2: The Deployment Scenario
+// Slide 2: The Scenario Setup
 function Slide02Hook() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
@@ -43,8 +43,14 @@ function Slide02Hook() {
           A Common Scenario
         </h2>
         <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg p-16">
-          <p className="text-4xl text-gray-200 leading-relaxed">
-            Deploying the same thing — like a Postgres DB — to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or <strong className="text-cyan-400">Kubernetes</strong>
+          <p className="text-4xl text-gray-200 leading-relaxed mb-8">
+            <strong className="text-cyan-400">Company 1:</strong> Deploy Postgres to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or <strong className="text-cyan-400">Kubernetes</strong>
+          </p>
+          <p className="text-3xl text-gray-400">
+            A few years later...
+          </p>
+          <p className="text-4xl text-gray-200 leading-relaxed mt-8">
+            <strong className="text-purple-400">Company 2:</strong> Same Postgres deployment needed
           </p>
         </div>
       </motion.div>
@@ -52,8 +58,65 @@ function Slide02Hook() {
   );
 }
 
-// Slide 3: The Challenge
-function Slide03Problem() {
+// Slide 3: The Traditional Workflow
+function Slide03Workflow() {
+  return (
+    <div className="w-full h-full flex items-center justify-center p-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-6xl"
+      >
+        <h2 className="text-5xl font-bold text-white mb-10">The Traditional Way</h2>
+        
+        <div className="space-y-6">
+          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl font-bold text-cyan-400">1</span>
+              <div>
+                <p className="text-2xl text-gray-200">
+                  Learn how to deploy Postgres on <strong className="text-orange-400">AWS</strong>
+                </p>
+                <p className="text-lg text-gray-400 mt-2">Write Terraform modules, configure RDS, set up networking...</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl font-bold text-blue-400">2</span>
+              <div>
+                <p className="text-2xl text-gray-200">
+                  Need <strong className="text-blue-400">GCP</strong>? Write more Terraform
+                </p>
+                <p className="text-lg text-gray-400 mt-2">Different APIs, different configuration, start from scratch...</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl font-bold text-red-400">3</span>
+              <div>
+                <p className="text-2xl text-gray-200">
+                  Move to <strong className="text-purple-400">Company 2</strong>? <strong className="text-red-400">Start over</strong>
+                </p>
+                <p className="text-lg text-gray-400 mt-2">Can't bring company code • New repo setup • Rewrite everything • Same work, different place</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center text-2xl text-gray-300 mt-10">
+          💭 Why rebuild the same thing <strong className="text-red-400">over and over</strong>?
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+// Slide 4: The Challenge
+function Slide04Problem() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -110,8 +173,8 @@ function Slide03Problem() {
   );
 }
 
-// Slide 4: Project Planton - The Solution
-function Slide04ProjectPlanton() {
+// Slide 5: Project Planton - The Solution
+function Slide05ProjectPlanton() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -119,37 +182,44 @@ function Slide04ProjectPlanton() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-5xl"
       >
-        <h2 className="text-5xl font-bold text-white mb-8">Meet Project Planton</h2>
+        <h2 className="text-5xl font-bold text-white mb-8">The Project Planton Way</h2>
         <p className="text-2xl text-cyan-400 mb-8">
-          Open-Source Multi-Cloud Infrastructure Framework
+          Write once. Use anywhere. Take it with you.
         </p>
         <div className="space-y-6 text-gray-200 text-xl">
           <p>
-            ✅ <strong className="text-white">Kubernetes-style consistency</strong> across AWS, GCP, Azure, Kubernetes
+            ✅ <strong className="text-white">100+ pre-written modules</strong> bundled with the CLI - No need to write from scratch
           </p>
           <p>
-            ✅ <strong className="text-white">100+ deployment components</strong> - Production-ready modules
+            ✅ <strong className="text-white">Consistent manifests</strong> across AWS, GCP, Azure, Kubernetes
           </p>
           <p>
-            ✅ <strong className="text-white">Protocol Buffers validation</strong> - Catch 90%+ errors before cloud APIs
+            ✅ <strong className="text-white">Portable between companies</strong> - Same manifest, different cloud account
           </p>
           <p>
-            ✅ <strong className="text-white">Dual Pulumi/Terraform support</strong> - Your choice, not ours
+            ✅ <strong className="text-white">Protocol Buffers validation</strong> - Catch 90%+ errors before deployment
           </p>
           <p>
-            ✅ <strong className="text-white">Simple CLI</strong> - No K8s cluster required
+            ✅ <strong className="text-white">Open source</strong> - Your knowledge travels with you
           </p>
         </div>
-          <p className="text-xl text-gray-400 pt-6">
-          🌐 project-planton.org • github.com/project-planton/project-planton
+        
+        <div className="mt-8 bg-gradient-to-r from-green-900/30 to-cyan-900/30 border border-green-500/50 rounded-lg p-6">
+          <p className="text-xl text-gray-200 text-center">
+            💼 Move to a new company? <strong className="text-green-400">Apply the same manifest</strong> → Point to their cloud account → Done
           </p>
+        </div>
+
+        <p className="text-lg text-gray-400 pt-6 text-center">
+          🌐 project-planton.org • github.com/project-planton/project-planton
+        </p>
       </motion.div>
     </div>
   );
 }
 
-// Slide 5: Example Walkthrough
-function Slide05DemoPreview() {
+// Slide 6: Example Walkthrough
+function Slide06DemoPreview() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -185,8 +255,8 @@ function Slide05DemoPreview() {
   );
 }
 
-// Slide 6: Example 1 - Postgres on Kubernetes
-function Slide06DemoK8s() {
+// Slide 7: Example 1 - Postgres on Kubernetes
+function Slide07DemoK8s() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
@@ -256,8 +326,8 @@ spec:
   );
 }
 
-// Slide 7: Example 2 - Postgres on AWS
-function Slide07DemoAWS() {
+// Slide 8: Example 2 - Postgres on AWS
+function Slide08DemoAWS() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
@@ -328,8 +398,8 @@ spec:
   );
 }
 
-// Slide 8: Example 3 - Postgres on GCP
-function Slide08DemoGCP() {
+// Slide 9: Example 3 - Postgres on GCP
+function Slide09DemoGCP() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
@@ -395,8 +465,8 @@ spec:
   );
 }
 
-// Slide 9: Key Point
-function Slide09KeyPoint() {
+// Slide 10: Key Point
+function Slide10KeyPoint() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -417,8 +487,8 @@ function Slide09KeyPoint() {
   );
 }
 
-// Slide 10: The Backstory
-function Slide10Backstory() {
+// Slide 11: The Backstory
+function Slide11Backstory() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -449,8 +519,8 @@ function Slide10Backstory() {
   );
 }
 
-// Slide 11: The Turning Point
-function Slide11TurningPoint() {
+// Slide 12: The Turning Point
+function Slide12TurningPoint() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -479,8 +549,8 @@ function Slide11TurningPoint() {
   );
 }
 
-// Slide 12: Architecture - Protocol Buffers
-function Slide12ProtoBufs() {
+// Slide 13: Architecture - Protocol Buffers
+function Slide13ProtoBufs() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -514,8 +584,8 @@ function Slide12ProtoBufs() {
   );
 }
 
-// Slide 13: Proto Example
-function Slide13ProtoExample() {
+// Slide 14: Proto Example
+function Slide14ProtoExample() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -555,8 +625,8 @@ $ project-planton validate --manifest postgres.yaml
   );
 }
 
-// Slide 14: SDK Generation
-function Slide14SDKs() {
+// Slide 15: SDK Generation
+function Slide15SDKs() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -591,8 +661,8 @@ function Slide14SDKs() {
   );
 }
 
-// Slide 15: CLI vs Operators
-function Slide15CLIvsOperators() {
+// Slide 16: CLI vs Operators
+function Slide16CLIvsOperators() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -626,8 +696,8 @@ function Slide15CLIvsOperators() {
   );
 }
 
-// Slide 16: When to Use Each
-function Slide16WhenToUse() {
+// Slide 17: When to Use Each
+function Slide17WhenToUse() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -662,8 +732,8 @@ function Slide16WhenToUse() {
   );
 }
 
-// Slide 17: Dual IaC Support
-function Slide17DualIaC() {
+// Slide 18: Dual IaC Support
+function Slide18DualIaC() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -701,8 +771,8 @@ function Slide17DualIaC() {
   );
 }
 
-// Slide 18: Deployment Component Concept
-function Slide18DeploymentComponent() {
+// Slide 19: Deployment Component Concept
+function Slide19DeploymentComponent() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -734,8 +804,8 @@ function Slide18DeploymentComponent() {
   );
 }
 
-// Slide 19: Crossplane Comparison Table
-function Slide19CrossplaneTable() {
+// Slide 20: Crossplane Comparison Table
+function Slide20CrossplaneTable() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -792,8 +862,8 @@ function Slide19CrossplaneTable() {
   );
 }
 
-// Slide 20: Key Takeaways
-function Slide20KeyTakeaways() {
+// Slide 21: Key Takeaways
+function Slide21KeyTakeaways() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -826,8 +896,8 @@ function Slide20KeyTakeaways() {
   );
 }
 
-// Slide 21: Get Involved
-function Slide21GetInvolved() {
+// Slide 22: Get Involved
+function Slide22GetInvolved() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -862,8 +932,8 @@ function Slide21GetInvolved() {
   );
 }
 
-// Slide 22: Roadmap
-function Slide22Roadmap() {
+// Slide 23: Roadmap
+function Slide23Roadmap() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -911,8 +981,8 @@ function Slide22Roadmap() {
   );
 }
 
-// Slide 23: Thank You
-function Slide23ThankYou() {
+// Slide 24: Thank You
+function Slide24ThankYou() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -952,27 +1022,28 @@ export default function TalkPresentation() {
   const slides = [
     <Slide01Title key="slide-1" />,
     <Slide02Hook key="slide-2" />,
-    <Slide03Problem key="slide-3" />,
-    <Slide04ProjectPlanton key="slide-4" />,
-    <Slide05DemoPreview key="slide-5" />,
-    <Slide06DemoK8s key="slide-6" />,
-    <Slide07DemoAWS key="slide-7" />,
-    <Slide08DemoGCP key="slide-8" />,
-    <Slide09KeyPoint key="slide-9" />,
-    <Slide10Backstory key="slide-10" />,
-    <Slide11TurningPoint key="slide-11" />,
-    <Slide12ProtoBufs key="slide-12" />,
-    <Slide13ProtoExample key="slide-13" />,
-    <Slide14SDKs key="slide-14" />,
-    <Slide15CLIvsOperators key="slide-15" />,
-    <Slide16WhenToUse key="slide-16" />,
-    <Slide17DualIaC key="slide-17" />,
-    <Slide18DeploymentComponent key="slide-18" />,
-    <Slide19CrossplaneTable key="slide-19" />,
-    <Slide20KeyTakeaways key="slide-20" />,
-    <Slide21GetInvolved key="slide-21" />,
-    <Slide22Roadmap key="slide-22" />,
-    <Slide23ThankYou key="slide-23" />,
+    <Slide03Workflow key="slide-3" />,
+    <Slide04Problem key="slide-4" />,
+    <Slide05ProjectPlanton key="slide-5" />,
+    <Slide06DemoPreview key="slide-6" />,
+    <Slide07DemoK8s key="slide-7" />,
+    <Slide08DemoAWS key="slide-8" />,
+    <Slide09DemoGCP key="slide-9" />,
+    <Slide10KeyPoint key="slide-10" />,
+    <Slide11Backstory key="slide-11" />,
+    <Slide12TurningPoint key="slide-12" />,
+    <Slide13ProtoBufs key="slide-13" />,
+    <Slide14ProtoExample key="slide-14" />,
+    <Slide15SDKs key="slide-15" />,
+    <Slide16CLIvsOperators key="slide-16" />,
+    <Slide17WhenToUse key="slide-17" />,
+    <Slide18DualIaC key="slide-18" />,
+    <Slide19DeploymentComponent key="slide-19" />,
+    <Slide20CrossplaneTable key="slide-20" />,
+    <Slide21KeyTakeaways key="slide-21" />,
+    <Slide22GetInvolved key="slide-22" />,
+    <Slide23Roadmap key="slide-23" />,
+    <Slide24ThankYou key="slide-24" />,
   ];
 
   const goToNext = useCallback(() => {
