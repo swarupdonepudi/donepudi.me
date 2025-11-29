@@ -125,7 +125,7 @@ function Slide04Hook() {
         </h2>
         <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg p-12">
           <p className="text-3xl text-gray-200 leading-relaxed mb-6">
-            Deploying a PostgreSQL database to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or a <strong className="text-cyan-400">Kubernetes</strong> felt the same?
+            Deploying a PostgreSQL database to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or <strong className="text-cyan-400">Kubernetes</strong> felt the same?
           </p>
           <p className="text-2xl text-cyan-400 font-semibold">
             Same YAML structure • Same CLI command • Same validation workflow
