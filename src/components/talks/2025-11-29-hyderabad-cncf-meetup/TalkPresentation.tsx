@@ -125,7 +125,7 @@ function Slide04Hook() {
         </h2>
         <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 rounded-lg p-12">
           <p className="text-3xl text-gray-200 leading-relaxed mb-6">
-            Deploying a PostgreSQL database to <strong className="text-orange-400">AWS RDS</strong>, <strong className="text-blue-400">GCP Cloud SQL</strong>, or a <strong className="text-cyan-400">Kubernetes cluster</strong> felt the same?
+            Deploying a PostgreSQL database to <strong className="text-orange-400">AWS</strong>, <strong className="text-blue-400">GCP</strong>, or a <strong className="text-cyan-400">Kubernetes</strong> felt the same?
           </p>
           <p className="text-2xl text-cyan-400 font-semibold">
             Same YAML structure • Same CLI command • Same validation workflow
@@ -177,7 +177,7 @@ function Slide05ProjectPlanton() {
   );
 }
 
-// Slide 6: Demo Preview
+// Slide 6: Example Walkthrough
 function Slide06DemoPreview() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
@@ -187,23 +187,23 @@ function Slide06DemoPreview() {
         className="w-full max-w-5xl text-center"
       >
         <h2 className="text-5xl font-bold text-white mb-12">
-          Live Demos
+          Comparing Deployments
         </h2>
         <p className="text-2xl text-gray-300 mb-12">
-          Let's deploy three databases in three different clouds with three CLI commands
+          Let's examine how PostgreSQL deploys to three different clouds
         </p>
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-cyan-900/20 border border-cyan-500/50 rounded-lg p-6">
             <h3 className="text-cyan-400 text-3xl font-bold mb-2">1</h3>
-            <p className="text-xl text-white">PostgreSQL on Kubernetes</p>
+            <p className="text-xl text-white">Postgres on Kubernetes</p>
           </div>
           <div className="bg-orange-900/20 border border-orange-500/50 rounded-lg p-6">
             <h3 className="text-orange-400 text-3xl font-bold mb-2">2</h3>
-            <p className="text-xl text-white">PostgreSQL on AWS RDS</p>
+            <p className="text-xl text-white">Postgre on AWS</p>
           </div>
           <div className="bg-blue-900/20 border border-blue-500/50 rounded-lg p-6">
             <h3 className="text-blue-400 text-3xl font-bold mb-2">3</h3>
-            <p className="text-xl text-white">PostgreSQL on GCP Cloud SQL</p>
+            <p className="text-xl text-white">Postgre on GCP</p>
           </div>
         </div>
         <p className="text-xl text-cyan-400 mt-12 font-semibold">
@@ -214,125 +214,204 @@ function Slide06DemoPreview() {
   );
 }
 
-// Slide 7: Demo - Postgres on Kubernetes
+// Slide 7: Example 1 - Postgres on Kubernetes
 function Slide07DemoK8s() {
   return (
-    <div className="w-full h-full flex items-center justify-center p-12">
+    <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-5xl"
+        className="w-full max-w-6xl"
       >
-        <h2 className="text-4xl font-bold text-white mb-6">Demo 1: PostgreSQL on Kubernetes</h2>
-        <div className="bg-gray-900 rounded-lg border border-cyan-500/30 p-6">
-          <pre className="text-green-400 text-sm font-mono overflow-x-auto">
-{`# postgres-k8s.yaml
-apiVersion: code2cloud.planton.cloud/v1
-kind: PostgresKubernetes
+        <h2 className="text-4xl font-bold text-white mb-6">Example 1: PostgreSQL on Kubernetes</h2>
+        
+        {/* Manifest Section */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold text-cyan-400 mb-2">Manifest</h3>
+          <div className="bg-gray-900 rounded-lg border border-gray-700 p-4">
+            <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
+{`apiVersion: kubernetes.project-planton.org/v1
+kind: KubernetesPostgres
 metadata:
-  name: my-postgres-k8s
+  name: kubernetes-postgres-example
+  labels:
+    project-planton.org/provisioner: pulumi
 spec:
-  kubernetes_cluster_credential_id: my-k8s-cluster
+  namespace:
+    value: kubernetes-postgres-example
   container:
-    replicas: 3
+    replicas: 1
     resources:
       requests:
-        cpu: 500m
-        memory: 1Gi
-  
-$ project-planton pulumi up --manifest postgres-k8s.yaml
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+    diskSize: 1Gi
+  ingress:
+    enabled: false`}
+            </pre>
+          </div>
+        </div>
 
-✅ Validating manifest with proto rules...
-✅ Planning infrastructure changes...
-✅ Creating PostgreSQL cluster...
-✅ Deployment complete!
-
-Outputs:
-  connection_string: postgres://user:pass@postgres.example.com:5432/db
-  pod_count: 3`}
-          </pre>
+        {/* Terminal Section */}
+        <div>
+          <h3 className="text-lg font-semibold text-cyan-400 mb-2">Terminal</h3>
+          <div className="bg-gray-950 rounded-lg border border-gray-700 p-4">
+            <pre className="text-sm font-mono overflow-x-auto leading-relaxed">
+              <span className="text-cyan-400">$</span> <span className="text-white">project-planton apply -f --manifest kubernetes-postgres.yaml</span>
+              {'\n\n'}
+              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
+              {'\n'}
+              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
+              {'\n'}
+              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Creating PostgreSQL cluster...</span>
+              {'\n'}
+              <span className="text-cyan-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
+              {'\n\n'}
+              <span className="text-yellow-400">Outputs:</span>
+              {'\n'}
+              <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://user:pass@postgres.example.com:5432/db</span>
+              {'\n'}
+              <span className="text-gray-500">  pod_count: </span><span className="text-white">1</span>
+            </pre>
+          </div>
         </div>
       </motion.div>
     </div>
   );
 }
 
-// Slide 8: Demo - Postgres on AWS
+// Slide 8: Example 2 - Postgres on AWS
 function Slide08DemoAWS() {
   return (
-    <div className="w-full h-full flex items-center justify-center p-12">
+    <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-5xl"
+        className="w-full max-w-6xl"
       >
-        <h2 className="text-4xl font-bold text-white mb-6">Demo 2: PostgreSQL on AWS RDS</h2>
-        <div className="bg-gray-900 rounded-lg border border-orange-500/30 p-6">
-          <pre className="text-green-400 text-sm font-mono overflow-x-auto">
-{`# postgres-aws.yaml
-apiVersion: code2cloud.planton.cloud/v1
-kind: PostgresAws
+        <h2 className="text-4xl font-bold text-white mb-6">Example 2: PostgreSQL on AWS RDS</h2>
+        
+        {/* Manifest Section */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold text-orange-400 mb-2">Manifest</h3>
+          <div className="bg-gray-900 rounded-lg border border-gray-700 p-4">
+            <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
+{`apiVersion: aws.project-planton.org/v1
+kind: AwsRdsInstance
 metadata:
-  name: my-postgres-aws
+  name: aws-postgres-example
+  labels:
+    project-planton.org/provisioner: pulumi
 spec:
-  aws_credential_id: my-aws-account
-  region: us-east-1
-  instance_class: db.t3.medium
-  allocated_storage: 100
-  engine_version: "15.4"
-  
-$ project-planton pulumi up --manifest postgres-aws.yaml
+  subnetIds:
+    - value: subnet-abc123
+    - value: subnet-def456
+  securityGroupIds:
+    - value: sg-xyz789
+  engine: postgres
+  engineVersion: "15.4"
+  instanceClass: db.t3.micro
+  allocatedStorageGb: 20
+  storageEncrypted: true
+  username: postgres
+  password: my-secure-password
+  port: 5432
+  publiclyAccessible: false
+  multiAz: false`}
+            </pre>
+          </div>
+        </div>
 
-✅ Validating manifest with proto rules...
-✅ Planning infrastructure changes...
-✅ Creating RDS instance...
-✅ Deployment complete!
-
-Outputs:
-  connection_string: postgres://admin:pass@mydb.abc.us-east-1.rds.amazonaws.com:5432/db
-  instance_id: mydb-20251129`}
-          </pre>
+        {/* Terminal Section */}
+        <div>
+          <h3 className="text-lg font-semibold text-orange-400 mb-2">Terminal</h3>
+          <div className="bg-gray-950 rounded-lg border border-gray-700 p-4">
+            <pre className="text-sm font-mono overflow-x-auto leading-relaxed">
+              <span className="text-orange-400">$</span> <span className="text-white">project-planton apply -f --manifest aws-postgres.yaml</span>
+              {'\n\n'}
+              <span className="text-orange-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
+              {'\n'}
+              <span className="text-orange-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
+              {'\n'}
+              <span className="text-orange-400">✓</span> <span className="text-gray-300">Creating RDS instance...</span>
+              {'\n'}
+              <span className="text-orange-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
+              {'\n\n'}
+              <span className="text-yellow-400">Outputs:</span>
+              {'\n'}
+              <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://admin:pass@mydb.abc.us-east-1.rds.amazonaws.com:5432/db</span>
+              {'\n'}
+              <span className="text-gray-500">  instance_id: </span><span className="text-white">mydb-20251129</span>
+            </pre>
+          </div>
         </div>
       </motion.div>
     </div>
   );
 }
 
-// Slide 9: Demo - Postgres on GCP
+// Slide 9: Example 3 - Postgres on GCP
 function Slide09DemoGCP() {
   return (
-    <div className="w-full h-full flex items-center justify-center p-12">
+    <div className="w-full h-full flex items-center justify-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-5xl"
+        className="w-full max-w-6xl"
       >
-        <h2 className="text-4xl font-bold text-white mb-6">Demo 3: PostgreSQL on GCP Cloud SQL</h2>
-        <div className="bg-gray-900 rounded-lg border border-blue-500/30 p-6">
-          <pre className="text-green-400 text-sm font-mono overflow-x-auto">
-{`# postgres-gcp.yaml
-apiVersion: code2cloud.planton.cloud/v1
-kind: PostgresGcp
+        <h2 className="text-4xl font-bold text-white mb-6">Example 3: PostgreSQL on GCP Cloud SQL</h2>
+        
+        {/* Manifest Section */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold text-blue-400 mb-2">Manifest</h3>
+          <div className="bg-gray-900 rounded-lg border border-gray-700 p-4">
+            <pre className="text-gray-300 text-xs font-mono overflow-x-auto leading-relaxed">
+{`apiVersion: gcp.project-planton.org/v1
+kind: GcpCloudSql
 metadata:
-  name: my-postgres-gcp
+  name: gcp-postgres-example
+  labels:
+    project-planton.org/provisioner: pulumi
 spec:
-  gcp_credential_id: my-gcp-project
-  region: us-central1
-  tier: db-n1-standard-1
-  disk_size: 100
-  database_version: POSTGRES_15
-  
-$ project-planton pulumi up --manifest postgres-gcp.yaml
+  databaseEngine: POSTGRESQL
+  databaseVersion: POSTGRES_15
+  network:
+    authorizedNetworks:
+    - 0.0.0.0/0
+  projectId: project-planton-demo
+  region: asia-south1
+  rootPassword: my-secure-password
+  storageGb: 10
+  tier: db-f1-micro`}
+            </pre>
+          </div>
+        </div>
 
-✅ Validating manifest with proto rules...
-✅ Planning infrastructure changes...
-✅ Creating Cloud SQL instance...
-✅ Deployment complete!
-
-Outputs:
-  connection_string: postgres://user:pass@10.1.2.3:5432/db
-  instance_name: my-postgres-gcp-abc123`}
-          </pre>
+        {/* Terminal Section */}
+        <div>
+          <h3 className="text-lg font-semibold text-blue-400 mb-2">Terminal</h3>
+          <div className="bg-gray-950 rounded-lg border border-gray-700 p-4">
+            <pre className="text-sm font-mono overflow-x-auto leading-relaxed">
+              <span className="text-blue-400">$</span> <span className="text-white">project-planton apply -f --manifest gcp-postgres.yaml</span>
+              {'\n\n'}
+              <span className="text-blue-400">✓</span> <span className="text-gray-300">Validating manifest with proto rules...</span>
+              {'\n'}
+              <span className="text-blue-400">✓</span> <span className="text-gray-300">Planning infrastructure changes...</span>
+              {'\n'}
+              <span className="text-blue-400">✓</span> <span className="text-gray-300">Creating Cloud SQL instance...</span>
+              {'\n'}
+              <span className="text-blue-400">✓</span> <span className="text-gray-300">Deployment complete!</span>
+              {'\n\n'}
+              <span className="text-yellow-400">Outputs:</span>
+              {'\n'}
+              <span className="text-gray-500">  connection_string: </span><span className="text-white">postgres://user:pass@10.1.2.3:5432/db</span>
+              {'\n'}
+              <span className="text-gray-500">  instance_name: </span><span className="text-white">my-postgres-gcp-abc123</span>
+            </pre>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -806,8 +885,57 @@ function Slide22GetInvolved() {
   );
 }
 
-// Slide 23: Thank You
-function Slide23ThankYou() {
+// Slide 23: Roadmap
+function Slide23Roadmap() {
+  return (
+    <div className="w-full h-full flex items-center justify-center p-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-5xl"
+      >
+        <h2 className="text-5xl font-bold text-white mb-12">What's Next? 🚀</h2>
+        <div className="space-y-8">
+          <div className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border border-purple-500/50 rounded-lg p-8">
+            <h3 className="text-3xl font-bold text-purple-400 mb-6">Project Planton Web App</h3>
+            <div className="space-y-4 text-gray-200 text-xl">
+              <p>
+                🌐 <strong className="text-white">Self-hosted web interface</strong> for your infrastructure
+              </p>
+              <p>
+                💾 <strong className="text-white">Built-in database</strong> to store configurations and state
+              </p>
+              <p>
+                ⚙️ <strong className="text-white">Backend execution engine</strong> runs infrastructure modules
+              </p>
+              <p>
+                📜 <strong className="text-white">Deployment history</strong> and audit trails
+              </p>
+              <p>
+                🏢 <strong className="text-white">Deploy in your own infrastructure</strong> - complete control
+              </p>
+            </div>
+          </div>
+          
+          <div className="bg-green-900/20 border border-green-500/50 rounded-lg p-8 text-center">
+            <p className="text-2xl text-green-400 font-bold mb-4">
+              🧪 Beta Testing Now Open!
+            </p>
+            <p className="text-xl text-gray-300">
+              Testing the open source web app with early adopters
+            </p>
+            <p className="text-lg text-gray-400 mt-4">
+              📧 Interested? Reach out: <strong className="text-white">swarup@donepudi.me</strong>
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+// Slide 24: Thank You
+function Slide24ThankYou() {
   return (
     <div className="w-full h-full flex items-center justify-center p-12">
       <motion.div
@@ -867,7 +995,8 @@ export default function TalkPresentation() {
     <Slide20CrossplaneTable key="slide-20" />,
     <Slide21KeyTakeaways key="slide-21" />,
     <Slide22GetInvolved key="slide-22" />,
-    <Slide23ThankYou key="slide-23" />,
+    <Slide23Roadmap key="slide-23" />,
+    <Slide24ThankYou key="slide-24" />,
   ];
 
   const goToNext = useCallback(() => {
