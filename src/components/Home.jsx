@@ -225,7 +225,7 @@ export default function Home() {
             <div className="flex justify-center space-x-8 text-gray-400">
               <a href="/blog" className="hover:text-cyan-400 transition-colors">Blog</a>
               <a href="/talks" className="hover:text-cyan-400 transition-colors">Talks</a>
-              <a href="https://github.com/project-planton" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Open Source</a>
+              <a href="https://github.com/plantonhq" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Open Source</a>
               <a href="https://planton.cloud" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Planton Cloud</a>
             </div>
           </motion.div>

@@ -175,13 +175,13 @@ Used shell `mv` commands to rename files in batch operations:
 
 ```bash
 # Blog posts
-cd /Users/swarup/scm/github.com/swarupdonepudi/donepudi.me/public/blog
+cd ~/scm/github.com/swarupdonepudi/donepudi.me/public/blog
 mv 37-signals-in-datacenter.md 2025-03-18-37-signals-in-datacenter.md
 mv planton-will-become-the-next-postman.md 2025-11-25-planton-will-become-the-next-postman.md
 # ... (15 more files)
 
 # Images
-cd /Users/swarup/scm/github.com/swarupdonepudi/donepudi.me/public/blog/images
+cd ~/scm/github.com/swarupdonepudi/donepudi.me/public/blog/images
 mv planton-will-become-the-next-postman.cover.png 2025-11-25-planton-will-become-the-next-postman.cover.png
 mv planton-will-become-the-next-postman-logos.png 2025-11-25-planton-will-become-the-next-postman-logos.png
 # ... (30 more files)

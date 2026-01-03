@@ -18,14 +18,14 @@ With over 10 years of experience in DevOps and platform engineering, Swarup has 
 
 Project Planton features 100+ deployment components with dual Pulumi/Terraform support, enabling teams to deploy production-ready infrastructure in minutes instead of weeks. PlantonCloud currently serves paying customers in production.
 
-**GitHub:** github.com/project-planton/project-planton  
+**GitHub:** github.com/plantonhq/project-planton  
 **Website:** project-planton.org
 
 ### Alternate Bio (More Concise)
 
 **Swarup Donepudi** is a platform engineering entrepreneur and creator of Project Planton, an open-source multi-cloud framework that brings Kubernetes Resource Model patterns to infrastructure deployments across any cloud provider. With a decade of DevOps experience, he's passionate about making enterprise-grade platform engineering accessible to teams of all sizes through "consistency without abstraction"—unified developer experience while preserving provider-specific power. He's currently preparing to launch Project Planton publicly and serves production customers through PlantonCloud.
 
-**GitHub:** github.com/project-planton/project-planton
+**GitHub:** github.com/plantonhq/project-planton
 
 ### Ultra-Short Bio (If space is limited)
 
@@ -178,7 +178,7 @@ The talk includes:
 - Open to connecting attendees with relevant resources
 
 ### Materials to Share
-- **GitHub:** github.com/project-planton/project-planton
+- **GitHub:** github.com/plantonhq/project-planton
 - **Website:** project-planton.org
 - **LinkedIn:** linkedin.com/in/swarupdonepudi
 

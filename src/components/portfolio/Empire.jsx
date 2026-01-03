@@ -28,7 +28,7 @@ const projects = [
     color: 'from-green-500 to-emerald-500',
     icon: Code,
     links: {
-      github: 'https://github.com/plantoncloud/gitr',
+      github: 'https://github.com/swarupdonepudi/gitr',
       website: 'https://gitr.dev/'
     }
   },
@@ -56,7 +56,7 @@ const projects = [
     color: 'from-orange-500 to-red-500',
     icon: Globe,
     links: {
-      github: 'https://github.com/plantoncloud/mactl'
+      github: 'https://github.com/plantonhq/mactl'
     }
   }
 ];

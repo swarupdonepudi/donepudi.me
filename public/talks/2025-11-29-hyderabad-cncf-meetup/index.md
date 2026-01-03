@@ -82,7 +82,7 @@ You can have unified experience without hiding provider differences. The manifes
 
 ## Links
 
-- **GitHub:** [github.com/project-planton/project-planton](https://github.com/project-planton/project-planton)
+- **GitHub:** [github.com/plantonhq/project-planton](https://github.com/plantonhq/project-planton)
 - **Website:** [project-planton.org](https://project-planton.org)
 
 ## About the Speaker
@@ -92,7 +92,7 @@ You can have unified experience without hiding provider differences. The manifes
 With 10+ years architecting DevOps infrastructure at scale, he believes in "consistency without abstraction": providing unified developer experience while preserving provider-specific power. His work focuses on making enterprise-grade platform engineering accessible to teams of all sizes through validation-first deployments, Protocol Buffers-based APIs, and the 80/20 principle applied to infrastructure.
 
 **Connect:**
-- **GitHub:** [github.com/project-planton/project-planton](https://github.com/project-planton/project-planton)
+- **GitHub:** [github.com/plantonhq/project-planton](https://github.com/plantonhq/project-planton)
 - **Website:** [project-planton.org](https://project-planton.org)
 - **LinkedIn:** [linkedin.com/in/swarupdonepudi](https://linkedin.com/in/swarupdonepudi)
 
