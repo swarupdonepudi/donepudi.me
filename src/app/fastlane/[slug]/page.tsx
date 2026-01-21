@@ -52,7 +52,7 @@ export default async function FastlaneEntryPage({ params }: FastlaneEntryPagePro
 
       {/* Content */}
       <article className="container mx-auto px-4 pt-28 pb-8 max-w-3xl">
-        <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg shadow-sm p-8 md:p-12">
+        <div>
           {/* Header */}
           <header className="mb-8 pb-8 border-b border-cyan-500/20">
             {/* Date */}

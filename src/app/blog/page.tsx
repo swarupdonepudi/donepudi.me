@@ -44,9 +44,9 @@ export default async function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="block group"
               >
-                <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg hover:border-cyan-400/50 transition-all duration-200 overflow-hidden hover:shadow-lg hover:shadow-cyan-500/10">
+                <article className="py-8 px-6 -mx-6 hover:bg-white/[0.02] transition-all duration-200 rounded-lg">
                   {post.frontmatter.featured_image && (
-                    <div className="w-full h-48 overflow-hidden">
+                    <div className="w-full h-48 overflow-hidden rounded-lg mb-4">
                       <img
                         src={post.frontmatter.featured_image}
                         alt={post.frontmatter.title}
@@ -54,7 +54,7 @@ export default async function BlogPage() {
                       />
                     </div>
                   )}
-                  <div className="p-6">
+                  <div>
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
                       <time dateTime={post.frontmatter.date} className="text-gray-400">
                         {formatDate(post.frontmatter.date)}
@@ -82,7 +82,7 @@ export default async function BlogPage() {
                       {post.frontmatter.excerpt}
                     </p>
                   </div>
-                </div>
+                </article>
               </Link>
             ))}
           </div>

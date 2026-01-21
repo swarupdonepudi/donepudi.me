@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Content */}
       <article className="container mx-auto px-4 py-12 max-w-4xl">
-        <div className="bg-black/40 backdrop-blur-lg border border-cyan-500/20 rounded-lg shadow-sm p-8 md:p-12">
+        <div>
           {/* Title and metadata */}
           <header className="mb-8 pb-8 border-b border-cyan-500/20">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
