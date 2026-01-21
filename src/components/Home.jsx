@@ -35,7 +35,6 @@ const navItems = [
   { label: 'Projects', href: '#projects' },
   { label: 'Blog', href: '/blog' },
   { label: 'Talks', href: '/talks' },
-  { label: 'Courses', href: '/courses' },
 ];
 
 export default function Home() {

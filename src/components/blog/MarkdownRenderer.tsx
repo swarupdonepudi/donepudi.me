@@ -97,17 +97,17 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
           ),
           // Custom lists
           ul: ({ children, ...props }) => (
-            <ul className="list-disc list-inside space-y-2 mb-4 text-gray-300" {...props}>
+            <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-300" {...props}>
               {children}
             </ul>
           ),
           ol: ({ children, ...props }) => (
-            <ol className="list-decimal list-inside space-y-2 mb-4 text-gray-300" {...props}>
+            <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-300" {...props}>
               {children}
             </ol>
           ),
           li: ({ children, ...props }) => (
-            <li className="text-gray-300" {...props}>
+            <li className="text-gray-300 pl-2" {...props}>
               {children}
             </li>
           ),

@@ -1,0 +1,200 @@
+---
+description: Action rule to quickly capture thoughts and moments to the Fastlane personal timeline
+globs: []
+alwaysApply: false
+---
+
+# Rule: Add Fastlane Entry
+
+**Purpose**: Quickly capture thoughts, observations, and moments to the Fastlane personal timeline with minimal friction.
+
+**Type**: Action rule
+
+**When to use**: User says "fastlane:", "add to fastlane", "fastlane entry", or provides content they want to add to their timeline.
+
+---
+
+## Philosophy
+
+Fastlane is for capturing life's moments without the overhead of polished blog posts. Speed matters. Authenticity matters. Don't over-structure or over-polish - preserve the raw voice.
+
+---
+
+## Inputs User Will Provide
+
+The user will provide one or more of:
+
+1. **Title**: Explicitly stated or extractable from content
+2. **Content**: Raw thoughts, observations, or reflections
+3. **Tags**: Optionally mentioned or inferable from context
+
+**Examples of triggers:**
+- "fastlane: Just realized that consistency beats intensity"
+- "add to fastlane - thoughts on building in public"
+- "fastlane entry about today's breakthrough"
+
+---
+
+## What You Must Do
+
+### 1. Extract or Generate Title
+
+If title is explicit, use it. Otherwise, extract from the first sentence or generate a concise title that captures the essence.
+
+**Good titles:**
+- Short, punchy (under 10 words)
+- Captures the core thought
+- Doesn't need to be clever or catchy
+
+### 2. Get Today's Date
+
+Use the current date in `YYYY-MM-DD` format.
+
+### 3. Generate Slug
+
+Create URL-friendly slug from title:
+- Convert to lowercase
+- Replace spaces with hyphens
+- Remove special characters except hyphens
+- Keep it concise
+
+**Example:** "Why I Read at 5 AM" → `why-i-read-at-5-am`
+
+### 4. Suggest Tags (Optional)
+
+If the content naturally fits certain themes, suggest 1-3 tags:
+
+| Theme | Suggested Tags |
+|-------|---------------|
+| Personal growth | `reflection`, `personal`, `growth` |
+| Planton/work | `planton`, `startup`, `work` |
+| Productivity | `productivity`, `discipline`, `habits` |
+| Reading/learning | `reading`, `learning`, `books` |
+| Technical | `engineering`, `code`, `infrastructure` |
+| Life observations | `life`, `observation`, `wisdom` |
+
+Tags are optional - don't force them if the content doesn't fit neatly.
+
+### 5. Create the File
+
+**Location:** `donepudi.me/public/fastlane/YYYY-MM-DD-slug.md`
+
+**Structure:**
+```yaml
+---
+title: "The Title Here"
+date: "YYYY-MM-DD"
+tags: ["tag1", "tag2"]  # Optional, omit if none
+---
+
+Content here...
+
+Preserve the user's voice exactly. Don't restructure, don't add headings unless the content naturally needs them.
+```
+
+### 6. Preserve Authentic Voice
+
+**DO:**
+- Keep the original phrasing
+- Preserve paragraph breaks
+- Fix obvious typos only
+- Add markdown links for URLs if present
+
+**DON'T:**
+- Restructure the content
+- Add headers where there were none
+- Change the tone or voice
+- Add commentary or conclusions
+- Over-polish casual thoughts
+
+---
+
+## File Naming Convention
+
+`YYYY-MM-DD-slug.md`
+
+**Examples:**
+- `2026-01-21-why-consistency-beats-intensity.md`
+- `2026-01-21-building-in-public.md`
+- `2026-01-21-5am-reading-habit.md`
+
+---
+
+## Frontmatter Schema
+
+```yaml
+---
+title: "Required - the entry title"
+date: "YYYY-MM-DD"
+tags: ["optional", "array", "of", "tags"]
+---
+```
+
+**Required fields:**
+- `title` - Entry title
+- `date` - Publication date
+
+**Optional fields:**
+- `tags` - Array of lowercase tags
+
+**NOT needed (unlike blog):**
+- `excerpt` - Auto-generated from content
+- `featured_image` - Not used in Fastlane
+- `author` - Always Swarup
+
+---
+
+## Example Workflow
+
+**User says:**
+> fastlane: Just had a realization while reading The Millionaire Fastlane again. Life really is single-threaded. Every day you wake up, you're on the same lane as yesterday. No branching, no parallel paths. The only variable is your speed and direction. That's why I named this feature Fastlane.
+
+**You create:** `donepudi.me/public/fastlane/2026-01-21-life-is-single-threaded.md`
+
+```yaml
+---
+title: "Life is Single-Threaded"
+date: "2026-01-21"
+tags: ["reflection", "reading"]
+---
+
+Just had a realization while reading The Millionaire Fastlane again. Life really is single-threaded. Every day you wake up, you're on the same lane as yesterday. No branching, no parallel paths. The only variable is your speed and direction.
+
+That's why I named this feature Fastlane.
+```
+
+---
+
+## Quick Reference
+
+| Field | Required | Format |
+|-------|----------|--------|
+| File location | - | `public/fastlane/YYYY-MM-DD-slug.md` |
+| title | Yes | String in quotes |
+| date | Yes | YYYY-MM-DD |
+| tags | No | Array of lowercase strings |
+
+---
+
+## Quality Checklist
+
+Before completing:
+
+- [ ] File named correctly: `YYYY-MM-DD-slug.md`
+- [ ] Frontmatter is valid YAML
+- [ ] Date matches today (unless user specified otherwise)
+- [ ] Title is concise and captures the essence
+- [ ] Content preserves user's authentic voice
+- [ ] Tags are relevant (or omitted if none fit)
+- [ ] No over-structuring or over-polishing
+
+---
+
+## Notes
+
+- **Location:** `donepudi.me/public/fastlane/`
+- **Access:** `/fastlane` (no navigation link - discovered only by URL)
+- **Purpose:** Quick captures, not polished posts
+- **Speed:** This should take seconds, not minutes
+
+**Remember:** The goal is minimal friction. Get the thought captured quickly and authentically. Polish is for blog posts.
