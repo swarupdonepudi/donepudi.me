@@ -211,7 +211,7 @@ function Slide05ProjectPlanton() {
         </div>
 
         <p className="text-lg text-gray-400 pt-6 text-center">
-          🌐 project-planton.org • github.com/project-planton/project-planton
+          🌐 project-planton.org • github.com/plantonhq/project-planton
         </p>
       </motion.div>
     </div>
@@ -909,7 +909,7 @@ function Slide22GetInvolved() {
         <p className="text-2xl text-cyan-400 mb-8">Project Planton is open source</p>
         <div className="space-y-6 text-gray-200 text-xl">
           <p>
-            ⭐ <strong className="text-white">Star the repo:</strong> github.com/project-planton/project-planton
+            ⭐ <strong className="text-white">Star the repo:</strong> github.com/plantonhq/project-planton
           </p>
           <p>
             🔨 <strong className="text-white">Add deployment components</strong> for your favorite cloud services
@@ -997,7 +997,7 @@ function Slide24ThankYou() {
             <div className="bg-white/5 rounded-lg p-6">
               <p className="text-white font-semibold mb-2">Project Planton (OSS)</p>
               <p>project-planton.org</p>
-              <p>github.com/project-planton/project-planton</p>
+              <p>github.com/plantonhq/project-planton</p>
             </div>
             <div className="bg-white/5 rounded-lg p-6">
               <p className="text-white font-semibold mb-2">Connect</p>

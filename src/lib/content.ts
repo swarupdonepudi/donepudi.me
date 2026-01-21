@@ -52,8 +52,8 @@ export function generateSlugFromPath(filePath: string): string {
   // Extract filename without extension
   const basename = path.basename(filePath, path.extname(filePath));
   
-  // Only strip date prefix for blog content, keep it for talks
-  const shouldStripDate = filePath.includes('/blog/');
+  // Strip date prefix for blog and fastlane content, keep it for talks
+  const shouldStripDate = filePath.includes('/blog/') || filePath.includes('/fastlane/');
   
   // If it's index.md, use the parent directory name
   if (basename === 'index' || basename === 'README') {

@@ -6,38 +6,44 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
-import 'lite-youtube-embed/src/lite-yt-embed.css';
-import YouTube from './YouTube';
+import Terminal from './Terminal';
+import Callout from './Callout';
 
-interface MarkdownRendererProps {
+interface CourseMarkdownRendererProps {
   content: string;
   className?: string;
 }
 
 /**
- * Markdown renderer component for blog posts and talk content
- * Styled for dark backgrounds with cyan accents
+ * Extended Markdown renderer for course content
+ * Supports custom components: terminal, callout, tip, warning, info, danger
  */
-export default function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
+export default function CourseMarkdownRenderer({
+  content,
+  className = '',
+}: CourseMarkdownRendererProps) {
   return (
     <div className={`prose prose-lg max-w-none ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
-          // Custom heading components with gradient text
+          // Custom heading components
           h1: ({ children, ...props }) => (
-            <h1 className="text-4xl font-bold mt-8 mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent" {...props}>
+            <h1
+              className="text-4xl font-bold mt-8 mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+              {...props}
+            >
               {children}
             </h1>
           ),
           h2: ({ children, ...props }) => (
-            <h2 className="text-3xl font-semibold mt-6 mb-3 text-gray-100" {...props}>
+            <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-100 border-b border-cyan-500/20 pb-2" {...props}>
               {children}
             </h2>
           ),
           h3: ({ children, ...props }) => (
-            <h3 className="text-2xl font-semibold mt-5 mb-2 text-gray-200" {...props}>
+            <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-200" {...props}>
               {children}
             </h3>
           ),
@@ -64,7 +70,7 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               {children}
             </a>
           ),
-          // Custom code blocks
+          // Custom code blocks - enhanced for course content
           code: ({ className, children, ...props }) => {
             const inline = !className;
             return inline ? (
@@ -82,14 +88,17 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
           },
           // Custom pre for code blocks
           pre: ({ children, ...props }) => (
-            <pre className="bg-black/60 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 border border-cyan-500/20" {...props}>
+            <pre
+              className="bg-black/60 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 border border-cyan-500/20"
+              {...props}
+            >
               {children}
             </pre>
           ),
-          // Custom blockquote
+          // Custom blockquote - styled as callout
           blockquote: ({ children, ...props }) => (
             <blockquote
-              className="border-l-4 border-cyan-500 pl-4 italic text-gray-400 my-4 bg-cyan-500/5 py-2"
+              className="border-l-4 border-cyan-500 pl-4 italic text-gray-400 my-4 bg-cyan-500/5 py-2 rounded-r"
               {...props}
             >
               {children}
@@ -97,12 +106,12 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
           ),
           // Custom lists
           ul: ({ children, ...props }) => (
-            <ul className="list-disc pl-6 space-y-2 mb-4 text-gray-300" {...props}>
+            <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-gray-300" {...props}>
               {children}
             </ul>
           ),
           ol: ({ children, ...props }) => (
-            <ol className="list-decimal pl-6 space-y-2 mb-4 text-gray-300" {...props}>
+            <ol className="list-decimal list-outside ml-6 space-y-2 mb-4 text-gray-300" {...props}>
               {children}
             </ol>
           ),
@@ -133,9 +142,7 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
             />
           ),
           // Custom horizontal rule
-          hr: (props) => (
-            <hr className="my-8 border-cyan-500/30" {...props} />
-          ),
+          hr: (props) => <hr className="my-8 border-cyan-500/30" {...props} />,
           // Custom table
           table: ({ children, ...props }) => (
             <div className="overflow-x-auto my-4 border border-cyan-500/20 rounded-lg">
@@ -145,7 +152,10 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
             </div>
           ),
           th: ({ children, ...props }) => (
-            <th className="px-4 py-2 bg-cyan-500/10 text-left text-sm font-semibold text-gray-200" {...props}>
+            <th
+              className="px-4 py-2 bg-cyan-500/10 text-left text-sm font-semibold text-gray-200"
+              {...props}
+            >
               {children}
             </th>
           ),
@@ -154,13 +164,43 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               {children}
             </td>
           ),
-          // Custom YouTube component via rehype-raw (lowercase because rehype-raw converts to lowercase)
-          youtube: ({ node, ...props }: any) => {
-            const videoId = props.videoid || props.videoid || props.videoId;
-            const url = props.url;
+          // Custom components via rehype-raw (HTML in markdown)
+          terminal: ({ node, ...props }: any) => {
+            const command = props.command || '';
+            const output = props.output;
             const title = props.title;
-            return <YouTube videoId={videoId} url={url} title={title} />;
+            return <Terminal command={command} output={output} title={title} />;
           },
+          callout: ({ node, ...props }: any) => {
+            const variant = props.variant || 'info';
+            const title = props.title;
+            const children = props.children;
+            return (
+              <Callout variant={variant} title={title}>
+                {children}
+              </Callout>
+            );
+          },
+          tip: ({ node, children, ...props }: any) => (
+            <Callout variant="tip" title={props.title}>
+              {children}
+            </Callout>
+          ),
+          warning: ({ node, children, ...props }: any) => (
+            <Callout variant="warning" title={props.title}>
+              {children}
+            </Callout>
+          ),
+          info: ({ node, children, ...props }: any) => (
+            <Callout variant="info" title={props.title}>
+              {children}
+            </Callout>
+          ),
+          danger: ({ node, children, ...props }: any) => (
+            <Callout variant="danger" title={props.title}>
+              {children}
+            </Callout>
+          ),
         } as any}
       >
         {content}
