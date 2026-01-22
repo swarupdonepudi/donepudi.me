@@ -1,0 +1,344 @@
+---
+description: Update an existing meeting presentation deck for donepudi.me/meets with iterative refinements
+alwaysApply: false
+---
+
+# Rule: Update donepudi.me Meeting Deck
+
+Purpose: Make iterative updates to an existing meeting presentation deck based on feedback. Use this when you have an existing deck that needs content changes, slide additions, or refinements.
+
+Usage: Invoke as `@update-donepudi-me-meeting-deck` with the guest slug and requested changes.
+
+## Overview
+
+This rule provides a streamlined workflow for updating existing meeting decks. Unlike the create rule, this focuses on iterative refinement with live preview support.
+
+**Key Principle:** The dev server should already be running during updates. Do not run build commands until all updates are finalized and approved.
+
+---
+
+## Prerequisites
+
+Before using this rule, ensure:
+1. The deck already exists at `src/components/meetings/guests/[guest-slug]/`
+2. The dev server is running (`npm run dev`)
+3. You have the guest slug and specific changes requested
+
+---
+
+## Phase 1: Understand the Request
+
+When triggered, I will:
+
+1. **Identify the guest** from your message
+2. **Read the existing deck** to understand current structure
+3. **Clarify the changes** if needed
+
+### Information I Need
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| Guest Slug | Existing deck identifier | `acme`, `example` |
+| Changes | What needs to be modified | "Update slide 3 stats", "Add new closing slide" |
+| Context | Why the change is needed (optional) | "Meeting moved to in-person" |
+
+### Quick Confirmation
+
+```markdown
+## Deck Update: [Guest Slug]
+
+**Current Deck:**
+- Slides: [N slides]
+- Location: src/components/meetings/guests/[slug]/
+
+**Requested Changes:**
+1. [Change 1]
+2. [Change 2]
+
+**Questions (if any):**
+- [Clarification needed]
+
+Shall I proceed with these changes?
+```
+
+---
+
+## Phase 2: Make Updates
+
+### Types of Updates
+
+**Content Changes:**
+- Update text, numbers, or data
+- Fix typos or improve wording
+- Change presenter notes
+
+**Structural Changes:**
+- Add new slides
+- Remove slides
+- Reorder slides
+
+**Style Changes:**
+- Change slide variants
+- Update component usage
+- Modify layouts
+
+### File Locations
+
+```
+src/components/meetings/guests/[guest-slug]/
+├── config.ts           # Slide array, metadata, presenter notes
+└── slides/
+    ├── S01Cover.tsx    # Individual slide components
+    ├── S02[Topic].tsx
+    └── ...
+```
+
+### Common Update Patterns
+
+**Update presenter notes:**
+```tsx
+// In config.ts, find the slide and update presenterNotes array
+{
+  id: 'slide-id',
+  name: 'Slide Name',
+  component: S01Cover,
+  presenterNotes: [
+    'Updated note 1',
+    'New note 2',
+    '<strong>Emphasis</strong> on key point',
+  ],
+},
+```
+
+**Add a new slide:**
+1. Create new file: `slides/S0N[Name].tsx`
+2. Add import to `config.ts`
+3. Add entry to slides array in correct position
+4. Update subsequent slide numbers if needed
+
+**Update slide content:**
+Edit the specific slide component file directly.
+
+**Change meeting metadata:**
+Update the config object in `config.ts`:
+```tsx
+export const [guestSlug]Config: GuestConfig = {
+  slides: [guestSlug]Slides,
+  guest: '[guest-slug]',
+  meetingDate: 'yyyy-mm-dd-hhmm',  // Update if meeting time changed
+  presenter: 'Swarup Donepudi',
+  context: '[Updated context]',
+  location: '[New location]',
+};
+```
+
+---
+
+## Phase 3: Live Preview
+
+### During Updates
+
+With dev server running, changes are reflected immediately:
+1. Save the file
+2. Browser auto-refreshes
+3. Review the change
+4. Provide feedback or approve
+
+### Review Checklist
+
+For each change:
+- [ ] Content displays correctly
+- [ ] Responsive design works (resize browser)
+- [ ] Presenter notes updated if content changed
+- [ ] Slide transitions smooth
+- [ ] No console errors
+
+### Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| → / Space | Next slide |
+| ← | Previous slide |
+| N | Toggle presenter notes |
+| F | Toggle fullscreen |
+| H / Home | First slide |
+
+---
+
+## Phase 4: Finalize
+
+Once all changes are approved:
+
+### Stop Dev Server
+
+If needed for build verification (Ctrl+C in terminal).
+
+### Run Build
+
+```bash
+cd /Users/swarup/scm/github.com/swarupdonepudi/donepudi.me
+npm run build
+```
+
+### Verify
+
+- Build completes without errors
+- All routes still work
+- Changes persist in production build
+
+---
+
+## Phase 5: Changelog
+
+Document the updates with a changelog entry.
+
+**Changelog Location:** `_changelog/[year]-[month]/[timestamp]-meets-[guest-slug]-update.md`
+
+**Update Changelog Template:**
+
+```markdown
+# Meets Deck Update: [Guest Name]
+
+**Date:** [Current date]
+**Type:** Update
+**Components:** Meetings Framework, [Guest Slug] Presentation
+
+## Summary
+
+Updated the [Guest Name] meeting deck with [brief description of changes].
+
+## Changes Made
+
+### Content Updates
+- [Slide X]: [What changed]
+- [Slide Y]: [What changed]
+
+### Structural Changes
+- Added: [New slides if any]
+- Removed: [Removed slides if any]
+- Reordered: [Reordering if any]
+
+### Presenter Notes
+- Updated notes for slides: [List]
+
+## Files Modified
+
+| File | Changes |
+|------|---------|
+| `config.ts` | [What changed] |
+| `slides/S0X.tsx` | [What changed] |
+
+## Before/After (if significant)
+
+[Optional: describe major visual or structural changes]
+
+---
+
+**Status:** ✅ Live
+**URL:** https://donepudi.me/meets/[guest-slug]
+```
+
+---
+
+## Session Tracking
+
+During an update session, I will track:
+
+1. **Files modified** - List of changed files
+2. **Changes made** - Summary of each change
+3. **Review status** - What's been approved
+4. **Pending items** - What still needs work
+
+This ensures nothing is missed when generating the changelog.
+
+---
+
+## Quick Reference
+
+### Start Update Session
+
+```bash
+# Ensure dev server is running
+cd /Users/swarup/scm/github.com/swarupdonepudi/donepudi.me
+npm run dev
+
+# Open deck in browser
+open http://localhost:3000/meets/[guest-slug]
+```
+
+### Finalize Session
+
+```bash
+# Stop dev server (Ctrl+C)
+# Run build
+npm run build
+
+# Verify
+npm run start
+# Check http://localhost:3000/meets/[guest-slug]
+```
+
+---
+
+## Common Update Scenarios
+
+### Scenario 1: Update Stats
+
+"Update the stats on slide 4 with new numbers"
+
+1. Open `slides/S04Stats.tsx`
+2. Update the numbers in the component
+3. Save and verify in browser
+4. Update presenter notes if needed
+
+### Scenario 2: Add New Slide
+
+"Add a slide about our team between slides 3 and 4"
+
+1. Create `slides/S04Team.tsx` (new slide)
+2. Rename `S04Stats.tsx` → `S05Stats.tsx` (and update exports)
+3. Update `config.ts` imports and slides array
+4. Save and verify order in browser
+
+### Scenario 3: Change Meeting Details
+
+"Meeting moved from Zoom to in-person at their office"
+
+1. Update `config.ts`:
+   ```tsx
+   location: 'Client Office, San Francisco',
+   ```
+2. Update cover slide if it displays location
+3. Save and verify
+
+### Scenario 4: Improve Flow
+
+"The solution slide comes too early, move it after the demo"
+
+1. Reorder entries in the slides array in `config.ts`
+2. Optionally rename files if numbering matters
+3. Save and verify navigation
+
+---
+
+## Important Notes
+
+1. **Don't run build during iteration** - Use dev server for instant feedback
+2. **Small, incremental changes** - Easier to review and approve
+3. **Always verify responsive** - Resize browser to check mobile view
+4. **Update presenter notes** - Keep them in sync with content changes
+5. **Track all changes** - For accurate changelog generation
+
+---
+
+## Summary
+
+This rule enables efficient iterative updates to existing meeting decks:
+
+1. **Understand** - Clarify what needs to change
+2. **Update** - Make changes to the appropriate files
+3. **Preview** - Review with live dev server
+4. **Finalize** - Build and verify
+5. **Document** - Generate changelog entry
+
+The goal is rapid iteration with immediate feedback, only running build when changes are finalized and approved.
