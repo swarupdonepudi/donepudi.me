@@ -107,6 +107,40 @@ Preserve the user's voice exactly. Don't restructure, don't add headings unless 
 - Add commentary or conclusions
 - Over-polish casual thoughts
 
+### 7. Ensure Public-Safe Content
+
+Fastlane is public. Anyone on the internet can read it. When the user shares content involving professional situations, partnerships, or interpersonal dynamics, ensure the entry is safe for public consumption.
+
+**Remove or generalize identifying details:**
+
+| User says | You write |
+|-----------|-----------|
+| "Ruchi was demanding about the agreement" | "A potential partner was pushing for faster timelines" |
+| "The deal with Yajaman LLC fell through" | "A partnership opportunity didn't work out" |
+| "My investor Raghav suggested I move faster" | "Someone close to me suggested I move faster" |
+| "The meeting with MISO executives" | "A meeting with enterprise prospects" |
+
+**Reframe grievance as insight:**
+
+| User says | You write |
+|-----------|-----------|
+| "This person was toxic and wasted my time" | "The partnership wasn't the right fit for this stage" |
+| "They didn't understand what I was building" | "We had different views on the right approach" |
+| "He was being unreasonable about timelines" | "There was pressure to move faster than I was comfortable with" |
+
+**Never include:**
+- Names of people, companies, or organizations in negative contexts
+- Specific agreement terms, financial figures, or negotiation details
+- Private communications or confidential business information
+- Details that could identify parties who haven't consented
+
+**The test before finalizing:**
+1. If the person being discussed read this, would they feel unfairly represented?
+2. Could this create professional or legal complications?
+3. Does the entry provide value without the identifying details?
+
+If the content only works with names and specifics, suggest to the user that it might belong in a private journal rather than Fastlane.
+
 ---
 
 ## File Naming Convention
@@ -187,6 +221,9 @@ Before completing:
 - [ ] Content preserves user's authentic voice
 - [ ] Tags are relevant (or omitted if none fit)
 - [ ] No over-structuring or over-polishing
+- [ ] No names or identifying details in negative contexts
+- [ ] Grievances reframed as strategic insights
+- [ ] No confidential business information exposed
 
 ---
 
@@ -196,5 +233,8 @@ Before completing:
 - **Access:** `/fastlane` (no navigation link - discovered only by URL)
 - **Purpose:** Quick captures, not polished posts
 - **Speed:** This should take seconds, not minutes
+- **Visibility:** Public to the internet - anyone can read it
 
 **Remember:** The goal is minimal friction. Get the thought captured quickly and authentically. Polish is for blog posts.
+
+**Public-safe reminder:** Fastlane is public. When content involves other people or professional situations, generalize identifying details and reframe grievances as insights. The internet is permanent, relationships persist, and reputation compounds.
