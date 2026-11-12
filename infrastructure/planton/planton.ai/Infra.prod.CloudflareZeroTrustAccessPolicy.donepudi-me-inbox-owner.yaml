@@ -1,0 +1,19 @@
+# Who may pass as the owner: the one address in the secret inbox-owner-email, for a week per code.
+#
+#   planton apply -f Infra.prod.CloudflareZeroTrustAccessPolicy.donepudi-me-inbox-owner.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZeroTrustAccessPolicy
+metadata:
+  name: donepudi-me-inbox-owner
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  name: donepudi.me inbox owner
+  decision: allow
+  sessionDuration: 168h
+  include:
+    - email:
+        email: $secret/inbox-owner-email

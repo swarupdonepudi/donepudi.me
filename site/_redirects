@@ -1,0 +1,7 @@
+# The rooms' addresses end without a slash, so the one with a slash redirects to it, on the threads' host where the
+# rooms live (and harmlessly on the home page's, where the address it lands on answers 404). /people/ is the
+# Worker's, which sends it to /people itself. Today's old address, /me, and the threads' older one, /inbox, lead
+# nowhere: no redirect, the site's 404 page. test/site.test.ts checks this file, and test/routing.test.ts sends the
+# requests.
+/meetings/ /meetings 301
+/asks/ /asks 301

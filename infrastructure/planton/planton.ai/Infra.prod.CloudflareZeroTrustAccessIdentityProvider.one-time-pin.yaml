@@ -1,0 +1,15 @@
+# Sign-in by an emailed one-time code: the only identity provider.
+#
+#   planton apply -f Infra.prod.CloudflareZeroTrustAccessIdentityProvider.one-time-pin.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZeroTrustAccessIdentityProvider
+metadata:
+  name: one-time-pin
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  name: Email code
+  type: onetimepin

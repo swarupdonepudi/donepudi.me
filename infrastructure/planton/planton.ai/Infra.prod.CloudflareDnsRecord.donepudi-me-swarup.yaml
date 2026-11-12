@@ -1,0 +1,25 @@
+# swarup.donepudi.me, an old name kept alive: the redirects ruleset sends it to the apex.
+#
+#   planton apply -f Infra.prod.CloudflareDnsRecord.donepudi-me-swarup.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareDnsRecord
+metadata:
+  name: donepudi-me-swarup
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  name: swarup.donepudi.me
+  type: AAAA
+  content:
+    value: '100::' # a discard address: only Cloudflare answers this name
+  proxied: true
+  ttl: 1
+  comment: swarup; 301 to the apex by the redirects ruleset

@@ -1,0 +1,17 @@
+# The Zero Trust team. Cloudflare creates it under a random name when Zero Trust is switched on; this
+# file names it, so sign-in happens at donepudi.cloudflareaccess.com.
+#
+#   planton apply -f Infra.prod.CloudflareZeroTrustOrganization.donepudi.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZeroTrustOrganization
+metadata:
+  name: donepudi # permanent
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  authDomain: donepudi.cloudflareaccess.com
+  name: donepudi
+  userSeatExpirationInactiveTime: 730h # a seat unused for a month is freed

@@ -1,0 +1,17 @@
+# Planton's connection to the Cloudflare account `swarupdonepudi`, signed in with the account token above.
+# The grant asks for everything; the token is narrower, so Verify lists the kinds it can't reach, as expected.
+#
+#   planton apply -f Connection.CloudflareProviderConnection.cloudflare-swarupdonepudi-account.yaml --instance planton.ai --org swarup-donepudi
+#   planton connect cloudflare verify cloudflare-swarupdonepudi-account --instance planton.ai --org swarup-donepudi
+apiVersion: connect.planton.ai/v1alpha1
+kind: CloudflareProviderConnection
+metadata:
+  name: cloudflare-swarupdonepudi-account # permanent: every Cloudflare resource's record names it
+  org: swarup-donepudi
+spec:
+  authMode: inline
+  authScheme: api_token
+  apiToken:
+    secret: cloudflare-swarupdonepudi-account-api-token
+  grant:
+    coverage: everything

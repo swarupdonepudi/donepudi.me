@@ -1,0 +1,24 @@
+# The inbox sync's service token passes by Service Auth.
+#
+#   planton apply -f Infra.prod.CloudflareZeroTrustAccessPolicy.donepudi-me-inbox-sync.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZeroTrustAccessPolicy
+metadata:
+  name: donepudi-me-inbox-sync
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  name: donepudi.me inbox sync
+  decision: non_identity
+  sessionDuration: 24h
+  include:
+    - serviceToken:
+        tokenId:
+          valueFrom:
+            kind: CloudflareZeroTrustAccessServiceToken
+            env: prod
+            name: donepudi-me-inbox-sync
+            fieldPath: status.outputs.service_token_id

@@ -1,0 +1,25 @@
+# Google mail for donepudi.me.
+#
+#   planton apply -f Infra.prod.CloudflareDnsRecord.donepudi-me-mx.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareDnsRecord
+metadata:
+  name: donepudi-me-mx
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  name: donepudi.me
+  type: MX
+  content:
+    value: smtp.google.com
+  priority: 1
+  ttl: 1
+  comment: Google mail

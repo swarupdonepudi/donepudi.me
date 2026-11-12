@@ -1,0 +1,19 @@
+# The zone's settings: every plain-HTTP request is sent to HTTPS.
+#
+#   planton apply -f Infra.prod.CloudflareZoneSettings.donepudi-me.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZoneSettings
+metadata:
+  name: donepudi-me
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  alwaysUseHttps: true

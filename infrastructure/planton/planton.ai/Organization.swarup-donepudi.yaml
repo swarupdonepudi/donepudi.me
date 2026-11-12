@@ -1,0 +1,10 @@
+# The one organization donepudi.me's infrastructure runs in, owned by Swarup's Planton login.
+#
+#   planton apply -f Organization.swarup-donepudi.yaml --instance planton.ai
+apiVersion: tenancy.planton.ai/v1alpha1
+kind: Organization
+metadata:
+  name: swarup-donepudi
+  slug: swarup-donepudi # permanent: every state key and connection record begins with it
+spec:
+  description: donepudi.me -- Swarup's home page and what it runs on, declared in swarupdonepudi/donepudi.me under infrastructure/.

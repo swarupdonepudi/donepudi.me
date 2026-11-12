@@ -1,0 +1,17 @@
+# The site's database. Its tables are the repository's migrations/, applied by the deploy before the code.
+#
+#   planton apply -f Infra.prod.CloudflareD1Database.donepudi-me.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareD1Database
+metadata:
+  name: donepudi-me
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  databaseName: donepudi-me
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  region: apac # near where Swarup reads; fixed at creation
+  readReplication:
+    mode: disabled

@@ -1,0 +1,44 @@
+# The zone's redirects: www.donepudi.me and swarup.donepudi.me answer 301 to the same path on the apex.
+#
+#   planton apply -f Infra.prod.CloudflareRuleset.donepudi-me-redirects.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareRuleset
+metadata:
+  name: donepudi-me-redirects
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  rulesetKind: zone
+  phase: http_request_dynamic_redirect
+  name: donepudi.me redirects
+  rules:
+    - ref: www-to-apex
+      description: www.donepudi.me to the same address on the apex
+      expression: 'http.host eq "www.donepudi.me"'
+      action: redirect
+      enabled: true
+      actionParameters:
+        fromValue:
+          targetUrl:
+            expression: 'concat("https://donepudi.me", http.request.uri.path)'
+          statusCode: 301
+          preserveQueryString: true
+    - ref: swarup-to-apex
+      description: swarup.donepudi.me to the same address on the apex
+      expression: 'http.host eq "swarup.donepudi.me"'
+      action: redirect
+      enabled: true
+      actionParameters:
+        fromValue:
+          targetUrl:
+            expression: 'concat("https://donepudi.me", http.request.uri.path)'
+          statusCode: 301
+          preserveQueryString: true

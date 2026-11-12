@@ -1,0 +1,16 @@
+# The donepudi.me zone in the account `swarupdonepudi`. Its status.outputs.nameservers are the pair
+# GoDaddy delegates to.
+#
+#   planton apply -f Infra.prod.CloudflareDnsZone.donepudi-me.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareDnsZone
+metadata:
+  name: donepudi-me
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneName: donepudi.me
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  type: full

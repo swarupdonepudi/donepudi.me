@@ -1,0 +1,30 @@
+// The type check for the Worker (src/), against the runtime and bindings `wrangler types` writes to
+// worker-configuration.d.ts from wrangler.jsonc. That file is generated and committed; `npm run typecheck`
+// fails when it no longer matches the config. The Worker also imports the site's topic list
+// (site/talk-topics.js), its spaces (site/spaces.js), the threads' Markdown reader (site/app/markdown.js, for a
+// public thread's link preview), the journal's reader (site/app/journal.js, to index each saved page) and where a
+// thread stands (site/app/standing.js, the lists a call answers) and the site's two hosts (site/hosts.js), which are checked here too, with no browser
+// library, so they can never reach for a page. es2024.string gives `isWellFormed`, which the note's checks use.
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["es2023", "es2024.string"],
+    "types": [],
+    "allowJs": true,
+    "checkJs": true,
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "site/talk-topics.js", "site/spaces.js", "site/hosts.js", "site/app/markdown.js", "site/app/journal.js", "site/app/standing.js", "worker-configuration.d.ts"]
+}

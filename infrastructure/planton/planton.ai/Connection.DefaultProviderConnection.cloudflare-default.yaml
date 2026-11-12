@@ -1,0 +1,12 @@
+# The connection a Cloudflare resource uses when its manifest names none.
+#
+#   planton apply -f Connection.DefaultProviderConnection.cloudflare-default.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: connect.planton.ai/v1alpha1
+kind: DefaultProviderConnection
+metadata:
+  name: cloudflare-default
+  org: swarup-donepudi
+spec:
+  provider: cloudflare
+  connection: cloudflare-swarupdonepudi-account
+  scope: organization

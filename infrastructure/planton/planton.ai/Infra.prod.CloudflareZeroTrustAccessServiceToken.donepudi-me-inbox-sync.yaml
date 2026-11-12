@@ -1,0 +1,15 @@
+# The machine sign-in the record's inbox sync uses to read new notes. Planton keeps its secret.
+#
+#   planton apply -f Infra.prod.CloudflareZeroTrustAccessServiceToken.donepudi-me-inbox-sync.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZeroTrustAccessServiceToken
+metadata:
+  name: donepudi-me-inbox-sync
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  name: donepudi.me inbox sync
+  duration: forever

@@ -1,0 +1,13 @@
+# The id of the Cloudflare account `swarupdonepudi`, referenced as $var/cloudflare-swarupdonepudi-account-id. Not secret.
+#
+#   planton apply -f Config.Org.Variable.cloudflare-swarupdonepudi-account-id.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: config-manager.planton.ai/v1alpha1
+kind: Variable
+metadata:
+  name: cloudflare-swarupdonepudi-account-id
+  slug: cloudflare-swarupdonepudi-account-id
+  org: swarup-donepudi
+spec:
+  scope: organization
+  description: The Cloudflare account id of the account `swarupdonepudi`. Not secret.
+  value: dd1f610d414c078599fa77a56930195b

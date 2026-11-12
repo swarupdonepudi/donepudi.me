@@ -1,0 +1,18 @@
+# The note flow's invisible bot check, for donepudi.me and the hosts under it. Its site key is in
+# site/talk-send.js; its secret is copied to the GitHub environment `production` as TURNSTILE_SECRET.
+#
+#   planton apply -f Infra.prod.CloudflareTurnstileWidget.donepudi-me-talk.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareTurnstileWidget
+metadata:
+  name: donepudi-me-talk
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  name: donepudi.me talk
+  domains:
+    - donepudi.me
+  mode: invisible

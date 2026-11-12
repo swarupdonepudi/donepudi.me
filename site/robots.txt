@@ -1,0 +1,3 @@
+# donepudi.me is a public home page: every crawler may read all of it.
+User-agent: *
+Allow: /

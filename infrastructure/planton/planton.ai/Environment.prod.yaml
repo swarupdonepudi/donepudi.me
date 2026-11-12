@@ -1,0 +1,12 @@
+# The one environment: the zone, its records, redirects and settings, the database, the bucket,
+# the bot check and Access. Everything here lives and dies together.
+#
+#   planton apply -f Environment.prod.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: tenancy.planton.ai/v1alpha1
+kind: Environment
+metadata:
+  name: prod
+  slug: prod # permanent: state keys are {org}/{env}.{Kind}.{name}
+  org: swarup-donepudi
+spec:
+  description: donepudi.me -- the zone and everything the site runs on.

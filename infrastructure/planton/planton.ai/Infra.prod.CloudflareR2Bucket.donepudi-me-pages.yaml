@@ -1,0 +1,18 @@
+# The private bucket for pages saved into threads (one object per version), journal photos and video
+# thumbnails. Bound to the Worker as PAGES; only the code reads it.
+#
+#   planton apply -f Infra.prod.CloudflareR2Bucket.donepudi-me-pages.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareR2Bucket
+metadata:
+  name: donepudi-me-pages
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  bucketName: donepudi-me-pages
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  location: apac
+  jurisdiction: default
+  publicAccess: false

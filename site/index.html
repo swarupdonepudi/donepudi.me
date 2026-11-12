@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- donepudi.me's home page: his photo large beside a short greeting and the ways to reach him, with
+     his Now line under them; then what's happening, the threads he posted with his videos and releases, newest
+     first, beside a light column of the things he makes and where else to find him (one column on a phone, and
+     while nothing is listed). The Worker writes the Now line and the items in (src/home.ts), and shows each of
+     their sections only when it has something; with nothing listed the page is this file as it is. System type
+     and black-and-white greys, and loads no web font. Its one script is the
+     note flow, opened by "Send a note" and at /#talk or /#talk/<topic>. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Swarup Donepudi</title>
+  <meta name="description" content="I build Planton, where the software your coding agents write gets deployed and run in your own cloud. I talk platform engineering on Off the Pager.">
+  <!-- Never no-referrer: a site a reader leaves for learns they came from donepudi.me, and never which page. -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://donepudi.me/">
+  <!-- The feed is offered here alone: a feed reader given donepudi.me finds it, and no visible link opens raw XML in a browser. -->
+  <link rel="alternate" type="application/atom+xml" title="What's happening" href="/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://donepudi.me/">
+  <meta property="og:title" content="Swarup Donepudi">
+  <meta property="og:description" content="I build Planton, where the software your coding agents write gets deployed and run in your own cloud. I talk platform engineering on Off the Pager.">
+  <meta property="og:image" content="https://donepudi.me/img/share.jpg">
+  <meta property="og:image:alt" content="Swarup's photo">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/talk.js"></script>
+</head>
+<body class="home">
+  <header class="bar">
+    <a class="brand" href="/">donepudi.me</a>
+    <a class="bar-link" href="/feedback">Talk to me</a>
+  </header>
+
+  <main>
+    <section class="letter" aria-labelledby="hello">
+      <img class="portrait" src="/img/avatar.webp" width="1000" height="1000" alt="Swarup's photo">
+      <div class="letter-text">
+        <h1 id="hello">Hi, I'm Swarup.</h1>
+        <p class="lede">I build Planton, where the software your coding agents write gets deployed and run in your own cloud. I talk platform engineering on Off the Pager.</p>
+        <ul class="doors">
+          <li>
+            <button type="button" class="talk-button" data-talk>Send a note</button>
+            <p class="fine">Type what's on your mind. I read every one, and write back if you leave your email.</p>
+          </li>
+          <li>
+            <a class="ghost-button" href="https://cal.com/swarup">Book a call</a>
+            <p class="fine">30 minutes, live. Best for talking something through.</p>
+          </li>
+        </ul>
+        <p class="now" data-now hidden><b>Now</b> <span data-now-text></span></p>
+      </div>
+    </section>
+
+    <div class="home-grid">
+      <section class="home-main" aria-labelledby="happening" data-feed hidden>
+        <div class="section-head">
+          <h2 id="happening">What's happening</h2>
+        </div>
+        <ol class="feed" data-feed-list></ol>
+        <p class="more" data-feed-more hidden><a href="/updates">All updates</a></p>
+      </section>
+
+      <aside class="home-side" aria-label="More from Swarup">
+        <section aria-labelledby="makes">
+          <h2 id="makes">Things I make</h2>
+          <ul class="makes">
+            <li>
+              <a href="https://planton.ai">
+                <h3>Planton</h3>
+                <span class="where">planton.ai</span>
+                <p>Deploy and run what your coding agents write, governed, in your own cloud.</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/@SwarupDonepudi">
+                <h3>Off the Pager</h3>
+                <span class="where">on YouTube</span>
+                <p>Platform engineering news, explained for the engineers who run the platform.</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/swarupdonepudi/agent-tabs">
+                <h3>Agent Tabs</h3>
+                <span class="where">on GitHub</span>
+                <p>Open source, and my first release under my own name.</p>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="elsewhere">
+          <h2 id="elsewhere">Elsewhere</h2>
+          <ul class="links">
+            <li><a href="https://www.linkedin.com/in/swarupdonepudi">LinkedIn</a></li>
+            <li><a href="https://www.youtube.com/@SwarupDonepudi">YouTube</a></li>
+            <li><a href="https://github.com/swarupdonepudi">GitHub</a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span>Swarup</span>
+    <a href="/feedback">Talk to me</a>
+  </footer>
+</body>
+</html>

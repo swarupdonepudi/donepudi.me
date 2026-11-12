@@ -1,0 +1,88 @@
+// donepudi.me: one Cloudflare Worker that serves the folder ./site on two hosts (site/hosts.js). The home page's,
+// donepudi.me, runs code only for the home page, /, with what Swarup posted written in, its Atom feed, /feed.xml
+// (src/home.ts), its videos' pictures, /thumbs/* (src/outside.ts), and /api/talk (the note flow's one public write,
+// src/talk.ts). The threads', hey.donepudi.me, is everything behind the door: Today at its root, the threads'
+// private calls under /threads/api/ (src/threads.ts), their public calls and Access's sign-in answer under /api/, and
+// the threads page at every room and thread (src/pages.ts, which hands over site/threads/index.html through the
+// assets binding). Every path the code runs for on one host answers 404 on the other (src/worker.ts), all on the
+// database bound below. It also runs every hour on the cron trigger below, which fetches his videos and his products'
+// releases into the home page's list. Every other page comes straight from ./site on either host, with no code in its
+// path; Cloudflare Access guards hey.donepudi.me/threads/api and everything under it (infrastructure/), never a
+// thread's page. This file drives `wrangler dev`, the dry run in `npm run check` (whose bundle the Worker tests run,
+// with ./site and the routing below), and the deploy that .github/workflows/site.yaml runs on every merge to main,
+// all with the wrangler pinned in ./deploy.
+//
+// The zone, its records, its redirect rule and its settings, the database and the bot check are
+// Planton's (infrastructure/); only the Worker, its routes and its bindings are declared here. Routes
+// are declared only in this file, never in Cloudflare's dashboard. The bot check's secret is not here: the
+// deploy hands it over from the GitHub environment `production`, and `npm run dev` uses Cloudflare's
+// public test secret. Nor is the owner's email address, which the threads admit: the deploy hands it over the
+// same way, so this public repository never names it.
+{
+  "$schema": "./deploy/node_modules/wrangler/config-schema.json",
+  "name": "donepudi-me",
+  "account_id": "dd1f610d414c078599fa77a56930195b",
+  "main": "src/worker.ts",
+  // The newest date the runtime inside the pinned wrangler supports, so `wrangler dev` and the tests'
+  // Miniflare (the same version wrangler uses) run it too.
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./site",
+    // A path the site has no file for gets site/404.html, with a 404 status.
+    "not_found_handling": "404-page",
+    // /feedback serves feedback.html; /feedback.html and /index.html redirect to the clean address.
+    "html_handling": "auto-trailing-slash",
+    // Only these paths reach the code, on either host; everything else is a file from ./site. The root, "/" (the root
+    // alone: a pattern without a star names one path), is the home page with what he posted written in on the home
+    // page's host, and Today, the door everyone signed in enters by, on the threads'. On the home page's host, its
+    // feed is /feed.xml, every update's page /updates (src/home.ts), and its videos' pictures, copied by the hourly run, are /thumbs/<id>.jpg
+    // (src/outside.ts). On the threads' host, the rooms are the threads page too: /meetings, /people with a person
+    // under it, and /asks; so is an ask's own address, /ask/<slug>, and his journal, /journal with its days, weeks
+    // and storylines under it. The threads page's scripts live under /app/, so they stay files.
+    "run_worker_first": ["/", "/updates", "/feed.xml", "/thumbs/*", "/api/*", "/threads/*", "/meetings", "/people", "/people/*", "/asks", "/ask/*", "/journal", "/journal/*"],
+    // How the code hands over a file from ./site: the threads page, with site/_headers on it.
+    "binding": "ASSETS"
+  },
+  // The apex and hey are the Worker's two addresses, each through a route on the zone, found by its name in the
+  // account above. Each route needs a proxied record, which Planton holds (the apex's, and hey's AAAA 100::); www
+  // is the zone's redirect rule, also Planton's.
+  "routes": [
+    { "pattern": "donepudi.me/*", "zone_name": "donepudi.me" },
+    { "pattern": "hey.donepudi.me/*", "zone_name": "donepudi.me" }
+  ],
+  // Every hour, at an odd minute: his full YouTube episodes and the newest Planton and Agent Tabs releases, fetched into
+  // the home page's list with no act of his, because they are already public where they come from (src/outside.ts).
+  "triggers": { "crons": ["17 * * * *"] },
+  "workers_dev": false,
+  "preview_urls": false,
+  // The database Planton created (Infra.prod.CloudflareD1Database.donepudi-me), by its
+  // status.outputs.database_id. Its tables are ./migrations, which the deploy applies before the code.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "donepudi-me",
+      "database_id": "54516603-f385-4efb-8644-a2db78c6c234",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // The pages saved into threads (Infra.prod.CloudflareR2Bucket.donepudi-me-pages): one private object per
+  // version, read and written only by the code, which serves a page only through its thread's call, behind Access.
+  // His journal's photos live under journal/, and the home page's video pictures under outside/, which the code
+  // serves publicly at /thumbs/<id>.jpg.
+  "r2_buckets": [{ "binding": "PAGES", "bucket_name": "donepudi-me-pages" }],
+  // The threads' Access application and its callers' public halves, from Planton's outputs: the team's sign-in
+  // host (Infra.prod.CloudflareZeroTrustOrganization.donepudi, `authDomain`), the application's audience tag
+  // (…AccessApplication.donepudi-me-threads, `status.outputs.aud`) and the recorder sync's client id
+  // (…AccessServiceToken.donepudi-me-inbox-sync, `status.outputs.client_id`). None is secret: the Worker
+  // checks that a request was signed by that team for the application in front of the door called
+  // (src/access.ts).
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "donepudi.cloudflareaccess.com",
+    "THREADS_ACCESS_AUD": "db66d28750d3ed63363af7bba8a43d7aeba769eb6f7465ef9552e79917369435",
+    "INBOX_SYNC_CLIENT_ID": "83ce8979a8ffde10177a8de5cdc2797d.access"
+  },
+  // The Worker's own log lines (one per refused send: its status and reason, nothing personal) are kept;
+  // Cloudflare's automatic record of each request is off, because nothing says it leaves out the
+  // visitor's address.
+  "observability": { "enabled": true, "logs": { "invocation_logs": false } }
+}

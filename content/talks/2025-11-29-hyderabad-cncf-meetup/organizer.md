@@ -217,7 +217,7 @@ The talk includes:
 - Vegetarian
 
 ### Contact
-- **Email:** swarup@donepudi.me
+- **Note:** donepudi.me/#talk/speaking
 - **LinkedIn:** linkedin.com/in/swarupdonepudi
 - **Response time:** Usually within 24 hours
 

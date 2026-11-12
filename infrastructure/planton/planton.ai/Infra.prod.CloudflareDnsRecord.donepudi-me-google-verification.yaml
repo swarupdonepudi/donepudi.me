@@ -1,0 +1,24 @@
+# Google's site verification for donepudi.me (Search Console and Workspace).
+#
+#   planton apply -f Infra.prod.CloudflareDnsRecord.donepudi-me-google-verification.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareDnsRecord
+metadata:
+  name: donepudi-me-google-verification
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  name: donepudi.me
+  type: TXT
+  content:
+    value: 'google-site-verification=TCsNoXai4fQskvB-wo9JQJeqQs6beQS8i7PN3WWwzZs'
+  ttl: 1
+  comment: Google site verification

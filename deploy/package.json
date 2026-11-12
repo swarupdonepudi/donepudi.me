@@ -1,0 +1,8 @@
+{
+  "name": "donepudi-me-deploy",
+  "private": true,
+  "description": "Cloudflare's wrangler, pinned and locked apart from the check tools. The deploy job installs only this, because it holds the Cloudflare key; `npm run check` runs its dry run and `wrangler dev` serves the site locally.",
+  "devDependencies": {
+    "wrangler": "4.151.2"
+  }
+}

@@ -1,0 +1,21 @@
+# Who else may pass: an address the site says is invited to a thread, by an external evaluation the
+# Worker answers. Applied after the first deploy, because Access calls the live evaluate address.
+#
+#   planton apply -f Infra.prod.CloudflareZeroTrustAccessPolicy.donepudi-me-threads-members.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareZeroTrustAccessPolicy
+metadata:
+  name: donepudi-me-threads-members
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  accountId: $var/cloudflare-swarupdonepudi-account-id
+  name: donepudi.me threads members
+  decision: allow
+  sessionDuration: 168h
+  include:
+    - externalEvaluation:
+        evaluateUrl: https://hey.donepudi.me/api/access/evaluate
+        keysUrl: https://hey.donepudi.me/api/access/keys

@@ -1,0 +1,26 @@
+# hey.donepudi.me, the private side: answered by the Worker's route `hey.donepudi.me/*`, with Access in
+# front of /threads/api.
+#
+#   planton apply -f Infra.prod.CloudflareDnsRecord.donepudi-me-hey.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareDnsRecord
+metadata:
+  name: donepudi-me-hey
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  name: hey.donepudi.me
+  type: AAAA
+  content:
+    value: '100::' # a discard address: only Cloudflare answers this name
+  proxied: true
+  ttl: 1
+  comment: hey; answered by the Worker's route
