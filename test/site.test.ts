@@ -15,6 +15,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { HtmlValidate, Parser, type HtmlElement } from "html-validate";
+import { build, imagesNamed } from "../tools/publish/content.ts";
 import { describe, expect, it } from "vitest";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -53,6 +54,10 @@ const SERVED = [
   "threads/index.html",
 ];
 
+/** What the publisher makes from content/ (tools/publish), and the images its pages name. */
+const PUBLISHED = build(fileURLToPath(new URL("..", import.meta.url)));
+SERVED.push(...[...PUBLISHED.keys()].filter((path) => !SERVED.includes(path)), ...imagesNamed(PUBLISHED));
+
 /**
  * The only addresses on another origin a site script names. A resource a script loads is invisible to
  * the page checks, so it is allowed here instead. Turnstile's script also opens its own frame.
@@ -65,7 +70,7 @@ const SCRIPT_LINKS = ["https://cal.com/swarup", "https://mail.google.com/mail/",
 const originsOf = (urls: string[]): string => [...new Set(urls.map((url) => new URL(url).origin))].join(" ");
 
 /** The pages a link can be shared to, which carry a description and a preview picture. */
-const SHARED_PAGES = ["index.html", "feedback.html", "updates.html"];
+const SHARED_PAGES = ["index.html", "feedback.html", "updates.html", ...[...PUBLISHED.keys()].filter((path) => path.endsWith(".html") && path !== "index.html")];
 
 const ORIGIN = "https://donepudi.me";
 /** The threads' host, one label below the home page's (site/hosts.js): the site's own too, never another origin. */

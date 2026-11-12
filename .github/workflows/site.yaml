@@ -1,7 +1,13 @@
-# The site's one workflow. `check` runs the type checks, wrangler's dry run, the site tests and the Worker
-# tests on every pull request and on main, holding no key. The deploy and the private-address probe join it
-# when the site launches; until then nothing here holds a key or changes Cloudflare. The zone, its records,
-# its redirects, the database and the bot check are Planton's (infrastructure/), not this workflow's.
+# The site's one workflow. `check` runs the publisher's freshness check, the type checks, wrangler's dry run,
+# the site tests and the Worker tests on every pull request and on main, holding no key. On main, `deploy` then
+# applies the database's new migrations and puts site/ and the Worker's code on the Worker donepudi-me with
+# wrangler, using a key, the bot check's secret, the inbox owner's email address and the key that signs the
+# site's answers to Access's sign-in question, from the environment `production`, which only main may use. The
+# key can deploy Workers and their routes, read zones and edit the account's D1 databases, and nothing in DNS.
+# The deploy job checks out only what the deploy reads and installs only the wrangler pinned in deploy/, so none
+# of the check tools runs beside the key. After it, `private` asks the live site for every private address as a
+# stranger, holding no key (tools/probe/), and fails the run if any lets one in. The zone, its records, its
+# redirects, the database and the bot check are Planton's (infrastructure/), not this workflow's.
 
 name: site
 
@@ -41,3 +47,104 @@ jobs:
       - name: Check
         run: npm run check
 
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: https://donepudi.me
+    concurrency:
+      # A deploy is never cut short: a newer merge waits, then deploys its own commit.
+      group: deploy
+      cancel-in-progress: false
+    env:
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - name: Checkout what the deploy reads
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .nvmrc
+            wrangler.jsonc
+            site
+            src
+            migrations
+            deploy
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          package-manager-cache: false
+          node-version-file: ".nvmrc"
+
+      - name: Install wrangler
+        working-directory: deploy
+        run: npm ci --no-audit --no-fund
+
+      - name: Check the Worker's secrets are set
+        env:
+          TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+          INBOX_OWNER_EMAIL: ${{ secrets.INBOX_OWNER_EMAIL }}
+          THREADS_EVALUATION_KEY: ${{ secrets.THREADS_EVALUATION_KEY }}
+        run: |
+          for name in TURNSTILE_SECRET INBOX_OWNER_EMAIL THREADS_EVALUATION_KEY; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is empty in the environment production; nothing was changed"
+              exit 1
+            fi
+          done
+
+      # Before the code, so the new version never meets an old schema. Migrations only add, so the version
+      # still running keeps working if the deploy below fails. In CI wrangler asks nothing and still takes
+      # its backup of the database first.
+      - name: Apply the database's migrations
+        working-directory: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: ./node_modules/.bin/wrangler d1 migrations apply donepudi-me --remote --config ../wrangler.jsonc
+
+      # The secrets go to wrangler in a file only this job's user can read, deleted when the step ends;
+      # never on a command line. Secrets are added to the version, never deleted by a deploy.
+      - name: Deploy donepudi-me
+        working-directory: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+          INBOX_OWNER_EMAIL: ${{ secrets.INBOX_OWNER_EMAIL }}
+          THREADS_EVALUATION_KEY: ${{ secrets.THREADS_EVALUATION_KEY }}
+        run: |
+          secrets="$RUNNER_TEMP/worker-secrets.json"
+          trap 'rm -f "$secrets"' EXIT
+          (umask 077 && jq -n '{TURNSTILE_SECRET: env.TURNSTILE_SECRET, INBOX_OWNER_EMAIL: env.INBOX_OWNER_EMAIL, THREADS_EVALUATION_KEY: env.THREADS_EVALUATION_KEY}' > "$secrets")
+          ./node_modules/.bin/wrangler deploy --config ../wrangler.jsonc --secrets-file "$secrets" --message "main ${GITHUB_SHA::12}"
+
+  private:
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout the probe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .nvmrc
+            wrangler.jsonc
+            tools/probe
+            site/hosts.js
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          package-manager-cache: false
+          node-version-file: ".nvmrc"
+
+      # Asked twice at most, half a minute apart, so a version still reaching every location isn't mistaken for a
+      # leak; a real one fails both.
+      - name: Ask every private address as a stranger
+        run: node tools/probe/run.ts || { sleep 30; node tools/probe/run.ts; }

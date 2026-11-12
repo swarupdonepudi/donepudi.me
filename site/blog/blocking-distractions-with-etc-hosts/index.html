@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- donepudi.me/blog/blocking-distractions-with-etc-hosts/: the post "Get rid of distractions w/ /etc/hosts and uninstalling apps on mobile" (content/blog/2025-06-23-blocking-distractions-with-etc-hosts.md). Made by tools/publish from content/; edit the Markdown, not this file. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Get rid of distractions w/ /etc/hosts and uninstalling apps on mobile</title>
+  <meta name="description" content="It has been a while since I published my last blog post. I have recently succumbed to the temptation of watching YouTube videos both on my phone and on the laptop. Here's how I reclaimed my focus using /etc/hosts and mobile app management.">
+  <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171512" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://donepudi.me/blog/blocking-distractions-with-etc-hosts/">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://donepudi.me/blog/blocking-distractions-with-etc-hosts/">
+  <meta property="og:title" content="Get rid of distractions w/ /etc/hosts and uninstalling apps on mobile">
+  <meta property="og:description" content="It has been a while since I published my last blog post. I have recently succumbed to the temptation of watching YouTube videos both on my phone and on the laptop. Here's how I reclaimed my focus using /etc/hosts and mobile app management.">
+  <meta property="og:image" content="https://donepudi.me/blog/images/2025-06-23-blocking-distractions-with-etc-hosts.share.jpg">
+  <meta property="article:published_time" content="2025-06-23">
+  <meta property="article:author" content="Swarup Donepudi">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="/">donepudi.me</a>
+    <nav class="bar-nav" aria-label="Site">
+      <a class="bar-link" href="/blog/">Writing</a>
+      <a class="bar-link" href="/talks/">Talks</a>
+      <a class="bar-link" href="/feedback">Talk to me</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post">
+      <p class="post-meta"><time datetime="2025-06-23">23 June 2025</time> · productivity, personal, focus, discipline, reflection</p>
+      <h1>Get rid of distractions w/ /etc/hosts and uninstalling apps on mobile</h1>
+      <p class="lede">It has been a while since I published my last blog post. I have recently succumbed to the temptation of watching YouTube videos both on my phone and on the laptop. Here's how I reclaimed my focus using /etc/hosts and mobile app management.</p>
+      <img class="cover" src="/blog/images/2025-06-23-blocking-distractions-with-etc-hosts.cover.webp" alt="" width="1600" height="900">
+      <div class="post-body">
+<p>It has been a while since I published my last blog post. I have recently succumbed to the temptation of watching YouTube videos both on my phone and on the laptop. With all of the dedication and hard work that I'm putting into building out the product and going to market, I find myself glorifying all of my efforts and self-reward myself with some slack time. And I can't think of anything else to do other than two options:</p>
+<ol><li>Reading books</li><li>Watching YouTube videos</li></ol>
+<h2>The Problem: YouTube Replaced Books</h2>
+<p>I replaced book reading with YouTube video watching. Unlike reading books before going to bed, which actually helps with falling asleep more quickly, replacing that with watching YouTube videos before going to bed would actually delay your ability to fall asleep. Off late, it has gotten slightly difficult for me to get good quality of sleep because I sleep late, but I am trying to stick to my 3am schedule in the morning. Also, even during the breaks during the day, I replaced reading books with watching YouTube videos. And also YouTube has gotten a lot more interesting for me off-grid because of all the regional conflicts in various parts of the world, especially the conflict between Israel and Iran and the role of America because of my interest in geopolitics.</p>
+<p>And yesterday I realized that I'm wasting all of this precious time by diverting my focus and energy on things that I absolutely have no control over and absolutely has zero value in learning about all of that stuff. In fact, watching all those bad things happen in different parts of the world takes away a lot of my focus time from what really matters - that is, making progress on finding traction vs. stuff that I have no control over and I have zero ability to create any impact.</p>
+<h2>Learning from Past Success: The Chess.com Story</h2>
+<p>Having realized that yesterday being a fresh start to the week I wanted to address this somehow. In the past, I had built a pretty bad habit of opening up <a href="https://chess.com">chess.com</a> and playing a quick 5-minute or even 1-minute game whenever I am under some sort of stress. So chess used to be a stress buster for me, but then it has also gotten to a point where I played more chess than I did work. What I did was add chess.com to the <code>/etc/hosts</code> file on my Mac, making it difficult for me to start a new game of chess. I did this almost a year ago. And the end result was that I have never played chess ever again after that. It's been almost a year since my last game.</p>
+<h2>The Solution: Block YouTube Everywhere</h2>
+<p>I wanted to apply the same technique, but one difference is that YouTube is also on the mobile, and that's where I actually watch most of it. So, I did two things:</p>
+<ol><li>I added youtube.com to host file, so whenever I open up or type youtube.com in any of the browsers, it would simply redirect to the local host.</li><li>I removed or uninstalled YouTube from the mobile phone.</li></ol>
+<p>Here's what my <code>/etc/hosts</code> file looks like now:</p>
+<figure><img src="/blog/images/2025-06-23-blocking-distractions-with-etc-hosts-1.webp" alt="/etc/hosts file blocking distracting websites" loading="lazy"></figure>
+<p>And when I try to visit YouTube in my browser, this is what I see:</p>
+<figure><img src="/blog/images/2025-06-23-blocking-distractions-with-etc-hosts-2.webp" alt="YouTube blocked in browser" loading="lazy"></figure>
+<h2>The Results After 48 Hours</h2>
+<p>It's been close to 48 hours since I did that, and I don't have any cravings. I never felt like I want to watch a YouTube video because I know that it is difficult to do so, and the temptation is not high enough to go through those extra 2 steps to actually savor that temptation.</p>
+<p>I have even resumed my book reading before going to bed last night, and I did that the choice was pretty effortless because I don't really have a second one. I resumed reading the &quot;Sapiens&quot; book and I actually started enjoying reading it. So I'm going to continue reading that book during the breaks that I take during the day time. I want to finish that book since I have been wanting to do so for a very very long time.</p>
+<figure><img src="/blog/images/2025-06-23-blocking-distractions-with-etc-hosts-3.webp" alt="Sapiens book - my current reading" loading="lazy"></figure>
+<h2>A Testament to Removing Distractions</h2>
+<p>The fact that I am able to also publish this blog post is another testament to the benefits of removing the distractions from life which will naturally make place for more important things. So I'm really glad and proud of the choices and actions that I've taken to remove this useless habit of watching YouTube videos.</p>
+      </div>
+      <p class="post-end"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about it</a></p>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <span>Swarup Donepudi</span>
+    <a href="/">donepudi.me</a>
+  </footer>
+</body>
+</html>

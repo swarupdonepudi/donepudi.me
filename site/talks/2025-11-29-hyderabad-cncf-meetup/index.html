@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- donepudi.me/talks/2025-11-29-hyderabad-cncf-meetup/: the talk "Consistency Without Abstraction: Building a Multi-Cloud Infrastructure Framework with Project Planton" (content/talks/2025-11-29-hyderabad-cncf-meetup/index.md). Made by tools/publish from content/; edit the Markdown, not this file. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Consistency Without Abstraction: Building a Multi-Cloud…</title>
+  <meta name="description" content="What if deploying a PostgreSQL database to AWS RDS, GCP Cloud SQL, or a Kubernetes cluster felt the same—without hiding cloud-specific power?">
+  <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171512" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://donepudi.me/talks/2025-11-29-hyderabad-cncf-meetup/">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://donepudi.me/talks/2025-11-29-hyderabad-cncf-meetup/">
+  <meta property="og:title" content="Consistency Without Abstraction: Building a Multi-Cloud Infrastructure Framework with Project Planton">
+  <meta property="og:description" content="What if deploying a PostgreSQL database to AWS RDS, GCP Cloud SQL, or a Kubernetes cluster felt the same—without hiding cloud-specific power?">
+  <meta property="og:image" content="https://donepudi.me/img/share.jpg">
+  <meta property="article:published_time" content="2025-11-29">
+  <meta property="article:author" content="Swarup Donepudi">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="/">donepudi.me</a>
+    <nav class="bar-nav" aria-label="Site">
+      <a class="bar-link" href="/blog/">Writing</a>
+      <a class="bar-link" href="/talks/">Talks</a>
+      <a class="bar-link" href="/feedback">Talk to me</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post">
+      <p class="post-meta"><time datetime="2025-11-29">29 November 2025</time> · Hyderabad CNCF Meetup · Hyderabad, India</p>
+      <h1>Consistency Without Abstraction: Building a Multi-Cloud Infrastructure Framework with Project Planton</h1>
+      <p class="lede">What if deploying a PostgreSQL database to AWS RDS, GCP Cloud SQL, or a Kubernetes cluster felt the same—without hiding cloud-specific power?</p>
+      <div class="post-body">
+<h2>Overview</h2>
+<p>What if deploying a PostgreSQL database to AWS RDS, GCP Cloud SQL, or a Kubernetes cluster felt the same—same YAML structure, same CLI command, same validation workflow—without hiding cloud-specific power?</p>
+<p>This talk introduces <strong>Project Planton</strong>, an open-source multi-cloud infrastructure framework that brings Kubernetes-style consistency to infrastructure deployments. Through live demos, we'll deploy different infrastructure components (Postgres, Redis, Kafka) across multiple clouds using a single CLI, then dive into the architectural decisions behind the framework.</p>
+<h2>What You'll Learn</h2>
+<h3>1. Value Through Live Demos (10 minutes)</h3>
+<ul><li>Deploy PostgreSQL to Kubernetes, AWS RDS, and GCP Cloud SQL</li><li>Same CLI command, same workflow, different clouds</li><li>Validation catching errors before deployment</li><li>Compare deployment times and developer experience</li></ul>
+<h3>2. The Backstory (5 minutes)</h3>
+<ul><li>10 years of DevOps: constantly rebuilding the same patterns</li><li>The insight: 80% of use cases need only 20% of cloud capabilities</li><li>Why build an open-source framework instead of more one-off scripts</li></ul>
+<h3>3. Architectural Deep Dive (10 minutes)</h3>
+<ul><li>Why Protocol Buffers over raw YAML (validation, multi-language SDKs)</li><li>Why simple CLI + Pulumi/Terraform over Kubernetes operators</li><li>Why dual Pulumi/Terraform support (choice &gt; dogma)</li><li>The &quot;deployment component&quot; concept (API + IaC + docs + examples)</li></ul>
+<h3>4. Crossplane Comparison (5 minutes)</h3>
+<ul><li>Crossplane: YAML-driven, requires Kubernetes cluster, reconciler loops</li><li>Project Planton: YAML-driven, works anywhere, uses Pulumi/Terraform</li><li>When to use each (spoiler: both have valid use cases)</li></ul>
+<h2>Key Takeaways</h2>
+<p>Attendees will leave understanding:</p>
+<ul><li>✅ How to provide consistent multi-cloud experience without losing provider-specific power</li><li>✅ Why validation-first deployments catch 90%+ of errors before cloud APIs</li><li>✅ The tradeoffs between Kubernetes-operator-based vs CLI-based infrastructure frameworks</li><li>✅ How Project Planton's 100+ deployment components work</li><li>✅ When to use Crossplane vs Project Planton vs raw IaC</li><li>✅ How to contribute to Project Planton (it's open source!)</li></ul>
+<h2>Target Audience</h2>
+<p><strong>Primary:</strong> Platform engineers building internal developer platforms <strong>Secondary:</strong> DevOps engineers, SREs, cloud architects <strong>Tertiary:</strong> Developers interested in infrastructure tooling</p>
+<p><strong>Assumed knowledge:</strong></p>
+<ul><li>Basic understanding of cloud infrastructure (AWS/GCP/Azure)</li><li>Familiarity with Kubernetes concepts</li><li>Awareness of IaC tools (Terraform/Pulumi)</li><li>No Crossplane experience required</li></ul>
+<h2>Format</h2>
+<ul><li><strong>Duration:</strong> 25-30 minutes (20 min talk + 5-10 min Q&amp;A)</li><li><strong>Style:</strong> Demo-first approach with live deployments</li><li><strong>Interactive:</strong> Q&amp;A and discussion encouraged</li></ul>
+<h2>Key Philosophy</h2>
+<p><strong>Consistency ≠ Abstraction</strong></p>
+<p>You can have unified experience without hiding provider differences. The manifests are provider-specific (AWS RDS configuration ≠ GCP Cloud SQL configuration), but the experience is identical.</p>
+<p><strong>Core Principles:</strong></p>
+<ul><li><strong>Consistency over clever abstractions</strong> → Don't hide cloud providers, unify the experience</li><li><strong>Pragmatic defaults over blank slates</strong> → Battle-tested configurations that work</li><li><strong>Developer experience as a first-class feature</strong> → One click, one platform, no archaeology</li><li><strong>Validation-first deployments</strong> → Catch 90%+ of errors before calling cloud APIs</li></ul>
+<h2>Links</h2>
+<ul><li><strong>GitHub:</strong> <a href="https://github.com/plantonhq/project-planton">github.com/plantonhq/project-planton</a></li><li><strong>Website:</strong> <a href="https://project-planton.org">project-planton.org</a></li></ul>
+<h2>About the Speaker</h2>
+<p><strong>Swarup Donepudi</strong> is a platform engineering entrepreneur and founder of PlantonCloud, a multi-cloud Internal Developer Platform serving production customers today. As creator of Project Planton—an open-source multi-cloud framework with 100+ deployment components—Swarup is passionate about reducing cognitive overhead in modern cloud deployments.</p>
+<p>With 10+ years architecting DevOps infrastructure at scale, he believes in &quot;consistency without abstraction&quot;: providing unified developer experience while preserving provider-specific power. His work focuses on making enterprise-grade platform engineering accessible to teams of all sizes through validation-first deployments, Protocol Buffers-based APIs, and the 80/20 principle applied to infrastructure.</p>
+<p><strong>Connect:</strong></p>
+<ul><li><strong>GitHub:</strong> <a href="https://github.com/plantonhq/project-planton">github.com/plantonhq/project-planton</a></li><li><strong>Website:</strong> <a href="https://project-planton.org">project-planton.org</a></li><li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/swarupdonepudi">linkedin.com/in/swarupdonepudi</a></li></ul>
+<hr>
+<p><strong>Why This Talk Matters:</strong></p>
+<ol><li><strong>Demo-first approach</strong> → Immediate value, not abstract concepts</li><li><strong>Clear differentiation</strong> → Explains how it's different from Crossplane</li><li><strong>Architectural depth</strong> → Appeals to technical CNCF audience</li><li><strong>Open source angle</strong> → Invites community participation</li><li><strong>Practical lessons</strong> → Based on real-world experience (10 years)</li><li><strong>No vendor pitch</strong> → Educational, not sales-y</li></ol>
+      </div>
+      <p class="post-end"><a href="/talks/">All talks</a> · <a href="/feedback">Invite me to speak</a></p>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <span>Swarup Donepudi</span>
+    <a href="/">donepudi.me</a>
+  </footer>
+</body>
+</html>
