@@ -20,8 +20,9 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/post.js"></script>
 </head>
-<body>
+<body class="reading">
   <header class="bar">
     <a class="brand" href="/">donepudi.me</a>
     <nav class="bar-nav" aria-label="Site">
@@ -32,29 +33,38 @@
   </header>
 
   <main>
-    <article class="post">
-      <p class="post-meta"><time datetime="2025-07-01">1 July 2025</time> · reflection, discipline, planton-cloud, productivity, startup</p>
-      <h1>June Month Reflection: Reclaiming Focus and Finding Momentum</h1>
-      <p class="lede">June was about discipline, resilience, and clarity. It began with me recommitting to my cherished routine of waking up at 3 AM. While some see this as extreme, for me, these early morning hours are a sanctuary of productivity.</p>
-      <img class="cover" src="/blog/images/2025-07-01-june-month-reflection-reclaiming-focus-and-finding-momentum.cover.webp" alt="" width="1600" height="900">
-      <div class="post-body">
+    <article class="post post-long">
+      <header class="post-head">
+        <p class="post-meta"><time datetime="2025-07-01">1 July 2025</time><span aria-hidden="true">·</span><span>2 min read</span></p>
+        <h1>June Month Reflection: Reclaiming Focus and Finding Momentum</h1>
+        <p class="lede">June was about discipline, resilience, and clarity. It began with me recommitting to my cherished routine of waking up at 3 AM. While some see this as extreme, for me, these early morning hours are a sanctuary of productivity.</p>
+        <p class="byline"><img class="byline-photo" src="/img/avatar.webp" width="1000" height="1000" alt=""><span class="byline-text"><span class="byline-name">Swarup Donepudi</span><span class="byline-tags">reflection · discipline · planton-cloud · productivity · startup</span></span></p>
+      </header>
+      <figure class="post-cover"><img src="/blog/images/2025-07-01-june-month-reflection-reclaiming-focus-and-finding-momentum.cover.webp" alt="" width="1600" height="900"></figure>
+      <div class="post-grid">
+        <nav class="toc" aria-label="In this post"><p class="toc-title">In this post</p><ol><li><a href="#technical-transformation-monorepo-nats-and-bazel">Technical Transformation: Monorepo, NATS, and Bazel</a></li><li><a href="#blocking-distractions-to-reclaim-focus">Blocking Distractions to Reclaim Focus</a></li><li><a href="#the-financial-reality-product-to-business">The Financial Reality: Product to Business</a></li><li><a href="#validation-from-corestack">Validation from CoreStack</a></li><li><a href="#the-power-of-simplicity">The Power of Simplicity</a></li><li><a href="#family-and-balance">Family and Balance</a></li><li><a href="#looking-ahead">Looking Ahead</a></li></ol></nav>
+        <div class="post-body">
 <p>June was about discipline, resilience, and clarity. It began with me recommitting to my cherished routine of waking up at 3 AM. While some see this as extreme, for me, these early morning hours are a sanctuary of productivity. After a shaky start—fighting off lethargy and distraction—I eventually locked into a rhythm that profoundly amplified my output.</p>
-<h2>Technical Transformation: Monorepo, NATS, and Bazel</h2>
+<h2 id="technical-transformation-monorepo-nats-and-bazel">Technical Transformation: Monorepo, NATS, and Bazel</h2>
 <p>I spent most of June deep in refactoring and migrating critical parts of my product, PlantonCloud. Moving from Kafka to <a href="https://nats.io/">NATS</a>, consolidating services into a streamlined monorepo, and harnessing the power of <a href="https://bazel.build/">Bazel</a> with remote build execution via <a href="https://www.buildbuddy.io/">BuildBuddy</a> transformed the way I build and deploy. What once took minutes now completes in seconds. Every commit triggers clear feedback and powerful visual workflows, giving me a newfound confidence in the stability and potential of what I'm creating.</p>
-<h2>Blocking Distractions to Reclaim Focus</h2>
+<h2 id="blocking-distractions-to-reclaim-focus">Blocking Distractions to Reclaim Focus</h2>
 <p>But not every moment was smooth. Mid-month, I struggled with self-doubt, amplified by distractions—particularly YouTube. Rather than rely on pure willpower, I blocked it entirely from my devices, a decision that quickly paid off. Within days, that regained focus turned into meaningful progress and clarity.</p>
-<h2>The Financial Reality: Product to Business</h2>
+<h2 id="the-financial-reality-product-to-business">The Financial Reality: Product to Business</h2>
 <p>This month also offered an important reminder about financial discipline. Receiving some much-needed support bought valuable runway, but also underscored the urgency of turning my product into sustainable revenue. This realization sharpened my focus further. It became clear that building a great product is only half the story—transforming it into a profitable business is the true challenge ahead.</p>
-<h2>Validation from CoreStack</h2>
+<h2 id="validation-from-corestack">Validation from CoreStack</h2>
 <p>One notable interaction stood out: a chance meeting with the product lead of a growing startup, CoreStack. My demo wasn't perfect, but his genuine interest validated the strength of our UX, reminding me how close I am to the critical step of real customer engagement.</p>
-<h2>The Power of Simplicity</h2>
+<h2 id="the-power-of-simplicity">The Power of Simplicity</h2>
 <p>Reflecting on the complexity of the product, I recognized the power of simplicity. Two key infrastructure management concepts, previously separate, merged beautifully into a unified solution. Simplifying the product not only reduced confusion but also reinforced a critical insight: great user experiences come from clarity, not complexity.</p>
-<h2>Family and Balance</h2>
+<h2 id="family-and-balance">Family and Balance</h2>
 <p>Toward the month's end, family milestones and personal moments added balance to the intense workload. Celebrating our 7th wedding anniversary was a meaningful pause, reminding me why all this effort matters. Those moments helped me step back, regain perspective, and recharge for what's next.</p>
-<h2>Looking Ahead</h2>
+<h2 id="looking-ahead">Looking Ahead</h2>
 <p>Heading into July, I'm more ready than ever. June clarified my priorities, sharpened my discipline, and reminded me that progress—real progress—comes from relentlessly simplifying, removing distractions, and staying focused on the things that truly matter.</p>
+        </div>
+        <footer class="post-foot">
+        <div class="author"><img class="author-photo" src="/img/avatar.webp" width="1000" height="1000" alt=""><div class="author-text"><p class="author-name">Written by Swarup Donepudi</p><p class="author-line">Platform engineer since 2015. I write about platform engineering, and the coding agents I build with every day.</p><p class="author-links"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about this post</a></p></div></div>
+          <nav class="pager" aria-label="More posts"><a class="pager-link" href="/blog/june-week-4-reflection-taking-stock-and-moving-forward/"><span class="pager-label">Newer</span><span class="pager-title">June Week #4 Reflection: Taking Stock and Moving Forward</span></a><a class="pager-link pager-older" href="/blog/blocking-distractions-with-etc-hosts/"><span class="pager-label">Older</span><span class="pager-title">Get rid of distractions w/ /etc/hosts and uninstalling apps on mobile</span></a></nav>
+        </footer>
       </div>
-      <p class="post-end"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about it</a></p>
     </article>
   </main>
 

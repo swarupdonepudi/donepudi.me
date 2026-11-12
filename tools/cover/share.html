@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- The link-preview picture's template: tools/cover/share.ts fills in the title, the kicker and the fonts folder. Never served. -->
+<html lang="en"><head><meta charset="utf-8"><title>share</title>
+<style>
+@font-face { font-family: "Source Serif 4"; src: url("{{fonts}}/source-serif-4.woff2") format("woff2"); font-weight: 200 900; }
+@font-face { font-family: "Inter"; src: url("{{fonts}}/inter.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "JetBrains Mono"; src: url("{{fonts}}/jetbrains-mono.woff2") format("woff2"); font-weight: 100 800; }
+* { box-sizing: border-box; margin: 0; }
+body { width: 1200px; height: 627px; overflow: hidden; background: radial-gradient(120% 120% at 85% 0%, #16302c, #121417 60%); color: #ebe8e1; font-family: "Inter", sans-serif; display: grid; grid-template-columns: 540px 1fr; align-items: center; gap: 48px; padding: 0 0 0 72px; }
+.kicker { color: #6fd3c4; font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 22px; }
+h1 { font-family: "Source Serif 4", serif; font-size: 58px; line-height: 1.08; letter-spacing: -0.02em; font-weight: 650; }
+.by { margin-top: 30px; color: #aeb2b9; font-size: 20px; }
+.win { width: 640px; border-radius: 14px; background: #16181d; border: 1px solid #2a2e36; box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); overflow: hidden; font-size: 15px; }
+.bar { height: 38px; border-bottom: 1px solid #2a2e36; display: flex; align-items: center; gap: 8px; padding: 0 16px; }
+.bar i { width: 12px; height: 12px; border-radius: 50%; background: #2a2e36; }
+.split { display: grid; grid-template-columns: 270px 1fr; height: 330px; }
+.ex { border-right: 1px solid #2a2e36; padding: 14px 0; color: #8b97ae; font-size: 14px; }
+.ex p { padding: 3px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ex .h { font-size: 11px; font-weight: 700; letter-spacing: .1em; }
+.ex .f { color: #d8dee9; }
+.ex .i { padding-left: 30px; }
+.ex .n { padding-left: 48px; background: #2a2e36; color: #d8dee9; }
+.t { font-family: "JetBrains Mono", monospace; color: #d8dee9; }
+.tabs { display: flex; gap: 2px; padding: 6px 10px 0; border-bottom: 1px solid #2a2e36; }
+.tabs span { padding: 6px 14px; border-radius: 8px 8px 0 0; font-size: 13px; color: #8b97ae; }
+.tabs .on { background: #2a2e36; color: #d8dee9; }
+.pane { padding: 18px 20px; line-height: 1.8; font-size: 14px; }
+.c { color: #e39a7b; } .p { color: #88c0d0; } .d { color: #8b97ae; }
+</style></head>
+<body>
+  <div>
+    <p class="kicker">{{kicker}}</p>
+    <h1>{{title}}</h1>
+    <p class="by">Swarup Donepudi · donepudi.me</p>
+  </div>
+  <div class="win">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div class="split">
+      <div class="ex"><p class="h">EXPLORER</p><p class="f">⌄ projects</p><p class="i">› 20261020.01.docs-site</p><p class="i">› 20261024.02.zero-open-bugs</p><p class="i f">⌄ 20261102.01.mobile-app</p><p class="n">next.md</p><p class="i">› 20261106.01.ten-blog-posts</p></div>
+      <div class="t"><div class="tabs"><span>✳ claude</span><span>✳ claude</span><span class="on">✳ claude</span></div>
+        <div class="pane"><span class="c">✻ Claude Code</span><br>&gt; <span class="p">projects/20261102.01.mobile-app/<br>next.md</span><br><span class="d">● 3 of 5 steps done.<br>On to step 4…</span></div></div>
+    </div>
+  </div>
+</body></html>

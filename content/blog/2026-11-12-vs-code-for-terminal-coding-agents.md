@@ -1,24 +1,39 @@
 ---
-title: "My VS Code Setup for Running Coding Agents in the Terminal"
+title: "How I Got My Project Habit Back: Claude Code in VS Code"
 date: "2026-11-12"
-excerpt: "I run Claude Code in VS Code's terminal. How I made it feel like iTerm, how my agent tabs now survive a restart, and a prompt your own coding agent can run to set it all up."
+excerpt: "When I moved from Cursor to Claude Code, my progress stalled. The agent wasn't the problem: my projects had dropped out of view. This is the VS Code setup that brought them back."
 author: "Swarup Donepudi"
-tags: ["vs-code", "claude-code", "coding-agents", "developer-tools", "terminal"]
+tags: ["claude-code", "vs-code", "coding-agents", "projects", "developer-tools"]
+cover_embed: "projects-mode"
+featured_image: "/blog/images/2026-11-12-vs-code-for-terminal-coding-agents.cover.png"
+share_kicker: "Claude Code · VS Code · projects"
 ---
 
-I spend my whole day with coding agents. For a long time that meant Cursor. Today it means Claude Code, running in a terminal, not in an editor's chat panel.
+> The simple goal of completing the projects is what helped me to make constant progress.
 
-I feel like coding agents in the terminal have an edge in capabilities over the agents built into IDEs. So I run the same Claude Code everywhere, with the same flags. In iTerm I start it with `claude --chrome`, which lets it work in my Chrome browser, and that works exactly the same way in VS Code's terminal.
+I wrote that line in my journal one morning this week, while trying to work out why I felt stuck.
 
-The problem was that VS Code's terminal didn't feel like my terminal. The colours were different, the font was different, and none of my iTerm shortcuts worked. And every time I quit VS Code, every agent session I had open was gone. In Cursor, my agent chats came back after a restart. In a plain terminal, quitting means starting over.
+Until the middle of October, I was using Cursor, and I kept making progress. Every piece of work that takes more than one session lives in my repo as a project: a folder named by the date it started and the outcome it's for, with a `next.md` file that says where it stands and what comes next. In Cursor, that projects folder was always there in the file explorer, right beside the agent chats. I'd look at the list, pick a project, drag its `next.md` into a chat, and work it to the end. The list kept me honest. The goal was simply to complete the projects.
 
-So I spent a day making VS Code's terminal work like iTerm, plus one thing iTerm doesn't do: bring every agent back after a restart. This post is what I did, why, what broke along the way, and, at the end, a prompt you can hand to your own coding agent to get the same setup on your Mac.
+Then I moved to Claude Code, in the terminal. I feel like coding agents in the terminal have an edge in capabilities over the agents built into IDEs, and Claude Code was proving great at executing the work. But ever since I moved, my progress stalled.
+
+When I wrote it out, the root cause was clear. The terminal took away the project completion habit I built in Cursor. The file explorer that always showed me my projects was no longer in my field of view, so I was picking up random things through the day, based on whatever goals I wrote down that morning. There is a lot of work to be completed, and Claude Code can complete all of it. I just needed to get back to that "complete the projects" mindset.
+
+That discovery led me to the fix. I brought Claude Code into VS Code's terminal. The projects folder sits in the explorer on the left, the agents run in terminal tabs on the right, and I drag a project's `next.md` straight into an agent session. It's the same experience I enjoyed in Cursor for months, now with Claude Code, and honestly, it's ridiculously powerful. I feel like I got back into my Iron Man suit once again.
+
+> [!TIP] Dragging a file into a terminal tab
+> Drag a file from VS Code's explorer onto a terminal tab, and VS Code types the file's path into it. In a Claude Code session, that's how a project's `next.md` becomes the next instruction.
+
+Getting there took a day of work. VS Code's terminal didn't feel like my terminal: the colours were different, the font was different, and none of my iTerm shortcuts worked. And every time I quit VS Code, every agent session I had open was gone. In Cursor, my agent chats came back after a restart. In a plain terminal, quitting means starting over.
+
+So I made VS Code's terminal work like iTerm, plus one thing iTerm doesn't do: bring every agent back after a restart. I start Claude with `claude --chrome`, which lets it work in my Chrome browser, and that works exactly the same way in VS Code's terminal. This post is what I did, what broke along the way, and, at the end, a prompt you can hand to your own coding agent to get the same setup on your Mac.
 
 ## What I ended up with
 
+- **My projects are back in view.** The projects folder in the explorer, the agents in terminal tabs beside it, and a project's `next.md` dragged straight into a session.
 - **It looks like my iTerm.** The Cursor Dark Midnight theme, SF Mono at 14, line spacing of 1.35, and calm blue-grey text (#8b97ae on #1e2127).
-- **It works like iTerm on the keyboard.** ⌘T opens a new tab that's already running `claude --chrome`. ⌘W closes the tab. ⌘R clears the screen and keeps the scrollback. ⌘1 to ⌘9 jump to a tab, ⌘0 focuses the terminal, and ⌘⇧↩ focuses it and maximises it, from anywhere in the window.
-- **It's quiet.** No extension recommendations, no "History restored" banners, no Python interpreter popups, no screen reader prompt. ⌘W asks before it closes the whole window, and the windows I had open come back when I reopen VS Code.
+- **It works like iTerm on the keyboard.** `⌘T` opens a new tab that's already running `claude --chrome`. `⌘W` closes the tab. `⌘R` clears the screen and keeps the scrollback. `⌘1` to `⌘9` jump to a tab, `⌘0` focuses the terminal, and `⌘⇧↩` focuses it and maximises it, from anywhere in the window.
+- **It's quiet.** No extension recommendations, no "History restored" banners, no Python interpreter popups, no screen reader prompt. `⌘W` asks before it closes the whole window, and the windows I had open come back when I reopen VS Code.
 - **Agent tabs survive a restart.** I quit with five Claude tabs open, I reopen, and all five are back, each in its own conversation.
 - **Any Mac gets it with one command.** The whole setup lives in a small public repo.
 
@@ -28,9 +43,13 @@ So I spent a day making VS Code's terminal work like iTerm, plus one thing iTerm
 
 I was coming from Cursor, so I wanted Cursor's Midnight theme. On this Mac I had a local copy of it, but I wanted to publish my setup, and that copy carried no license. So I looked for it on the Marketplace. [Cursor Themes for VS Code](https://marketplace.visualstudio.com/items?itemName=evanlong.cursor-themes) has a "Cursor Dark Midnight" too. I compared the two: all 240 UI colours and all 132 syntax colour rules, zero differences. Same theme, and anyone can install it.
 
-Then I gave the terminal my iTerm colours. VS Code lets you scope colour overrides to one theme, so they only apply when Midnight is on:
+Then I gave the terminal my iTerm colours. This is the difference:
 
-```json
+![[terminal-before-after]]
+
+VS Code lets you scope colour overrides to one theme, so they only apply when Midnight is on:
+
+```json title="settings.json"
 "workbench.colorTheme": "Cursor Dark Midnight",
 "workbench.colorCustomizations": {
     "[Cursor Dark Midnight]": {
@@ -59,13 +78,25 @@ cp /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/SF-Mono-
 
 **VS Code changes your colours on purpose.** By default it nudges terminal text colours to meet a contrast ratio, so my calm grey came out different from iTerm. Setting `minimumContrastRatio` to 1 turns that off, and the colours are exactly the ones you set.
 
-One thing I couldn't match: iTerm lets you pick a colour for bold text, and VS Code's terminal has no setting for that. `drawBoldTextInBrightColors` is the closest it gets.
+> [!NOTE] One thing I couldn't match
+> iTerm lets you pick a colour for bold text, and VS Code's terminal has no setting for that. `drawBoldTextInBrightColors` is the closest it gets.
 
 ### 2. The keys
 
-This is where most of the time went. The iTerm shortcuts I use all day don't exist in VS Code's terminal, or they do something else. Here are the bindings, from `keybindings.json`:
+This is where most of the time went. The iTerm shortcuts I use all day don't exist in VS Code's terminal, or they do something else. This is what I ended up with:
 
-```json
+| Keys | What it does | Works from |
+|---|---|---|
+| `⌘T` | New tab, already running `claude --chrome` | Anywhere, even with no terminal open |
+| `⌘W` | Close the terminal tab | The terminal |
+| `⌘R` | Clear the screen, keep the scrollback | The terminal |
+| `⌘1` … `⌘9` | Jump to terminal tab 1 to 9 | Anywhere |
+| `⌘0` | Focus the terminal, the tab you were last in | Anywhere |
+| `⌘⇧↩` | Focus the terminal and maximise it | Anywhere |
+
+And here are the bindings behind them:
+
+```json title="keybindings.json"
 { "key": "cmd+t", "command": "agentTabs.newTab" },
 { "key": "cmd+w", "command": "workbench.action.terminal.kill", "when": "terminalFocus" },
 { "key": "cmd+r", "command": "workbench.action.terminal.sendSequence", "when": "terminalFocus", "args": { "text": "\f" } },
@@ -76,19 +107,19 @@ This is where most of the time went. The iTerm shortcuts I use all day don't exi
 { "key": "cmd+shift+enter", "command": "workbench.action.terminal.focus", "when": "!terminalFocus && panelMaximized" }
 ```
 
-⌘2 to ⌘9 follow the same pattern as ⌘1. A few of these taught me something.
+`⌘2` to `⌘9` follow the same pattern as `⌘1`. A few of these taught me something.
 
-**⌘R first wiped my history.** I bound it to VS Code's "clear terminal" command, and it cleared the scrollback too. In iTerm I can still scroll up after ⌘R, and I wanted that. The fix is to send Ctrl+L (the `\f` above) to whatever runs in the terminal instead. The shell clears the screen, and everything above is still there. Inside Claude Code, Ctrl+L redraws the screen.
+**`⌘R` first wiped my history.** I bound it to VS Code's "clear terminal" command, and it cleared the scrollback too. In iTerm I can still scroll up after ⌘R, and I wanted that. The fix is to send Ctrl+L (the `\f` above) to whatever runs in the terminal instead. The shell clears the screen, and everything above is still there. Inside Claude Code, Ctrl+L redraws the screen.
 
-**Shortcuts that only work in the terminal aren't enough.** My first bindings all had `"when": "terminalFocus"`, so they only worked while the terminal had focus. But half the time I'm in a file and want to jump to tab 3, or open a new tab when no terminal is open at all. So ⌘T, ⌘0 and ⌘1 to ⌘9 have no `when`, and they work from anywhere. They replace VS Code's defaults for those keys (Go to Symbol in Workspace, and moving focus between editor groups and the side bar), which I never use.
+**Shortcuts that only work in the terminal aren't enough.** My first bindings all had `"when": "terminalFocus"`, so they only worked while the terminal had focus. But half the time I'm in a file and want to jump to tab 3, or open a new tab when no terminal is open at all. So `⌘T`, `⌘0` and `⌘1` to `⌘9` have no `when`, and they work from anywhere. They replace VS Code's defaults for those keys (Go to Symbol in Workspace, and moving focus between editor groups and the side bar), which I never use.
 
-**⌘⇧↩ needed three bindings.** One maximises when you're already in the terminal. One focuses and maximises from anywhere else. The third covers the case where the panel is already maximised but you're somewhere else: it only brings focus back, instead of shrinking the panel.
+**`⌘⇧↩` needed three bindings.** One maximises when you're already in the terminal. One focuses and maximises from anywhere else. The third covers the case where the panel is already maximised but you're somewhere else: it only brings focus back, instead of shrinking the panel.
 
-**⌘T asked me for a folder.** My workspace has several folders, so VS Code's new terminal asked which one to open in, every time. I wanted ⌘T to open straight into my main repo and start Claude there. That's now part of Agent Tabs, below: it opens in the folder you name, or in the first folder of the workspace.
+**`⌘T` asked me for a folder.** My workspace has several folders, so VS Code's new terminal asked which one to open in, every time. I wanted `⌘T` to open straight into my main repo and start Claude there. That's now part of Agent Tabs, below: it opens in the folder you name, or in the first folder of the workspace.
 
 ### 3. The quiet
 
-```json
+```json title="settings.json"
 "extensions.ignoreRecommendations": true,
 "window.confirmBeforeClose": "keyboardOnly",
 "window.restoreWindows": "preserve",
@@ -97,7 +128,10 @@ This is where most of the time went. The iTerm shortcuts I use all day don't exi
 
 I hate those extension recommendations, and the first line turns them off for good. The Python popups came from the Python and Pylance extensions asking me to pick an interpreter. I don't write Python in VS Code, so I uninstalled them, along with a few other extensions I never use. My exact reaction to the Pylance notice isn't printable here.
 
-`confirmBeforeClose` is there because ⌘W in the wrong place closes the whole window. `restoreWindows` reopens the windows I had when I quit. `accessibilitySupport` stops VS Code asking whether I use a screen reader. If you do use one, leave that line out.
+`confirmBeforeClose` is there because `⌘W` in the wrong place closes the whole window. `restoreWindows` reopens the windows I had when I quit. `accessibilitySupport` stops VS Code asking whether I use a screen reader.
+
+> [!WARNING] Using a screen reader?
+> Leave the `accessibilitySupport` line out. It turns off what VS Code does for screen readers.
 
 ### 4. Agent tabs that survive a restart
 
@@ -107,24 +141,27 @@ VS Code can restore terminals, but it can't bring back the processes inside them
 
 The hard part is knowing which conversation runs in which tab. The session ID changes when you `/clear`, when you `/resume` another chat, or when you type `claude` again yourself. Guessing from the outside would break all the time. So I let Claude report it.
 
-I built that into a small open-source tool called [Agent Tabs](https://github.com/swarupdonepudi/agent-tabs). It's a VS Code extension plus a Claude Code plugin:
+![[agent-tabs-replay]]
 
-1. Every tab Agent Tabs opens gets a unique ID in its environment, `AGENT_TABS_ID`.
-2. Claude Code runs the plugin's `SessionStart` hook whenever a session starts, resumes or is cleared. The hook writes that tab's current session ID to a small file under `~/.agent-tabs/sessions/`.
-3. When the workspace opens again, the extension rebuilds each saved tab, in order, and runs `claude --resume <id>` in the folder the conversation started in.
+I built that into a small open-source tool called [Agent Tabs](https://github.com/swarupdonepudi/agent-tabs). It's a VS Code extension plus a Claude Code plugin, and this is how it works:
+
+![[agent-tabs-flow]]
 
 One detail mattered a lot: telling a close from a quit. VS Code tells an extension why a terminal went away. If I closed the tab, or the shell exited, Agent Tabs forgets it. If VS Code is shutting down, it keeps it for next time.
 
 You also want VS Code's own terminal restore off, or you get a dead copy of every tab next to the live one:
 
-```json
+```json title="settings.json"
 "terminal.integrated.enablePersistentSessions": false,
 "agentTabs.extraArgs": ["--chrome"]
 ```
 
-`extraArgs` is how every tab starts as `claude --chrome`. The folder ⌘T opens in is the `agentTabs.defaultFolder` setting, and without it, the first folder of the workspace. My settings file is shared between my Macs, so I set the folder with an environment variable instead, `AGENT_TABS_FOLDER`, and each Mac picks its own.
+`extraArgs` is how every tab starts as `claude --chrome`. The folder `⌘T` opens in is the `agentTabs.defaultFolder` setting, and without it, the first folder of the workspace. My settings file is shared between my Macs, so I set the folder with an environment variable instead, `AGENT_TABS_FOLDER`, and each Mac picks its own.
 
-I wanted this open source from the start, in a way my team could use it elegantly, and maybe others in the broader community who want the same thing. It's MIT licensed, and it's agent-neutral: Claude Code is the first agent, and an adapter for another agent is about 15 lines. It has one honest limit. A reply the agent was in the middle of writing when you quit is lost. The conversation comes back at its last saved point, and you type "continue".
+I wanted this open source from the start, in a way my team could use it elegantly, and maybe others in the broader community who want the same thing. It's MIT licensed, and it's agent-neutral: Claude Code is the first agent, and an adapter for another agent is about 15 lines.
+
+> [!NOTE] One honest limit
+> A reply the agent was in the middle of writing when you quit is lost. The conversation comes back at its last saved point, and you type "continue".
 
 ### 5. One repo for every Mac
 
@@ -144,7 +181,7 @@ Once all this worked, I noticed every new tab took a moment before the prompt sh
 
 The fix is to load nvm without that check and put the default version's `bin` folder on the PATH yourself:
 
-```sh
+```zsh title="~/.zshrc"
 export NVM_DIR="$HOME/.nvm"
 [ -s /opt/homebrew/opt/nvm/nvm.sh ] && . /opt/homebrew/opt/nvm/nvm.sh --no-use
 if [[ -r "$NVM_DIR/alias/default" ]]; then
@@ -159,13 +196,15 @@ New tabs now start in 0.16 seconds, with the same Node version, and `nvm use` st
 
 ## What didn't work the first time
 
-- ⌘R cleared my scrollback. Sending Ctrl+L to the shell fixed it.
-- ⌘T asked for a folder in a multi-folder workspace. Agent Tabs opens in a named folder instead.
-- Shortcuts bound to `terminalFocus` did nothing from a file. The global ones have no `when`.
-- The Python interpreter popup kept showing after I uninstalled the Python extensions. It went away after the window reloaded.
-- I couldn't set a bold text colour. VS Code's terminal has no setting for it.
-- VS Code's own terminal restore brought back dead tabs. Turning it off and letting Agent Tabs do the restore fixed that.
-- The theme I had locally carried no license. The Marketplace version is identical, so the public repo has no theme files in it.
+| What broke | What fixed it |
+|---|---|
+| `⌘R` cleared my scrollback | Sending Ctrl+L to the shell instead |
+| `⌘T` asked for a folder in a multi-folder workspace | Agent Tabs opens in a named folder |
+| Shortcuts bound to `terminalFocus` did nothing from a file | The global ones have no `when` |
+| The Python interpreter popup kept showing after I uninstalled the Python extensions | It went away after the window reloaded |
+| I couldn't set a bold text colour | Nothing: VS Code's terminal has no setting for it |
+| VS Code's own terminal restore brought back dead tabs | Turning it off, and letting Agent Tabs do the restore |
+| The theme I had locally carried no license | The identical Marketplace version, so the public repo has no theme files |
 
 ## Want this setup? Give this to your coding agent
 
@@ -173,8 +212,8 @@ Copy the prompt below and paste it into Claude Code, Codex or Cursor on your Mac
 
 If you'd rather have my exact files, linked and kept in step with mine, clone [the repo](https://github.com/swarupdonepudi/vscode) and run `setup.sh`. The prompt is better if you have your own settings you want to keep.
 
-```text
-Set up VS Code on this Mac for running coding agents (Claude Code first) in VS Code's terminal. The goal: the terminal looks calm (the Cursor Dark Midnight theme, SF Mono), works like iTerm on the keyboard, stays quiet, and brings Claude Code tabs back after VS Code restarts. The setup is explained at https://donepudi.me/blog/vs-code-for-terminal-coding-agents/ and its files are at https://github.com/swarupdonepudi/vscode.
+```prompt
+Set up VS Code on this Mac for running coding agents (Claude Code first) in VS Code's terminal. The goal: the terminal looks calm (the Cursor Dark Midnight theme, SF Mono), works like iTerm on the keyboard, stays quiet, and brings Claude Code tabs back after VS Code restarts. The setup is explained at https://donepudi.me/blog/vs-code-for-terminal-coding-agents/ and its files are at https://github.com/swarupdonepudi/vscode
 
 RULES FOR THE WHOLE JOB
 - macOS only. If this isn't macOS, stop and say so.
@@ -316,6 +355,6 @@ STEP 9. FINISH
   - Delete the backup folder when you no longer need it.
 ```
 
-At the end of the day, the editor matters less than it used to. The agent does the work, and the terminal is where I watch it and talk to it. I just wanted that terminal to feel like home, and to stop losing my agents every time I restarted.
+At the end of the day, the editor matters less than it used to. The agent does the work. What I needed back was the list of projects in front of me, a terminal that feels like home, and agents that don't vanish when I restart. The goal is simple again: complete the projects.
 
-If you run your coding agents in VS Code's terminal too, I'd love to know what's in your setup that isn't in mine.
+If you run your coding agents in a terminal too, how do you keep track of what you're finishing? I'd love to know what's in your setup that isn't in mine.

@@ -1,92 +1,30 @@
-# Adding Blog Posts
+# Writing a post
 
-## Overview
+A post is one Markdown file, `content/blog/YYYY-MM-DD-<slug>.md`. Its address is `/blog/<slug>/` (the date comes off). `npm run publish` makes its page under `site/blog/`; `npm run check` fails if `site/` is stale.
 
-This directory contains blog posts in Markdown format. Each post is a `.md` file with frontmatter metadata.
+## Frontmatter
 
-## Creating a New Post
-
-### Option 1: Single File
-
-Create a file named `your-post-slug.md`:
-
-```markdown
----
-title: "Your Post Title"
-date: "2025-11-23"
-excerpt: "A brief summary of your post"
+```yaml
+title: "The post's title"            # 70 characters or fewer reads best
+date: "2026-11-12"
+excerpt: "One or two sentences."      # the lede under the title, the description and the link preview's text
 author: "Swarup Donepudi"
-tags: ["platform-engineering", "devops"]
-featured_image: "/blog/your-post-slug/hero.png"
----
-
-# Your Post Title
-
-Your content here...
+tags: ["claude-code", "vs-code"]
+featured_image: "/blog/images/<file>.cover.png"   # optional; needs <file>.share.jpg, and <file>.cover.webp unless cover_embed is set
+cover_embed: "projects-mode"                     # optional; an embed shown where the cover would be
+share_kicker: "Claude Code · VS Code"            # optional; the small line on the link preview picture
 ```
 
-### Option 2: Directory with Images
+The link preview picture: `node tools/cover/share.ts content/blog/<file>.md` writes `site/blog/images/<file>.share.jpg` from the title (`tools/cover/share.html`).
 
-Create a directory named `your-post-slug/` with an `index.md` file:
+## What the Markdown can hold
 
-```
-/blog/your-post-slug/
-  index.md
-  hero.png
-  diagram.png
-```
-
-## Required Frontmatter
-
-- `title`: Post title (required)
-- `date`: Publication date in YYYY-MM-DD format (required)
-- `excerpt`: Brief summary (optional, auto-generated if not provided)
-
-## Optional Frontmatter
-
-- `author`: Author name (defaults to your name)
-- `tags`: Array of tags for categorization
-- `featured_image`: Path to hero image
-
-## Formatting
-
-### Code Blocks
-
-Use triple backticks with language specification:
-
-\`\`\`typescript
-const example = "code";
-\`\`\`
-
-### Images
-
-Reference images from the public directory:
-
-```markdown
-![Alt text](/blog/post-slug/image.png)
-```
-
-### Links
-
-```markdown
-[Link text](https://example.com)
-```
-
-## Publishing
-
-1. Create your markdown file in `/public/blog/`
-2. Commit and push to the repository
-3. The static site will regenerate automatically
-
-## Tips
-
-- Keep excerpts under 200 characters
-- Use descriptive slugs (filename becomes URL)
-- Add tags for discoverability
-- Include a featured image for better presentation
-
-## Examples
-
-See `welcome.md` for a complete example.
-
-
+- Headings (`##`, `###`): a post with four or more `##` sections gets "In this post".
+- Code: ` ```json title="settings.json" ` is highlighted and shows the file name; ` ```sh ` lines wrap. Every block has a Copy button.
+- A prompt for the reader's coding agent: ` ```prompt `. It becomes a card with "Copy prompt", folded to its first lines.
+- Keys: inline code that opens with a modifier, `` `⌘T` ``, is a keycap.
+- Tables: GitHub's pipe tables.
+- Callouts: a quote whose first line is `[!NOTE]`, `[!TIP]`, `[!WARNING]` or `[!FIX]`, optionally followed by a title.
+- Images: `![alt](/blog/images/name.png "caption")`; the page serves the `.webp` beside it.
+- Embeds: `![[name]]` on its own line puts `content/blog/embeds/name.html` (or `.svg`) into the page. An embed holds no script, style or handler; it uses classes from `site/style.css`.
+- YouTube: `<youtube videoid="…" title="…"></youtube>`, a link card. Any other HTML is refused.

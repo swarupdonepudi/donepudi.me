@@ -20,8 +20,9 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/post.js"></script>
 </head>
-<body>
+<body class="reading">
   <header class="bar">
     <a class="brand" href="/">donepudi.me</a>
     <nav class="bar-nav" aria-label="Site">
@@ -33,22 +34,30 @@
 
   <main>
     <article class="post">
-      <p class="post-meta"><time datetime="2025-03-18">18 March 2025</time> · cloud, datacenter, infrastructure, 37signals, kamal</p>
-      <h1>37Signals in Datacenter</h1>
-      <p class="lede">37signals moved their apps out of the cloud and back to datacenters in 2023. Their journey and the open-source tool Kamal offer interesting insights for platform builders.</p>
-      <img class="cover" src="/blog/images/2025-03-18-37-signals-de-cloud.cover.webp" alt="" width="1600" height="900">
-      <div class="post-body">
+      <header class="post-head">
+        <p class="post-meta"><time datetime="2025-03-18">18 March 2025</time><span aria-hidden="true">·</span><span>2 min read</span></p>
+        <h1>37Signals in Datacenter</h1>
+        <p class="lede">37signals moved their apps out of the cloud and back to datacenters in 2023. Their journey and the open-source tool Kamal offer interesting insights for platform builders.</p>
+        <p class="byline"><img class="byline-photo" src="/img/avatar.webp" width="1000" height="1000" alt=""><span class="byline-text"><span class="byline-name">Swarup Donepudi</span><span class="byline-tags">cloud · datacenter · infrastructure · 37signals · kamal</span></span></p>
+      </header>
+      <figure class="post-cover"><img src="/blog/images/2025-03-18-37-signals-de-cloud.cover.webp" alt="" width="1600" height="900"></figure>
+      <div class="post-grid">
+        <div class="post-body">
 <p>I knew this. Considering the emphasis Jason put on being cost-effective, it is imperative for them to operate in a datacenter. I was right. Their ops team published <a href="https://dev.37signals.com/bringing-our-apps-back-home/">37signals Dev — De-cloud and de-k8s — bringing our apps back home</a>, explaining their journey to move out of cloud in 2023.</p>
 <figure><img src="/blog/images/2025-03-18-37-signals-de-cloud.webp" alt="37signals de-cloud journey" loading="lazy"></figure>
 <p>While reading up that blog post, I came across a potential open source version of PlantonCloud that they have built internally to orchestrate their deployments to the VMs in the datacenter the old school way. It's called <a href="https://github.com/basecamp/kamal">github.com/basecamp/kamal</a>. Gaining traction for any initiative started by the creator of Rails would obviously be far easier as he already has a ton of audience.</p>
-<h2>Ansible Provisioner in ProjectPlanton</h2>
+<h2 id="ansible-provisioner-in-projectplanton">Ansible Provisioner in ProjectPlanton</h2>
 <p>After reading up about 37signals' journey of migrating off of cloud and back into the data center, I gave a few minutes to think about how we can make sure that the platform we're building supports such migrations back into the data center.</p>
 <p>Inherently, there is nothing that ties Planton Cloud to any of the cloud providers per se. This system is designed to work with any provisioners and provide the ability to map templates or modules for the provisioners and also capture inputs from the users and kick off the provisioning workflows with the inputs to the right module. This remains to be the central design behind the provisioning automation that we have today.</p>
 <p>So, we could very well add Ansible as another provisioner to provision virtual machines in a data center and also configure the operating system to install packages using Ansible modules. And then probably provide features around maintaining the inventory of the static virtual machine infrastructure as another API resource on our system. Also add the ability or support storing SSH credentials in our credential system. In a way, this emulates the Ansible Tower design.</p>
 <p>While we do not intend to rebuild or support every tiny feature that Ansible Tower already does, our approach is to provide the basic tools that 80% of the people would need in a single platform. This is definitely an exciting idea that I would like to pursue in the future.</p>
 <p>If I can figure out a way to capture the events that Ansible emits during its execution and figure out a way to transmit those events into our system, and figure out the data model to be able to finally display that information on the UI. These are the things that I need to figure out, and these are the things that I have already done for Pulumi and Terraform.</p>
+        </div>
+        <footer class="post-foot">
+        <div class="author"><img class="author-photo" src="/img/avatar.webp" width="1000" height="1000" alt=""><div class="author-text"><p class="author-name">Written by Swarup Donepudi</p><p class="author-line">Platform engineer since 2015. I write about platform engineering, and the coding agents I build with every day.</p><p class="author-links"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about this post</a></p></div></div>
+          <nav class="pager" aria-label="More posts"><a class="pager-link" href="/blog/consulting-to-product-ideas/"><span class="pager-label">Newer</span><span class="pager-title">A Practical Way to Spark Your Next Product Idea: Start with Consulting</span></a></nav>
+        </footer>
       </div>
-      <p class="post-end"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about it</a></p>
     </article>
   </main>
 

@@ -1,0 +1,10 @@
+<!-- How Agent Tabs keeps a tab's conversation across a restart, drawn as five steps for the VS Code post. -->
+<figure class="flow" aria-label="How Agent Tabs brings a tab back">
+  <ol class="flow-steps">
+    <li class="flow-step"><p class="flow-title"><kbd>⌘T</kbd> opens a tab</p><p class="flow-detail">Agent Tabs gives the tab its own ID, in its environment: <code>AGENT_TABS_ID=7c1e…</code></p></li>
+    <li class="flow-step"><p class="flow-title">Claude Code starts in it</p><p class="flow-detail">Its <code>SessionStart</code> hook runs, on every start, resume and <code>/clear</code>.</p></li>
+    <li class="flow-step"><p class="flow-title">The hook writes down the conversation</p><p class="flow-detail"><code>~/.agent-tabs/…/7c1e.json</code> now holds the session ID, <code>4f2a…</code></p></li>
+    <li class="flow-step"><p class="flow-title">You quit VS Code</p><p class="flow-detail">A quit isn't a close, so the tab is kept. Close a tab yourself, and it's forgotten.</p></li>
+    <li class="flow-step flow-step-last"><p class="flow-title">VS Code opens again</p><p class="flow-detail">Agent Tabs rebuilds the tab in its folder and runs <code>claude --resume 4f2a…</code></p></li>
+  </ol>
+</figure>

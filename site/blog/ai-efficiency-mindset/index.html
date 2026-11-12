@@ -20,8 +20,9 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/post.js"></script>
 </head>
-<body>
+<body class="reading">
   <header class="bar">
     <a class="brand" href="/">donepudi.me</a>
     <nav class="bar-nav" aria-label="Site">
@@ -33,20 +34,28 @@
 
   <main>
     <article class="post">
-      <p class="post-meta"><time datetime="2025-04-02">2 April 2025</time> · ai, productivity, efficiency, chatgpt, tools</p>
-      <h1>Time to Shift Your Mindset: Embrace AI Tools for Maximum Efficiency</h1>
-      <p class="lede">A coffee shop conversation that turned into a productivity lesson. How combining ChatGPT and voice dictation transformed a tedious spreadsheet task into a 10-second solution.</p>
-      <img class="cover" src="/blog/images/2025-04-02-ai-efficiency-mindset.cover.webp" alt="" width="1600" height="900">
-      <div class="post-body">
+      <header class="post-head">
+        <p class="post-meta"><time datetime="2025-04-02">2 April 2025</time><span aria-hidden="true">·</span><span>1 min read</span></p>
+        <h1>Time to Shift Your Mindset: Embrace AI Tools for Maximum Efficiency</h1>
+        <p class="lede">A coffee shop conversation that turned into a productivity lesson. How combining ChatGPT and voice dictation transformed a tedious spreadsheet task into a 10-second solution.</p>
+        <p class="byline"><img class="byline-photo" src="/img/avatar.webp" width="1000" height="1000" alt=""><span class="byline-text"><span class="byline-name">Swarup Donepudi</span><span class="byline-tags">ai · productivity · efficiency · chatgpt · tools</span></span></p>
+      </header>
+      <figure class="post-cover"><img src="/blog/images/2025-04-02-ai-efficiency-mindset.cover.webp" alt="" width="1600" height="900"></figure>
+      <div class="post-grid">
+        <div class="post-body">
 <p>I was sitting at a coffee shop with my friend Avinash when I spotted him copying data into a Google Sheet. He had received a Slack message with the hours logged by our front-end developer for the month, but since Jira's time-tracking was broken, the developer tracked hours manually.</p>
-<h2>A Faster Approach</h2>
+<h2 id="a-faster-approach">A Faster Approach</h2>
 <p>Curious, I suggested we try a faster approach. Instead of splitting text in the sheet, we used ChatGPT to convert the raw text into CSV format. Avinash then pasted the CSV into Google Sheets. Soon after, I realized we didn't actually need the spreadsheet at all—he just needed the total hours. We asked ChatGPT directly, and it immediately gave the sum, skipping the entire spreadsheet step.</p>
-<h2>Voice Dictation as a Multiplier</h2>
+<h2 id="voice-dictation-as-a-multiplier">Voice Dictation as a Multiplier</h2>
 <p>Throughout this process, we used Flow for voice dictation, minimizing our typing. What would usually take several minutes in Google Sheets took just seconds with the right tools. Avinash was impressed; he already had ChatGPT and Flow but never thought of combining them to speed up simple tasks.</p>
-<h2>The Efficiency-First Mindset</h2>
+<h2 id="the-efficiency-first-mindset">The Efficiency-First Mindset</h2>
 <p>The lesson here is to adopt an efficiency-first mindset. By leveraging modern tools, we can save time and mental energy for the things that truly matter. The freed up time can be used for getting more done at work or spending quality time with the people we care about.</p>
+        </div>
+        <footer class="post-foot">
+        <div class="author"><img class="author-photo" src="/img/avatar.webp" width="1000" height="1000" alt=""><div class="author-text"><p class="author-name">Written by Swarup Donepudi</p><p class="author-line">Platform engineer since 2015. I write about platform engineering, and the coding agents I build with every day.</p><p class="author-links"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about this post</a></p></div></div>
+          <nav class="pager" aria-label="More posts"><a class="pager-link" href="/blog/refocusing-my-social-media-strategy/"><span class="pager-label">Newer</span><span class="pager-title">Refocusing My Social Media Strategy</span></a><a class="pager-link pager-older" href="/blog/reflections-on-march/"><span class="pager-label">Older</span><span class="pager-title">Reflections on March</span></a></nav>
+        </footer>
       </div>
-      <p class="post-end"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about it</a></p>
     </article>
   </main>
 

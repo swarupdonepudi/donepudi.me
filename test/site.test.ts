@@ -38,6 +38,14 @@ const SERVED = [
   "app/threads-store.js",
   "app/threads.js",
   "feedback.html",
+  "fonts/inter-italic.woff2",
+  "fonts/inter-OFL.txt",
+  "fonts/inter.woff2",
+  "fonts/jetbrains-mono-OFL.txt",
+  "fonts/jetbrains-mono.woff2",
+  "fonts/source-serif-4-OFL.txt",
+  "fonts/source-serif-4.woff2",
+  "post.js",
   "updates.html",
   "img/apple-touch-icon.png",
   "img/avatar.webp",
@@ -82,6 +90,8 @@ const EXPECTED_HEADERS: Record<string, string> = {
     `script-src 'self' ${originsOf(SCRIPT_RESOURCES)}`,
     "style-src 'self'",
     "img-src 'self'",
+    // The site's three faces, served from site/fonts/ (AGENTS.md, "Design").
+    "font-src 'self'",
     "connect-src 'self'",
     // The site's own frames are the pages saved into threads, each sealed by its own answer's CSP (src/page.ts).
     `frame-src 'self' ${originsOf(SCRIPT_RESOURCES)}`,
@@ -222,8 +232,12 @@ describe.each(pages)("%s", (page) => {
       ...doc.querySelectorAll("link[href]").filter((el) => attr(el, "rel") !== "canonical").map((el) => attr(el, "href")),
       ...doc.querySelectorAll("img[src], iframe[src], script[src], source[src]").map((el) => attr(el, "src")),
     ];
+    // A link within the page ("In this post") names an id the page holds.
+    const ids = new Set(doc.querySelectorAll("[id]").map((el) => attr(el, "id")));
+    const inPage = refs.filter((ref) => ref.startsWith("#"));
+    expect(inPage.filter((ref) => !ids.has(ref.slice(1)))).toEqual([]);
     const misses = refs
-      .filter((ref) => !/^[a-z]+:/i.test(ref))
+      .filter((ref) => !/^[a-z]+:/i.test(ref) && !ref.startsWith("#"))
       .map((ref) => ({ ref, result: resolveInternal(ref) }))
       .flatMap(({ ref, result }) => ("error" in result ? [`${ref} ${result.error}`] : []));
     expect(misses).toEqual([]);
@@ -624,6 +638,11 @@ describe("the design system", () => {
     ["--muted", "--bg"], ["--muted", "--surface"], ["--muted", "--hover"], ["--muted", "--sel"],
     ["--faint", "--bg"], ["--faint", "--surface"], ["--faint", "--hover"], ["--faint", "--sel"],
     ["--accent", "--bg"], ["--accent", "--surface"], ["--accent", "--accent-soft"], ["--accent-ink", "--accent"], ["--ink", "--accent-soft"],
+    ["--ink", "--chip"], ["--warn", "--surface"], ["--warn", "--bg"],
+    // Code panels: their text, their labels and every token colour, on the panel.
+    ["--code-ink", "--code-bg"], ["--code-muted", "--code-bg"], ["--tk-keyword", "--code-bg"], ["--tk-string", "--code-bg"],
+    ["--tk-constant", "--code-bg"], ["--tk-function", "--code-bg"], ["--tk-punctuation", "--code-bg"], ["--claude", "--code-bg"],
+    ["--vsc-ink", "--vsc-bg"],
   ] as const;
 
   it.each([["light", light], ["dark", dark]] as const)("meets WCAG AA for every text and background pair in %s", (_theme, colours) => {
