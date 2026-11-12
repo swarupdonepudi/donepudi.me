@@ -34,7 +34,7 @@ export const TOPICS = Object.freeze([
   },
   {
     slug: 'platform-engineering',
-    label: 'Platform engineering question',
+    label: 'Platform engineering',
     hint: 'Your platform, your pipeline, your cloud',
     questions: [
       'What are you building, and for how many teams?',

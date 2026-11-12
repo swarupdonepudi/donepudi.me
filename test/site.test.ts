@@ -571,6 +571,62 @@ describe("style.css", () => {
   });
 });
 
+describe("the design system", () => {
+  // AGENTS.md, "Design": every colour, font size and spacing is a token in :root, and every pair of text and
+  // background the site draws meets WCAG AA (4.5:1) in light and in dark.
+  const raw = read("style.css").replace(/\/\*[\s\S]*?\*\//g, "");
+  const rootEnd = raw.indexOf("* { box-sizing");
+  const tokens = raw.slice(0, rootEnd);
+  const rules = raw.slice(rootEnd);
+  const [lightBlock = "", darkBlock = ""] = tokens.split("@media (prefers-color-scheme: dark)");
+  const palette = (block: string): Map<string, string> =>
+    new Map([...block.matchAll(/(--[\w-]+):\s*(#[0-9a-f]{6})\b/gi)].map((m) => [m[1] ?? "", (m[2] ?? "").toLowerCase()]));
+  const light = palette(lightBlock);
+  const dark = new Map([...light, ...palette(darkBlock)]);
+
+  it("keeps the tokens first, in :root and its dark twin, and nothing else before the rules", () => {
+    expect(rootEnd).toBeGreaterThan(0);
+    expect(tokens.replace(/:root\s*\{[^}]*\}/g, "").replace(/@media \(prefers-color-scheme: dark\)\s*\{\s*\}/g, "").trim()).toBe("");
+  });
+
+  it("writes no colour outside the tokens", () => {
+    expect(rules.match(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/gi)).toBeNull();
+  });
+
+  it("sizes every font with a type token", () => {
+    const sizes = [...rules.matchAll(/font-size:\s*([^;}]+)/g)].map((m) => (m[1] ?? "").trim());
+    expect(sizes.filter((v) => !/^var\(--text-[\w-]+\)$|^inherit$/.test(v))).toEqual([]);
+    const shorthands = [...rules.matchAll(/(?<![\w-])font:\s*([^;}]+)/g)].map((m) => (m[1] ?? "").trim());
+    expect(shorthands.filter((v) => v !== "inherit" && /\d(?:px|rem|em)\b/.test(v.replace(/var\([^)]*\)/g, "")))).toEqual([]);
+  });
+
+  it("spaces every margin, padding and gap with a spacing token", () => {
+    const values = [...rules.matchAll(/(?<![\w-])(?:margin|padding|gap|row-gap|column-gap)(?:-[a-z]+)?:\s*([^;}]+)/g)].map((m) => (m[1] ?? "").trim());
+    const literal = (v: string): boolean => /(?<![\w.-])(?!0(?:px)?\b)\d*\.?\d+(?:px|rem|em|vh|vw)\b/.test(v.replace(/env\([^)]*\)/g, "").replace(/var\([^)]*\)/g, ""));
+    expect(values.filter(literal)).toEqual([]);
+  });
+
+  const luminance = (hex: string): number => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * (r ?? 0) + 0.7152 * (g ?? 0) + 0.0722 * (b ?? 0);
+  };
+  const contrast = (a: string, b: string): number => {
+    const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return ((hi ?? 0) + 0.05) / ((lo ?? 0) + 0.05);
+  };
+  const PAIRS = [
+    ["--ink", "--bg"], ["--ink", "--surface"], ["--ink", "--hover"], ["--ink", "--sel"],
+    ["--muted", "--bg"], ["--muted", "--surface"], ["--muted", "--hover"], ["--muted", "--sel"],
+    ["--faint", "--bg"], ["--faint", "--surface"], ["--faint", "--hover"], ["--faint", "--sel"],
+    ["--accent", "--bg"], ["--accent", "--surface"], ["--accent", "--accent-soft"], ["--accent-ink", "--accent"], ["--ink", "--accent-soft"],
+  ] as const;
+
+  it.each([["light", light], ["dark", dark]] as const)("meets WCAG AA for every text and background pair in %s", (_theme, colours) => {
+    const failing = PAIRS.map(([text, ground]) => [text, ground, contrast(colours.get(text) ?? "", colours.get(ground) ?? "")] as const).filter(([, , ratio]) => !(ratio >= 4.5));
+    expect(failing).toEqual([]);
+  });
+});
+
 describe("_redirects", () => {
   it("sends /meetings/ and /asks/ to their rooms, and nothing else: /me and /inbox lead nowhere", () => {
     const rules = read("_redirects")

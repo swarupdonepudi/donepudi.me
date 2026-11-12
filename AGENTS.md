@@ -27,3 +27,18 @@ This repository is donepudi.me, Swarup's home page and, one label below it at he
 - **The Cloudflare key, the bot check's secret, the owner's email address and the evaluation key live only in the GitHub environment `production`,** which only `main` may use. The `check` job holds none of them. The `deploy` job installs nothing but the wrangler pinned in `deploy/`, refuses to run with any of the three Worker secrets empty, and hands them to wrangler in an owner-only file it deletes. The key can deploy Workers and their routes, read zones and edit the account's D1 databases, and nothing in DNS (`infrastructure/vendors/cloudflare/README.md`). Local runs use Cloudflare's public test keys (`npm run dev`), so no secret is ever on disk.
 - **Never touch the zone's TXT records `_atproto` and `_dmarc`.** `_atproto` is what makes `donepudi.me` a Bluesky handle, and `_dmarc` is the mail policy. Their files under `infrastructure/` say so, and nothing in the site or the workflows can edit DNS.
 - **Nothing private in any file:** no notes from outside this repository, no task or plan names, and no one's name but Swarup's.
+
+## Design
+
+The look is **Field notes**: an engineer's published notebook. Warm paper and near-black ink in light, warm charcoal in dark (from the device's setting), serif headings over a sans body, and one deep teal for links and actions. It is written for a working platform engineer and should still read as right in ten years: no trends, no decoration that doesn't carry meaning.
+
+- **`site/style.css` is the only source of the look**, and its `:root` (with its dark twin) is the only place a value is written:
+  - colour: `--bg`, `--surface`, `--ink`, `--muted`, `--faint`, `--line`, `--hover`, `--sel`, `--accent`, `--accent-ink`, `--accent-soft`, `--frame-bg`, `--shadow`, `--scrim`;
+  - type: `--font`, `--serif` (headings and the journal), `--mono`, and the sizes `--text-3xs` … `--text-h1` plus the fluid `--text-sub`, `--text-lede-fluid`, `--text-title`, `--text-display`, `--text-hero`;
+  - spacing: `--space-px` and `--space-1` … `--space-15` for every margin, padding and gap, plus the safe-area gutters.
+- **Never write a literal colour, font size or spacing outside `:root`.** Borders, radii, widths and heights stay literal: they're shape, not rhythm.
+- **Every text and background pair meets WCAG AA (4.5:1) in both themes.** The test computes it from the tokens.
+- **Adding a token** is one line in `:root`, and one in the dark block when it changes with the theme. A token nothing reads fails the build.
+- **No web font and no font host.** The CSP serves fonts from nowhere, and system faces cover every script.
+
+`test/site.test.ts`, "the design system", enforces all of this beside the older rules (no unused class, no inline style, no third-party origin).

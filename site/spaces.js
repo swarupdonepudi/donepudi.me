@@ -11,7 +11,7 @@
 /** @type {readonly Space[]} */
 export const SPACES = Object.freeze([
   { slug: 'speaking', label: 'Speaking invitation' },
-  { slug: 'platform-engineering', label: 'Platform engineering question' },
+  { slug: 'platform-engineering', label: 'Platform engineering' },
   { slug: 'planton', label: 'Planton' },
   { slug: 'company', label: 'Company' },
   { slug: 'shows', label: 'The shows' },
