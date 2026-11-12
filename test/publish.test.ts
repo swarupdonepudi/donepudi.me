@@ -30,7 +30,8 @@ describe("the publisher", () => {
     expect(slugFor("/content/talks/2025-11-29-hyderabad-cncf-meetup/index.md")).toBe("2025-11-29-hyderabad-cncf-meetup");
     expect(slugFor("/content/blog/2025-01-01-shouldn't stop.md")).toBe("shouldnt-stop");
     const posts = readdirSync(join(root, "content", "blog")).filter((name) => /^\d{4}-\d{2}-\d{2}-.*\.md$/.test(name));
-    expect(posts.length).toBe(17);
+    // The old site had 17 posts; every one still answers, and so does every post written since.
+    expect(posts.filter((name) => name < "2026-11-11").length).toBe(17);
     for (const name of posts) expect(published.has(`blog/${slugFor(`/content/blog/${name}`)}/index.html`)).toBe(true);
     expect(published.has("talks/2025-11-29-hyderabad-cncf-meetup/index.html")).toBe(true);
   });

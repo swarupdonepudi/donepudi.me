@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!-- donepudi.me/blog/vs-code-for-terminal-coding-agents/: the post "My VS Code Setup for Running Coding Agents in the Terminal" (content/blog/2026-11-12-vs-code-for-terminal-coding-agents.md). Made by tools/publish from content/; edit the Markdown, not this file. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>My VS Code Setup for Running Coding Agents in the Terminal</title>
+  <meta name="description" content="I run Claude Code in VS Code's terminal. How I made it feel like iTerm, how my agent tabs now survive a restart, and a prompt your own coding agent can run to set it all up.">
+  <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171512" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://donepudi.me/blog/vs-code-for-terminal-coding-agents/">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://donepudi.me/blog/vs-code-for-terminal-coding-agents/">
+  <meta property="og:title" content="My VS Code Setup for Running Coding Agents in the Terminal">
+  <meta property="og:description" content="I run Claude Code in VS Code's terminal. How I made it feel like iTerm, how my agent tabs now survive a restart, and a prompt your own coding agent can run to set it all up.">
+  <meta property="og:image" content="https://donepudi.me/img/share.jpg">
+  <meta property="article:published_time" content="2026-11-12">
+  <meta property="article:author" content="Swarup Donepudi">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="/">donepudi.me</a>
+    <nav class="bar-nav" aria-label="Site">
+      <a class="bar-link" href="/blog/">Writing</a>
+      <a class="bar-link" href="/talks/">Talks</a>
+      <a class="bar-link" href="/feedback">Talk to me</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post">
+      <p class="post-meta"><time datetime="2026-11-12">12 November 2026</time> · vs-code, claude-code, coding-agents, developer-tools, terminal</p>
+      <h1>My VS Code Setup for Running Coding Agents in the Terminal</h1>
+      <p class="lede">I run Claude Code in VS Code's terminal. How I made it feel like iTerm, how my agent tabs now survive a restart, and a prompt your own coding agent can run to set it all up.</p>
+      <div class="post-body">
+<p>I spend my whole day with coding agents. For a long time that meant Cursor. Today it means Claude Code, running in a terminal, not in an editor's chat panel.</p>
+<p>I feel like coding agents in the terminal have an edge in capabilities over the agents built into IDEs. So I run the same Claude Code everywhere, with the same flags. In iTerm I start it with <code>claude --chrome</code>, which lets it work in my Chrome browser, and that works exactly the same way in VS Code's terminal.</p>
+<p>The problem was that VS Code's terminal didn't feel like my terminal. The colours were different, the font was different, and none of my iTerm shortcuts worked. And every time I quit VS Code, every agent session I had open was gone. In Cursor, my agent chats came back after a restart. In a plain terminal, quitting means starting over.</p>
+<p>So I spent a day making VS Code's terminal work like iTerm, plus one thing iTerm doesn't do: bring every agent back after a restart. This post is what I did, why, what broke along the way, and, at the end, a prompt you can hand to your own coding agent to get the same setup on your Mac.</p>
+<h2>What I ended up with</h2>
+<ul><li><strong>It looks like my iTerm.</strong> The Cursor Dark Midnight theme, SF Mono at 14, line spacing of 1.35, and calm blue-grey text (#8b97ae on #1e2127).</li><li><strong>It works like iTerm on the keyboard.</strong> ⌘T opens a new tab that's already running <code>claude --chrome</code>. ⌘W closes the tab. ⌘R clears the screen and keeps the scrollback. ⌘1 to ⌘9 jump to a tab, ⌘0 focuses the terminal, and ⌘⇧↩ focuses it and maximises it, from anywhere in the window.</li><li><strong>It's quiet.</strong> No extension recommendations, no &quot;History restored&quot; banners, no Python interpreter popups, no screen reader prompt. ⌘W asks before it closes the whole window, and the windows I had open come back when I reopen VS Code.</li><li><strong>Agent tabs survive a restart.</strong> I quit with five Claude tabs open, I reopen, and all five are back, each in its own conversation.</li><li><strong>Any Mac gets it with one command.</strong> The whole setup lives in a small public repo.</li></ul>
+<h2>How I did it</h2>
+<h3>1. The look</h3>
+<p>I was coming from Cursor, so I wanted Cursor's Midnight theme. On this Mac I had a local copy of it, but I wanted to publish my setup, and that copy carried no license. So I looked for it on the Marketplace. <a href="https://marketplace.visualstudio.com/items?itemName=evanlong.cursor-themes">Cursor Themes for VS Code</a> has a &quot;Cursor Dark Midnight&quot; too. I compared the two: all 240 UI colours and all 132 syntax colour rules, zero differences. Same theme, and anyone can install it.</p>
+<p>Then I gave the terminal my iTerm colours. VS Code lets you scope colour overrides to one theme, so they only apply when Midnight is on:</p>
+<pre><code class="lang">&quot;workbench.colorTheme&quot;: &quot;Cursor Dark Midnight&quot;,
+&quot;workbench.colorCustomizations&quot;: {
+    &quot;[Cursor Dark Midnight]&quot;: {
+        &quot;terminal.background&quot;: &quot;#1e2127&quot;,
+        &quot;terminal.foreground&quot;: &quot;#8b97ae&quot;,
+        &quot;terminal.selectionBackground&quot;: &quot;#434c5e&quot;,
+        &quot;terminal.selectionForeground&quot;: &quot;#eceff4&quot;,
+        &quot;terminalCursor.foreground&quot;: &quot;#8fbcbb&quot;,
+        &quot;terminalCursor.background&quot;: &quot;#1e2127&quot;
+    }
+},
+&quot;terminal.integrated.fontFamily&quot;: &quot;SF Mono&quot;,
+&quot;terminal.integrated.fontSize&quot;: 14,
+&quot;terminal.integrated.lineHeight&quot;: 1.35,
+&quot;terminal.integrated.minimumContrastRatio&quot;: 1,
+&quot;terminal.integrated.drawBoldTextInBrightColors&quot;: true</code></pre>
+<p>Two things here aren't obvious.</p>
+<p><strong>SF Mono isn't available to apps by default.</strong> macOS ships it, but only inside Terminal.app. You copy it out once:</p>
+<pre><code class="lang">cp /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/SF-Mono-*.otf ~/Library/Fonts/</code></pre>
+<p><strong>VS Code changes your colours on purpose.</strong> By default it nudges terminal text colours to meet a contrast ratio, so my calm grey came out different from iTerm. Setting <code>minimumContrastRatio</code> to 1 turns that off, and the colours are exactly the ones you set.</p>
+<p>One thing I couldn't match: iTerm lets you pick a colour for bold text, and VS Code's terminal has no setting for that. <code>drawBoldTextInBrightColors</code> is the closest it gets.</p>
+<h3>2. The keys</h3>
+<p>This is where most of the time went. The iTerm shortcuts I use all day don't exist in VS Code's terminal, or they do something else. Here are the bindings, from <code>keybindings.json</code>:</p>
+<pre><code class="lang">{ &quot;key&quot;: &quot;cmd+t&quot;, &quot;command&quot;: &quot;agentTabs.newTab&quot; },
+{ &quot;key&quot;: &quot;cmd+w&quot;, &quot;command&quot;: &quot;workbench.action.terminal.kill&quot;, &quot;when&quot;: &quot;terminalFocus&quot; },
+{ &quot;key&quot;: &quot;cmd+r&quot;, &quot;command&quot;: &quot;workbench.action.terminal.sendSequence&quot;, &quot;when&quot;: &quot;terminalFocus&quot;, &quot;args&quot;: { &quot;text&quot;: &quot;\f&quot; } },
+{ &quot;key&quot;: &quot;cmd+0&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot; },
+{ &quot;key&quot;: &quot;cmd+1&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex1&quot; },
+{ &quot;key&quot;: &quot;cmd+shift+enter&quot;, &quot;command&quot;: &quot;workbench.action.toggleMaximizedPanel&quot;, &quot;when&quot;: &quot;terminalFocus&quot; },
+{ &quot;key&quot;: &quot;cmd+shift+enter&quot;, &quot;command&quot;: &quot;runCommands&quot;, &quot;when&quot;: &quot;!terminalFocus &amp;&amp; !panelMaximized&quot;, &quot;args&quot;: { &quot;commands&quot;: [&quot;workbench.action.terminal.focus&quot;, &quot;workbench.action.toggleMaximizedPanel&quot;] } },
+{ &quot;key&quot;: &quot;cmd+shift+enter&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot;, &quot;when&quot;: &quot;!terminalFocus &amp;&amp; panelMaximized&quot; }</code></pre>
+<p>⌘2 to ⌘9 follow the same pattern as ⌘1. A few of these taught me something.</p>
+<p><strong>⌘R first wiped my history.</strong> I bound it to VS Code's &quot;clear terminal&quot; command, and it cleared the scrollback too. In iTerm I can still scroll up after ⌘R, and I wanted that. The fix is to send Ctrl+L (the <code>\f</code> above) to whatever runs in the terminal instead. The shell clears the screen, and everything above is still there. Inside Claude Code, Ctrl+L redraws the screen.</p>
+<p><strong>Shortcuts that only work in the terminal aren't enough.</strong> My first bindings all had <code>&quot;when&quot;: &quot;terminalFocus&quot;</code>, so they only worked while the terminal had focus. But half the time I'm in a file and want to jump to tab 3, or open a new tab when no terminal is open at all. So ⌘T, ⌘0 and ⌘1 to ⌘9 have no <code>when</code>, and they work from anywhere. They replace VS Code's defaults for those keys (Go to Symbol in Workspace, and moving focus between editor groups and the side bar), which I never use.</p>
+<p><strong>⌘⇧↩ needed three bindings.</strong> One maximises when you're already in the terminal. One focuses and maximises from anywhere else. The third covers the case where the panel is already maximised but you're somewhere else: it only brings focus back, instead of shrinking the panel.</p>
+<p><strong>⌘T asked me for a folder.</strong> My workspace has several folders, so VS Code's new terminal asked which one to open in, every time. I wanted ⌘T to open straight into my main repo and start Claude there. That's now part of Agent Tabs, below: it opens in the folder you name, or in the first folder of the workspace.</p>
+<h3>3. The quiet</h3>
+<pre><code class="lang">&quot;extensions.ignoreRecommendations&quot;: true,
+&quot;window.confirmBeforeClose&quot;: &quot;keyboardOnly&quot;,
+&quot;window.restoreWindows&quot;: &quot;preserve&quot;,
+&quot;editor.accessibilitySupport&quot;: &quot;off&quot;</code></pre>
+<p>I hate those extension recommendations, and the first line turns them off for good. The Python popups came from the Python and Pylance extensions asking me to pick an interpreter. I don't write Python in VS Code, so I uninstalled them, along with a few other extensions I never use. My exact reaction to the Pylance notice isn't printable here.</p>
+<p><code>confirmBeforeClose</code> is there because ⌘W in the wrong place closes the whole window. <code>restoreWindows</code> reopens the windows I had when I quit. <code>accessibilitySupport</code> stops VS Code asking whether I use a screen reader. If you do use one, leave that line out.</p>
+<h3>4. Agent tabs that survive a restart</h3>
+<p>This was the one I cared about most. I asked whether the terminal sessions could be preserved and reopened, because right now, if I quit and reopen, every terminal session is lost.</p>
+<p>VS Code can restore terminals, but it can't bring back the processes inside them. What you get is a dead copy of each tab. When I thought about it, though, the conversation was never the process. Claude Code saves every conversation to disk, and <code>claude --resume &lt;id&gt;</code> brings one back with its full history. So nothing has to keep running. VS Code only has to remember which tab held which conversation.</p>
+<p>The hard part is knowing which conversation runs in which tab. The session ID changes when you <code>/clear</code>, when you <code>/resume</code> another chat, or when you type <code>claude</code> again yourself. Guessing from the outside would break all the time. So I let Claude report it.</p>
+<p>I built that into a small open-source tool called <a href="https://github.com/swarupdonepudi/agent-tabs">Agent Tabs</a>. It's a VS Code extension plus a Claude Code plugin:</p>
+<ol><li>Every tab Agent Tabs opens gets a unique ID in its environment, <code>AGENT_TABS_ID</code>.</li><li>Claude Code runs the plugin's <code>SessionStart</code> hook whenever a session starts, resumes or is cleared. The hook writes that tab's current session ID to a small file under <code>~/.agent-tabs/sessions/</code>.</li><li>When the workspace opens again, the extension rebuilds each saved tab, in order, and runs <code>claude --resume &lt;id&gt;</code> in the folder the conversation started in.</li></ol>
+<p>One detail mattered a lot: telling a close from a quit. VS Code tells an extension why a terminal went away. If I closed the tab, or the shell exited, Agent Tabs forgets it. If VS Code is shutting down, it keeps it for next time.</p>
+<p>You also want VS Code's own terminal restore off, or you get a dead copy of every tab next to the live one:</p>
+<pre><code class="lang">&quot;terminal.integrated.enablePersistentSessions&quot;: false,
+&quot;agentTabs.extraArgs&quot;: [&quot;--chrome&quot;]</code></pre>
+<p><code>extraArgs</code> is how every tab starts as <code>claude --chrome</code>. The folder ⌘T opens in is the <code>agentTabs.defaultFolder</code> setting, and without it, the first folder of the workspace. My settings file is shared between my Macs, so I set the folder with an environment variable instead, <code>AGENT_TABS_FOLDER</code>, and each Mac picks its own.</p>
+<p>I wanted this open source from the start, in a way my team could use it elegantly, and maybe others in the broader community who want the same thing. It's MIT licensed, and it's agent-neutral: Claude Code is the first agent, and an adapter for another agent is about 15 lines. It has one honest limit. A reply the agent was in the middle of writing when you quit is lost. The conversation comes back at its last saved point, and you type &quot;continue&quot;.</p>
+<h3>5. One repo for every Mac</h3>
+<p>Then I wanted my other Mac to behave exactly like this one. My first plans were bigger: Settings Sync plus a script, and then a whole &quot;Mac as code&quot; repo. That seemed like overkill. What I actually wanted was one repo called <code>vscode</code> that contains everything that sets up VS Code on any computer.</p>
+<p>That's <a href="https://github.com/swarupdonepudi/vscode">swarupdonepudi/vscode</a>. It has four files that matter:</p>
+<ul><li><code>settings.json</code> and <code>keybindings.json</code>, linked into VS Code's settings folder, so any change I make in VS Code lands in the repo.</li><li><code>extensions.txt</code>, the Marketplace extensions.</li><li><code>setup.sh</code>, which installs VS Code if it's missing, copies SF Mono, links the two files (saving whatever was there), installs the extensions and Agent Tabs, and adds the Claude Code plugin.</li></ul>
+<p><code>setup.sh</code> is safe to run again. On my other Mac it's <code>git pull &amp;&amp; ./setup.sh</code>, and everything matches. Because the repo is public, it has no third-party files in it. The theme comes from the Marketplace, and the font comes from the Mac itself.</p>
+<h3>6. A bonus: the slow terminal</h3>
+<p>Once all this worked, I noticed every new tab took a moment before the prompt showed up. So I timed it. A new zsh took 0.57 seconds to start, and 0.44 of those were nvm, which checks your default Node version every time a shell starts.</p>
+<p>The fix is to load nvm without that check and put the default version's <code>bin</code> folder on the PATH yourself:</p>
+<pre><code class="lang">export NVM_DIR=&quot;$HOME/.nvm&quot;
+[ -s /opt/homebrew/opt/nvm/nvm.sh ] &amp;&amp; . /opt/homebrew/opt/nvm/nvm.sh --no-use
+if [[ -r &quot;$NVM_DIR/alias/default&quot; ]]; then
+  nvm_default=$(&lt;&quot;$NVM_DIR/alias/default&quot;)
+  nvm_bins=(&quot;$NVM_DIR&quot;/versions/node/v${nvm_default#v}*/bin(N/nOn))
+  (( $#nvm_bins )) &amp;&amp; path=($nvm_bins[1] $path)
+  unset nvm_default nvm_bins
+fi</code></pre>
+<p>New tabs now start in 0.16 seconds, with the same Node version, and <code>nvm use</code> still works. This is zsh. It works when your default is a version number, like <code>24</code>. If it's a name like <code>lts/*</code>, keep the plain load.</p>
+<h2>What didn't work the first time</h2>
+<ul><li>⌘R cleared my scrollback. Sending Ctrl+L to the shell fixed it.</li><li>⌘T asked for a folder in a multi-folder workspace. Agent Tabs opens in a named folder instead.</li><li>Shortcuts bound to <code>terminalFocus</code> did nothing from a file. The global ones have no <code>when</code>.</li><li>The Python interpreter popup kept showing after I uninstalled the Python extensions. It went away after the window reloaded.</li><li>I couldn't set a bold text colour. VS Code's terminal has no setting for it.</li><li>VS Code's own terminal restore brought back dead tabs. Turning it off and letting Agent Tabs do the restore fixed that.</li><li>The theme I had locally carried no license. The Marketplace version is identical, so the public repo has no theme files in it.</li></ul>
+<h2>Want this setup? Give this to your coding agent</h2>
+<p>Copy the prompt below and paste it into Claude Code, Codex or Cursor on your Mac. Your agent checks what you already have, backs up every file before changing it, merges into your settings instead of replacing them, asks before anything risky or third-party, and keeps a manifest of what it changed, so you can undo it. It's safe to run twice. I had a fresh agent read the prompt cold and pick holes in it before I published it.</p>
+<p>If you'd rather have my exact files, linked and kept in step with mine, clone <a href="https://github.com/swarupdonepudi/vscode">the repo</a> and run <code>setup.sh</code>. The prompt is better if you have your own settings you want to keep.</p>
+<pre><code class="lang">Set up VS Code on this Mac for running coding agents (Claude Code first) in VS Code's terminal. The goal: the terminal looks calm (the Cursor Dark Midnight theme, SF Mono), works like iTerm on the keyboard, stays quiet, and brings Claude Code tabs back after VS Code restarts. The setup is explained at https://donepudi.me/blog/vs-code-for-terminal-coding-agents/ and its files are at https://github.com/swarupdonepudi/vscode.
+
+RULES FOR THE WHOLE JOB
+- macOS only. If this isn't macOS, stop and say so.
+- Check before you change. For each step, first check whether it's already done. If it is, say &quot;already in place&quot; and move on. Running this prompt a second time must change nothing.
+- Back up before you edit. The first time this run changes anything (a backup, a new file or folder, or an install), create one folder: $HOME/vscode-setup-backup-YYYYMMDD-HHMMSS (the current date and time). Copy every existing file into it before you change it. A run that changes nothing creates no folder.
+- Keep a manifest. In that folder, keep manifest.txt up to date as you go: every file backed up (with its original path), every file or folder created, every extension installed or upgraded (with the version it had before, if any), every marketplace and plugin added, and the exact CODE path used.
+- Merge, don't replace. Keep every setting and keybinding the user already has. When a value below would change one the user set, show both and ask which to keep.
+- Ask before anything destructive, global or third-party: installing Homebrew or VS Code, overwriting a file, deleting anything, editing a shell startup file, or installing code from outside the VS Code Marketplace. Never uninstall anything.
+- Verify each step right after it, using its check, and report pass or fail. If a step fails, say why, skip what depends on it, and carry on with the rest.
+- Don't rely on python3 or node unless they already run without a prompt: on a stock Mac, python3 only opens the &quot;install developer tools&quot; popup. To check that a JSONC file parses, use the built-in JavaScript for Automation: run osascript -l JavaScript with a short script that reads the file, removes // and /* */ comments that are outside strings, removes trailing commas before } or ], and calls JSON.parse.
+- VS Code's settings.json and keybindings.json are JSONC: they may contain comments and trailing commas. Don't load them with a strict parser and write them back, or the user's comments are lost. Edit them as text, then confirm they still parse (as above).
+- The user doesn't need to quit VS Code while you work. They restart it at the end (step 9).
+
+STEP 1. VS CODE AND ITS COMMAND LINE
+- Check: &quot;/Applications/Visual Studio Code.app&quot; or &quot;$HOME/Applications/Visual Studio Code.app&quot; exists. Call the one found APP.
+- If neither exists, ask the user whether to install it with Homebrew (&quot;brew install --cask visual-studio-code&quot;, only if &quot;brew&quot; already exists) or to download it themselves from https://code.visualstudio.com. If they download it, stop and wait until they say it's installed, then check again. Don't install Homebrew yourself.
+- The command line: CODE is &quot;APP/Contents/Resources/app/bin/code&quot;. Use that full path, not a &quot;code&quot; on PATH, which may belong to another editor.
+- Verify: CODE --version prints a version number.
+- The VS Code profile. If the folder $HOME/Library/Application Support/Code/User/profiles/ exists, the user may use more than one VS Code profile. Ask which one to set up, and call it PROFILE (Default if there's only one). If PROFILE isn't Default, add --profile &quot;&lt;PROFILE&gt;&quot; to every CODE --list-extensions, --install-extension and --uninstall-extension call below, and edit that profile's settings.json and keybindings.json in steps 5 and 6.
+
+STEP 2. ONE QUESTION UP FRONT: AGENT TABS
+Agent Tabs (https://github.com/swarupdonepudi/agent-tabs, MIT) is what brings Claude Code tabs back after a restart. It has two parts:
+- a VS Code extension, installed from a .vsix file on its GitHub releases page (not the Marketplace), and
+- a Claude Code plugin whose hook runs whenever a Claude session starts or ends, and writes that tab's session ID to small files under $HOME/.agent-tabs/.
+It needs Claude Code. Check &quot;claude --version&quot;.
+If swarupdonepudi.agent-tabs is already in CODE --list-extensions and &quot;claude plugin list&quot; shows agent-tabs@agent-tabs, set AGENT_TABS = yes, say &quot;already in place&quot; and don't ask.
+Otherwise, tell the user what it is and does, as above, and ask whether to install it. If Claude Code is missing, say so, point them to https://claude.com/claude-code, and ask whether to skip Agent Tabs or wait while they install Claude Code. Remember the answer as AGENT_TABS = yes or no. Steps 5, 6 and 7 use it.
+
+STEP 3. THE SF MONO FONT
+- Check: SF-Mono-Regular.otf is in $HOME/Library/Fonts or /Library/Fonts.
+- If not: macOS ships SF Mono inside Terminal.app. Copy each /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/SF-Mono-*.otf into $HOME/Library/Fonts/ (create the folder if needed), skipping files already there. Record the copied files in the manifest.
+- If Terminal.app has no SF Mono files, say so. The font setting in step 5 falls back to Menlo by itself.
+- Verify: SF-Mono-Regular.otf is in $HOME/Library/Fonts or /Library/Fonts.
+
+STEP 4. EXTENSIONS
+- Check: CODE --list-extensions (compare IDs case-insensitively).
+- Install evanlong.cursor-themes (the Cursor Dark Midnight theme) if it's missing: CODE --install-extension evanlong.cursor-themes.
+- Ask whether the user also wants yzhang.markdown-all-in-one (Markdown editing). It's part of the original setup but not needed for the terminal. Install it only with a yes.
+- Verify: the installed IDs appear in CODE --list-extensions.
+
+STEP 5. SETTINGS
+- Which file: $HOME/Library/Application Support/Code/User/settings.json for the Default profile, or the chosen PROFILE's own settings.json under User/profiles/ (step 1). If Settings Sync is on (ask if unsure), tell the user that Sync will carry these changes to their other machines.
+- If the folder doesn't exist, create it (mkdir -p). If the file doesn't exist, create it containing {}. If it's a symbolic link, tell the user where it points and ask before editing it.
+- Merge in these keys:
+
+    &quot;workbench.colorTheme&quot;: &quot;Cursor Dark Midnight&quot;,
+    &quot;workbench.colorCustomizations&quot;: {
+        &quot;[Cursor Dark Midnight]&quot;: {
+            &quot;terminal.background&quot;: &quot;#1e2127&quot;,
+            &quot;terminal.foreground&quot;: &quot;#8b97ae&quot;,
+            &quot;terminal.selectionBackground&quot;: &quot;#434c5e&quot;,
+            &quot;terminal.selectionForeground&quot;: &quot;#eceff4&quot;,
+            &quot;terminalCursor.foreground&quot;: &quot;#8fbcbb&quot;,
+            &quot;terminalCursor.background&quot;: &quot;#1e2127&quot;
+        }
+    },
+    &quot;terminal.integrated.fontFamily&quot;: &quot;'SF Mono', Menlo, monospace&quot;,
+    &quot;terminal.integrated.fontSize&quot;: 14,
+    &quot;terminal.integrated.lineHeight&quot;: 1.35,
+    &quot;terminal.integrated.minimumContrastRatio&quot;: 1,
+    &quot;terminal.integrated.drawBoldTextInBrightColors&quot;: true,
+    &quot;window.confirmBeforeClose&quot;: &quot;keyboardOnly&quot;,
+    &quot;window.restoreWindows&quot;: &quot;preserve&quot;,
+    &quot;extensions.ignoreRecommendations&quot;: true,
+    &quot;editor.accessibilitySupport&quot;: &quot;off&quot;
+
+- Only if AGENT_TABS is yes, also merge:
+
+    &quot;terminal.integrated.enablePersistentSessions&quot;: false
+
+  This turns off VS Code's own terminal restore. Otherwise every agent tab comes back twice after a restart: once live (from Agent Tabs) and once dead. Tell the user it also means ordinary, non-agent terminals no longer come back.
+- If &quot;workbench.colorCustomizations&quot; already exists, add the &quot;[Cursor Dark Midnight]&quot; block inside it and keep everything else. If that block exists, merge these six keys into it.
+- &quot;editor.accessibilitySupport&quot;: &quot;off&quot; stops VS Code asking about screen readers. Ask the user first whether they use a screen reader. If they do, leave this key out.
+- &quot;terminal.integrated.minimumContrastRatio&quot;: 1 stops VS Code shifting the terminal colours.
+- Verify: the file parses (see the rules), and each key has the value above or the one the user chose.
+
+STEP 6. KEYBOARD SHORTCUTS
+- File: keybindings.json in the same folder as the settings.json you used in step 5. If it doesn't exist, create it containing []. Same rules: back up, merge, keep comments.
+- Add each entry below unless an identical entry is already there. Before adding, look for any existing entry with the same &quot;key&quot;, whatever its &quot;when&quot;, including removal entries (a &quot;command&quot; starting with &quot;-&quot;). Ignore entries identical to one in the list below; if you find any other, show it and ask what to do.
+- The Cmd+T command: &quot;agentTabs.newTab&quot; if AGENT_TABS is yes, otherwise &quot;workbench.action.terminal.new&quot;.
+- In the cmd+r entry, &quot;\f&quot; is two characters, a backslash and the letter f, written exactly like that in the file. Don't let printf or echo turn it into a form-feed byte.
+
+    { &quot;key&quot;: &quot;cmd+t&quot;, &quot;command&quot;: &quot;&lt;the Cmd+T command above&gt;&quot; },
+    { &quot;key&quot;: &quot;cmd+w&quot;, &quot;command&quot;: &quot;workbench.action.terminal.kill&quot;, &quot;when&quot;: &quot;terminalFocus&quot; },
+    { &quot;key&quot;: &quot;cmd+r&quot;, &quot;command&quot;: &quot;workbench.action.terminal.sendSequence&quot;, &quot;when&quot;: &quot;terminalFocus&quot;, &quot;args&quot;: { &quot;text&quot;: &quot;\f&quot; } },
+    { &quot;key&quot;: &quot;cmd+shift+enter&quot;, &quot;command&quot;: &quot;workbench.action.toggleMaximizedPanel&quot;, &quot;when&quot;: &quot;terminalFocus&quot; },
+    { &quot;key&quot;: &quot;cmd+shift+enter&quot;, &quot;command&quot;: &quot;runCommands&quot;, &quot;when&quot;: &quot;!terminalFocus &amp;&amp; !panelMaximized&quot;, &quot;args&quot;: { &quot;commands&quot;: [&quot;workbench.action.terminal.focus&quot;, &quot;workbench.action.toggleMaximizedPanel&quot;] } },
+    { &quot;key&quot;: &quot;cmd+shift+enter&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot;, &quot;when&quot;: &quot;!terminalFocus &amp;&amp; panelMaximized&quot; },
+    { &quot;key&quot;: &quot;cmd+0&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focus&quot; },
+    { &quot;key&quot;: &quot;cmd+1&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex1&quot; },
+    { &quot;key&quot;: &quot;cmd+2&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex2&quot; },
+    { &quot;key&quot;: &quot;cmd+3&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex3&quot; },
+    { &quot;key&quot;: &quot;cmd+4&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex4&quot; },
+    { &quot;key&quot;: &quot;cmd+5&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex5&quot; },
+    { &quot;key&quot;: &quot;cmd+6&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex6&quot; },
+    { &quot;key&quot;: &quot;cmd+7&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex7&quot; },
+    { &quot;key&quot;: &quot;cmd+8&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex8&quot; },
+    { &quot;key&quot;: &quot;cmd+9&quot;, &quot;command&quot;: &quot;workbench.action.terminal.focusAtIndex9&quot; }
+
+- What they do: Cmd+T opens a new terminal tab (running Claude Code, with Agent Tabs). Cmd+W closes the terminal tab. Cmd+R sends Ctrl+L to whatever runs in the terminal: the shell clears the screen and keeps the scrollback, and Claude Code redraws its screen. Cmd+Shift+Enter focuses the terminal and maximises it, from anywhere. Cmd+0 focuses the terminal, and Cmd+1 to Cmd+9 jump to terminal tab 1 to 9, from anywhere.
+- Tell the user these replace some VS Code defaults: Cmd+T was Go to Symbol in Workspace, and Cmd+0 to Cmd+9 moved focus between the side bar and editor groups.
+- Verify: the file parses, every entry is present, and the cmd+r entry contains a backslash followed by f.
+
+STEP 7. AGENT TABS (ONLY IF AGENT_TABS IS YES)
+- The extension. Check: CODE --list-extensions --show-versions shows swarupdonepudi.agent-tabs@&lt;version&gt;. Read https://api.github.com/repos/swarupdonepudi/agent-tabs/releases/latest: &quot;tag_name&quot; is the latest version (strip the leading v), and the &quot;browser_download_url&quot; ending in .vsix is the file. Compare versions as major.minor.patch numbers. If it's missing or older, download the .vsix into a new temporary folder, run CODE --install-extension &lt;that file&gt; --force, delete the temporary folder, and record the old version (or &quot;none&quot;) in the manifest. Never downgrade a newer install.
+- The Claude Code plugin. If &quot;claude plugin list&quot; doesn't work (an older Claude Code), ask the user to update Claude Code, or to run /plugin inside Claude Code, and skip this part. Check: &quot;claude plugin list&quot; shows agent-tabs@agent-tabs. If not, run &quot;claude plugin marketplace list&quot;. If a marketplace named agent-tabs is there, check its source is swarupdonepudi/agent-tabs; if it points somewhere else, stop and ask. If none is there, run &quot;claude plugin marketplace add swarupdonepudi/agent-tabs&quot; and record it in the manifest. Then run &quot;claude plugin install agent-tabs@agent-tabs&quot; and record it.
+- Two settings, in the same settings.json as step 5. If a key is already set, show its value and treat it as already in place.
+  a. &quot;agentTabs.extraArgs&quot;: extra flags for every Claude tab. Ask, for example whether they want --chrome (Claude in Chrome). If they give any, set it, for example [&quot;--chrome&quot;]. If none, leave the key out.
+  b. &quot;agentTabs.defaultFolder&quot;: the folder Cmd+T opens Claude in. Empty means the first folder of the open workspace. Ask. It takes a workspace folder's name, an absolute path, or a path starting with ~/. Leave it out if they're happy with the first folder. (There's also an AGENT_TABS_FOLDER environment variable that overrides it on one machine. You don't need it here: don't edit any shell file for this.)
+- Verify: CODE --list-extensions --show-versions shows swarupdonepudi.agent-tabs at the latest version or newer, &quot;claude plugin list&quot; shows agent-tabs@agent-tabs, and settings.json still parses.
+
+STEP 8. SHELL START TIME (CHECK, CHANGE ONLY WITH A YES)
+- Measure: time &quot;zsh -i -c exit&quot; three times (use the user's shell from $SHELL if it isn't zsh). Report the times.
+- If the median is over 0.3 seconds, look for the usual cause in $HOME/.zshrc and $HOME/.zprofile: nvm loaded the plain way, a line that sources nvm.sh without --no-use. That one line usually costs about 0.4 seconds, because nvm checks the default Node version every time a shell starts. Also look for nvm loaded through a plugin (the oh-my-zsh nvm plugin, zsh-nvm). Report those, but offer a fix only for the plain line.
+- Change nothing unless the user says yes. With a yes (zsh only): first record &quot;node -v&quot; and the start time. Back up the file, then replace the plain nvm load with this, keeping the nvm.sh path the file already uses:
+
+     export NVM_DIR=&quot;$HOME/.nvm&quot;
+     [ -s &quot;&lt;path to nvm.sh&gt;&quot; ] &amp;&amp; . &quot;&lt;path to nvm.sh&gt;&quot; --no-use
+     if [[ -r &quot;$NVM_DIR/alias/default&quot; ]]; then
+       nvm_default=$(&lt;&quot;$NVM_DIR/alias/default&quot;)
+       nvm_bins=(&quot;$NVM_DIR&quot;/versions/node/v${nvm_default#v}*/bin(N/nOn))
+       (( $#nvm_bins )) &amp;&amp; path=($nvm_bins[1] $path)
+       unset nvm_default nvm_bins
+     fi
+
+  This only works when the default (the file $NVM_DIR/alias/default) is a version number, like 22 or v22.11.0. If it's a name like lts/* or node, skip the change and say why.
+- Verify: in a new shell, &quot;node -v&quot; prints the version you recorded, and the start time went down.
+
+STEP 9. FINISH
+- Tell the user to quit VS Code completely (Cmd+Q) and open it again. A window reload isn't enough for a new font or a new extension.
+- Ask them to test: Cmd+T opens a terminal tab (running claude, with Agent Tabs). With Agent Tabs: quit and reopen VS Code, and the tab comes back in the same conversation.
+- Report a short table: each step, and &quot;already in place&quot;, &quot;changed&quot; or &quot;skipped&quot;. Then give the path of the backup folder and its manifest.txt, or say that nothing changed and no backup was made.
+- How to undo, from manifest.txt (print the literal CODE path, not the word CODE):
+  - For each backed-up file: compare it with the current file first, because the user may have changed it since. Then copy the backup back. Delete each file this run created.
+  - Extensions this run installed: &lt;CODE&gt; --uninstall-extension &lt;id&gt; (with --profile if step 1 chose one). An extension this run only upgraded: reinstall the old version, or leave it.
+  - The plugin, if this run installed it: &quot;claude plugin uninstall agent-tabs@agent-tabs&quot;. The marketplace, only if this run added it: &quot;claude plugin marketplace remove agent-tabs&quot;.
+  - $HOME/.agent-tabs/ holds which conversation ran in which tab. Delete it if you remove Agent Tabs.
+  - Delete the SF Mono files this run copied into $HOME/Library/Fonts.
+  - Delete the backup folder when you no longer need it.</code></pre>
+<p>At the end of the day, the editor matters less than it used to. The agent does the work, and the terminal is where I watch it and talk to it. I just wanted that terminal to feel like home, and to stop losing my agents every time I restarted.</p>
+<p>If you run your coding agents in VS Code's terminal too, I'd love to know what's in your setup that isn't in mine.</p>
+      </div>
+      <p class="post-end"><a href="/blog/">More writing</a> · <a href="/feedback">Talk to me about it</a></p>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <span>Swarup Donepudi</span>
+    <a href="/">donepudi.me</a>
+  </footer>
+</body>
+</html>
