@@ -1,0 +1,16 @@
+# Planton's way into GitHub: the Planton AI GitHub App, installed on the swarupdonepudi account with access to one
+# repository, swarupdonepudi/donepudi.me.
+#
+#   planton apply -f Connection.GithubConnection.github-swarupdonepudi.yaml --instance planton.ai --org swarup-donepudi
+#   planton connect github list-repos github-swarupdonepudi --instance planton.ai --org swarup-donepudi
+apiVersion: connect.planton.ai/v1alpha1
+kind: GithubConnection
+metadata:
+  name: github-swarupdonepudi
+  org: swarup-donepudi
+spec:
+  authMode: platform_app
+  host:
+    value: https://github.com
+  appInstallInfo:
+    installationId: 181130780 # Planton AI on the swarupdonepudi account
