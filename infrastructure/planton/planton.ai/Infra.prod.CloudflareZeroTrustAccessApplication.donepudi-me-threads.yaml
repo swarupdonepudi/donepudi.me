@@ -1,5 +1,5 @@
 # The door on the threads' private calls, hey.donepudi.me/threads/api and everything under it, never a
-# thread's own page. The members policy is added at precedence 3 after the first deploy.
+# thread's own page: the owner first, then the inbox sync, then the people invited to a thread.
 #
 #   planton apply -f Infra.prod.CloudflareZeroTrustAccessApplication.donepudi-me-threads.yaml --instance planton.ai --org swarup-donepudi
 apiVersion: cloudflare.planton.dev/v1alpha1
@@ -39,3 +39,10 @@ spec:
           name: donepudi-me-inbox-sync
           fieldPath: status.outputs.policy_id
       precedence: 2
+    - policy:
+        valueFrom:
+          kind: CloudflareZeroTrustAccessPolicy
+          env: prod
+          name: donepudi-me-threads-members
+          fieldPath: status.outputs.policy_id
+      precedence: 3
