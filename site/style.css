@@ -457,6 +457,7 @@ body.reading main { max-width: 1180px; }
 .post-body h4 { margin-top: var(--space-6); font-size: var(--text-body); }
 .post-body h2 + *, .post-body h3 + * { margin-top: calc(-1 * var(--space-4)); }
 .post-body h2 + h3 { margin-top: var(--space-2); }
+.post-body > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .post-body strong { font-weight: 650; color: var(--ink); }
 .post-body a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .post-body a:hover { text-decoration-thickness: 2px; }
