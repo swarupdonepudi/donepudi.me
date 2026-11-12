@@ -1,0 +1,24 @@
+# DMARC for donepudi.me: receivers reject mail claiming to be from donepudi.me that fails SPF or DKIM alignment.
+#
+#   planton apply -f Infra.prod.CloudflareDnsRecord.donepudi-me-dmarc.yaml --instance planton.ai --org swarup-donepudi
+apiVersion: cloudflare.planton.dev/v1alpha1
+kind: CloudflareDnsRecord
+metadata:
+  name: donepudi-me-dmarc
+  org: swarup-donepudi
+  env: prod
+  annotations:
+    planton.dev/provisioner: tofu
+spec:
+  zoneId:
+    valueFrom:
+      kind: CloudflareDnsZone
+      env: prod
+      name: donepudi-me
+      fieldPath: status.outputs.zone_id
+  name: _dmarc.donepudi.me
+  type: TXT
+  content:
+    value: 'v=DMARC1; p=reject; sp=reject; adkim=r; aspf=r'
+  ttl: 1
+  comment: DMARC, reject spoofed mail
