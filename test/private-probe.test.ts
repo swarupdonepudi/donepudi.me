@@ -11,7 +11,7 @@ import { isoWeek, probes, run } from "../tools/probe/private.ts";
 
 const ORIGIN = "https://donepudi.me";
 const THREADS = "https://hey.donepudi.me";
-const ACCESS = "donepudi.cloudflareaccess.com";
+const ACCESS = "swarup-donepudi.cloudflareaccess.com";
 const SHELL = "<!doctype html><title>Threads</title><main data-main></main>";
 
 /**

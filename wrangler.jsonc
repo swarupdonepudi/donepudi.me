@@ -77,9 +77,9 @@
   // checks that a request was signed by that team for the application in front of the door called
   // (src/access.ts).
   "vars": {
-    "ACCESS_TEAM_DOMAIN": "donepudi.cloudflareaccess.com",
-    "THREADS_ACCESS_AUD": "db66d28750d3ed63363af7bba8a43d7aeba769eb6f7465ef9552e79917369435",
-    "INBOX_SYNC_CLIENT_ID": "83ce8979a8ffde10177a8de5cdc2797d.access"
+    "ACCESS_TEAM_DOMAIN": "swarup-donepudi.cloudflareaccess.com",
+    "THREADS_ACCESS_AUD": "02c537ec7894bc5ac820049ae552b3ff2d947d29c9aa3d0e1bb9263029f5b72d",
+    "INBOX_SYNC_CLIENT_ID": "1f2de7158d1490346eb627d32f23719a.access"
   },
   // The Worker's own log lines (one per refused send: its status and reason, nothing personal) are kept;
   // Cloudflare's automatic record of each request is off, because nothing says it leaves out the
